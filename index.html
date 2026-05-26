@@ -1,1 +1,199 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Clario — La relation client, simplifiée</title>
+<meta name="theme-color" content="#0C1F3F">
+<link rel="manifest" href="manifest.json">
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: 'Segoe UI', sans-serif; background: #fff; color: #0C1F3F; }
+header { position: sticky; top: 0; background: rgba(255,255,255,0.95); backdrop-filter: blur(10px); border-bottom: 1px solid #E6F1FB; padding: 16px 24px; display: flex; align-items: center; justify-content: space-between; z-index: 100; }
+.logo { display: flex; align-items: center; gap: 10px; text-decoration: none; }
+.logo span { font-size: 22px; font-weight: 800; }
+.logo .clar { color: #0C447C; }
+.logo .io { color: #378ADD; }
+.nav-btns { display: flex; gap: 12px; align-items: center; }
+.btn-outline { background: none; border: 2px solid #0C447C; color: #0C447C; padding: 10px 20px; border-radius: 12px; font-weight: 700; cursor: pointer; font-size: 14px; }
+.btn-primary { background: #0C447C; color: white; border: none; padding: 10px 20px; border-radius: 12px; font-weight: 700; cursor: pointer; font-size: 14px; }
+.hero { background: linear-gradient(135deg, #E6F1FB 0%, #fff 60%, #dbeeff 100%); padding: 100px 24px; text-align: center; position: relative; overflow: hidden; }
+.hero::before { content: ''; position: absolute; width: 400px; height: 400px; background: #378ADD; opacity: 0.08; border-radius: 50%; top: -100px; left: -100px; }
+.hero::after { content: ''; position: absolute; width: 500px; height: 500px; background: #0C447C; opacity: 0.06; border-radius: 50%; bottom: -150px; right: -100px; }
+.badge { display: inline-block; background: #0C447C; color: white; padding: 6px 18px; border-radius: 999px; font-size: 12px; font-weight: 700; letter-spacing: 2px; margin-bottom: 24px; }
+h1 { font-size: clamp(36px, 6vw, 72px); font-weight: 900; line-height: 1.1; max-width: 800px; margin: 0 auto 24px; }
+h1 span { background: linear-gradient(90deg, #185FA5, #378ADD); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+.hero p { font-size: 18px; color: #666; max-width: 560px; margin: 0 auto 40px; line-height: 1.7; }
+.hero-btns { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; }
+.btn-big { padding: 16px 36px; border-radius: 16px; font-size: 17px; font-weight: 700; cursor: pointer; border: none; }
+.btn-big-primary { background: #0C447C; color: white; box-shadow: 0 8px 30px rgba(12,68,124,0.3); }
+.btn-big-outline { background: none; border: 2px solid #0C447C; color: #0C447C; }
+.stats { display: flex; justify-content: center; gap: 60px; margin-top: 70px; flex-wrap: wrap; }
+.stat-val { font-size: 36px; font-weight: 900; color: #0C447C; }
+.stat-label { font-size: 13px; color: #999; margin-top: 4px; }
+section { padding: 100px 24px; }
+.section-title { text-align: center; font-size: clamp(28px, 4vw, 42px); font-weight: 900; margin-bottom: 16px; }
+.section-sub { text-align: center; color: #999; font-size: 17px; margin-bottom: 60px; }
+.features-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 24px; max-width: 1000px; margin: 0 auto; }
+.feature-card { background: #F8FBFF; border: 1px solid #E6F1FB; border-radius: 20px; padding: 32px; transition: all 0.3s; }
+.feature-card:hover { transform: translateY(-6px); box-shadow: 0 20px 40px rgba(12,68,124,0.1); }
+.feature-icon { width: 56px; height: 56px; background: linear-gradient(135deg, #E6F1FB, #dbeeff); border-radius: 16px; display: flex; align-items: center; justify-content: center; font-size: 26px; margin-bottom: 20px; }
+.feature-card h3 { font-size: 18px; font-weight: 800; margin-bottom: 10px; }
+.feature-card p { color: #888; font-size: 14px; line-height: 1.7; }
+.how { background: linear-gradient(135deg, #0C1F3F, #0d3570); color: white; }
+.how .section-title { color: white; }
+.how .section-sub { color: #93c5fd; }
+.steps { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 24px; max-width: 900px; margin: 0 auto; }
+.step { background: rgba(255,255,255,0.08); border-radius: 20px; padding: 32px; }
+.step-num { font-size: 48px; font-weight: 900; color: #378ADD; opacity: 0.6; margin-bottom: 16px; }
+.step h3 { font-size: 18px; font-weight: 800; margin-bottom: 10px; }
+.step p { color: #93c5fd; font-size: 14px; line-height: 1.7; }
+.pricing { background: #F8FBFF; }
+.plans { display: flex; gap: 24px; max-width: 800px; margin: 0 auto; flex-wrap: wrap; }
+.plan { flex: 1; min-width: 260px; background: white; border-radius: 24px; padding: 40px 32px; border: 1px solid #E6F1FB; }
+.plan.pro { background: linear-gradient(135deg, #0C447C, #0d3570); color: white; position: relative; }
+.plan-badge { position: absolute; top: 20px; right: 20px; background: #378ADD; color: white; padding: 4px 14px; border-radius: 999px; font-size: 12px; font-weight: 700; }
+.plan h3 { font-size: 20px; font-weight: 800; margin-bottom: 6px; }
+.plan-desc { font-size: 13px; color: #999; margin-bottom: 24px; }
+.plan.pro .plan-desc { color: #93c5fd; }
+.price { font-size: 52px; font-weight: 900; color: #0C447C; margin-bottom: 32px; }
+.plan.pro .price { color: white; }
+.price span { font-size: 16px; font-weight: 400; color: #999; }
+.plan.pro .price span { color: #93c5fd; }
+.plan-features { list-style: none; margin-bottom: 32px; display: flex; flex-direction: column; gap: 12px; }
+.plan-features li { display: flex; align-items: center; gap: 10px; font-size: 14px; color: #555; }
+.plan.pro .plan-features li { color: #dbeeff; }
+.check { color: #378ADD; font-size: 18px; font-weight: 900; }
+.plan.pro .check { color: #a8d8ff; }
+.cta-section { text-align: center; padding: 100px 24px; }
+.cta-section h2 { font-size: clamp(28px, 4vw, 48px); font-weight: 900; max-width: 600px; margin: 0 auto 20px; }
+.cta-section p { color: #999; font-size: 17px; margin-bottom: 40px; }
+footer { background: #0C1F3F; color: white; padding: 48px 24px; }
+.footer-inner { max-width: 1000px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 24px; }
+.footer-links { display: flex; gap: 24px; }
+.footer-links a { color: #93c5fd; text-decoration: none; font-size: 14px; }
+footer p { color: #93c5fd; font-size: 14px; }
+@media(max-width: 600px) { .nav-btns .btn-outline { display: none; } .stats { gap: 30px; } }
+</style>
+</head>
+<body>
 
+<header>
+  <a class="logo" href="#">
+    <svg width="36" height="36" viewBox="0 0 100 100">
+      <rect width="100" height="100" rx="22" fill="#0C1F3F"/>
+      <defs>
+        <linearGradient id="cg" x1="0%" y1="0%" x2="0%" y2="100%">
+          <stop offset="0%" stop-color="#a8d8ff"/>
+          <stop offset="50%" stop-color="#378ADD"/>
+          <stop offset="100%" stop-color="#0C447C"/>
+        </linearGradient>
+      </defs>
+      <path d="M72 28 A34 34 0 1 0 72 72" fill="none" stroke="url(#cg)" stroke-width="10" stroke-linecap="round"/>
+    </svg>
+    <span><span class="clar">Clar</span><span class="io">io</span></span>
+  </a>
+  <div class="nav-btns">
+    <button class="btn-outline">Connexion</button>
+    <button class="btn-primary">Commencer</button>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="badge">LA RELATION CLIENT, SIMPLIFIÉE</div>
+  <h1>Gérez vos clients comme un <span>vrai pro</span></h1>
+  <p>Clario connecte les entrepreneurs à leurs clients en un seul lien. Suivi de projets, messagerie traduite, besoins en temps réel.</p>
+  <div class="hero-btns">
+    <button class="btn-big btn-big-primary">Créer mon espace gratuit →</button>
+    <button class="btn-big btn-big-outline">Voir la démo</button>
+  </div>
+  <div class="stats">
+    <div><div class="stat-val">500+</div><div class="stat-label">Entrepreneurs</div></div>
+    <div><div class="stat-val">10k+</div><div class="stat-label">Clients gérés</div></div>
+    <div><div class="stat-val">20+</div><div class="stat-label">Langues</div></div>
+  </div>
+</section>
+
+<section>
+  <div class="section-title">Tout ce dont vous avez besoin</div>
+  <div class="section-sub">Une plateforme complète pour gérer la relation avec vos clients</div>
+  <div class="features-grid">
+    <div class="feature-card"><div class="feature-icon">🔗</div><h3>Lien unique</h3><p>Générez un lien personnalisé pour chaque client en un clic.</p></div>
+    <div class="feature-card"><div class="feature-icon">💬</div><h3>Messagerie traduite</h3><p>Communiquez dans votre langue, vos clients dans la leur. Traduction automatique.</p></div>
+    <div class="feature-card"><div class="feature-icon">📊</div><h3>Suivi de projet</h3><p>Vos clients voient l'avancement de leur projet à tout moment.</p></div>
+    <div class="feature-card"><div class="feature-icon">🛒</div><h3>Gestion des besoins</h3><p>Vos clients ajoutent leurs besoins et achats depuis leur espace.</p></div>
+    <div class="feature-card"><div class="feature-icon">📅</div><h3>Planning partagé</h3><p>Un agenda commun pour ne jamais manquer une étape.</p></div>
+    <div class="feature-card"><div class="feature-icon">🌍</div><h3>Multi-langues</h3><p>Choisissez votre langue à l'inscription. Clario s'adapte à vous.</p></div>
+  </div>
+</section>
+
+<section class="how">
+  <div class="section-title">Comment ça marche ?</div>
+  <div class="section-sub">Lancez-vous en 3 étapes simples</div>
+  <div class="steps">
+    <div class="step"><div class="step-num">01</div><h3>Créez votre espace</h3><p>Inscrivez-vous et personnalisez votre profil entrepreneur en 2 minutes.</p></div>
+    <div class="step"><div class="step-num">02</div><h3>Ajoutez vos clients</h3><p>Générez un lien unique pour chaque client et envoyez-le leur.</p></div>
+    <div class="step"><div class="step-num">03</div><h3>Gérez tout en un</h3><p>Messagerie, suivi, besoins — tout au même endroit, en temps réel.</p></div>
+  </div>
+</section>
+
+<section class="pricing">
+  <div class="section-title">Tarifs simples</div>
+  <div class="section-sub">Commencez gratuitement, évoluez quand vous voulez</div>
+  <div class="plans">
+    <div class="plan">
+      <h3>Gratuit</h3>
+      <div class="plan-desc">Pour démarrer</div>
+      <div class="price">0€</div>
+      <ul class="plan-features">
+        <li><span class="check">✓</span>3 clients maximum</li>
+        <li><span class="check">✓</span>Messagerie basique</li>
+        <li><span class="check">✓</span>Suivi de projet</li>
+        <li><span class="check">✓</span>Lien unique par client</li>
+      </ul>
+      <button class="btn-big btn-big-outline" style="width:100%">Commencer</button>
+    </div>
+    <div class="plan pro">
+      <div class="plan-badge">⭐ Populaire</div>
+      <h3>Pro</h3>
+      <div class="plan-desc">Pour les pros</div>
+      <div class="price">19€<span>/mois</span></div>
+      <ul class="plan-features">
+        <li><span class="check">✓</span>Clients illimités</li>
+        <li><span class="check">✓</span>Messagerie + traduction auto</li>
+        <li><span class="check">✓</span>Planning partagé</li>
+        <li><span class="check">✓</span>Gestion des besoins</li>
+        <li><span class="check">✓</span>Statistiques avancées</li>
+        <li><span class="check">✓</span>Support prioritaire</li>
+      </ul>
+      <button class="btn-big" style="width:100%;background:white;color:#0C447C;border-radius:16px;font-weight:700;font-size:17px;cursor:pointer;border:none;padding:16px">Commencer</button>
+    </div>
+  </div>
+</section>
+
+<section class="cta-section">
+  <h2>Prêt à transformer votre relation client ?</h2>
+  <p>Rejoignez des centaines d'entrepreneurs qui font confiance à Clario.</p>
+  <button class="btn-big btn-big-primary">Créer mon compte gratuit →</button>
+</section>
+
+<footer>
+  <div class="footer-inner">
+    <div class="logo">
+      <svg width="28" height="28" viewBox="0 0 100 100">
+        <rect width="100" height="100" rx="22" fill="#185FA5"/>
+        <path d="M72 28 A34 34 0 1 0 72 72" fill="none" stroke="#a8d8ff" stroke-width="10" stroke-linecap="round"/>
+      </svg>
+      <span style="color:white;font-weight:800;font-size:18px">Clario</span>
+    </div>
+    <p>© 2026 Clario — La relation client, simplifiée.</p>
+    <div class="footer-links">
+      <a href="#">Confidentialité</a>
+      <a href="#">CGU</a>
+      <a href="#">Contact</a>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
