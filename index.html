@@ -6,7 +6,7 @@
 <title>Clario — La relation client, simplifiée</title>
 <meta name="theme-color" content="#ffffff">
 <link rel="manifest" href="manifest.json">
-<link rel="icon" href="logo.png">
+<link rel="icon" href="logo-icon.png">
 <link rel="apple-touch-icon" href="logo-icon.png">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 <style>
@@ -18,10 +18,12 @@ a{text-decoration:none;color:inherit}
 /* HEADER */
 header{position:sticky;top:0;background:rgba(255,255,255,0.97);backdrop-filter:blur(12px);border-bottom:1px solid #dbeeff;padding:12px 32px;display:flex;align-items:center;justify-content:space-between;z-index:100}
 .logo{display:flex;align-items:center;gap:12px}
-.logo img{width:52px;height:52px;border-radius:13px;object-fit:cover}
-.logo-text{font-size:26px;font-weight:800;line-height:1}
+.logo img{width:52px;height:52px;object-fit:contain}
+.logo-info{display:flex;flex-direction:column;justify-content:center}
+.logo-text{font-size:24px;font-weight:800;line-height:1.1}
 .logo-text .clar{color:var(--blue-main)}
 .logo-text .io{color:var(--blue-vif)}
+.logo-tagline{font-size:11px;color:#999;margin-top:2px}
 nav{display:flex;gap:32px}
 nav a{font-size:14px;color:#555;font-weight:500;transition:color .2s}
 nav a:hover{color:var(--blue-main)}
@@ -40,8 +42,9 @@ nav a:hover{color:var(--blue-main)}
 .side-menu.open{right:0}
 .side-menu-header{display:flex;align-items:center;justify-content:space-between;padding:24px 20px 20px}
 .side-menu-logo{display:flex;align-items:center;gap:10px}
-.side-menu-logo img{width:44px;height:44px;border-radius:12px;object-fit:cover}
-.side-menu-logo-text{font-size:22px;font-weight:800;color:white}
+.side-menu-logo img{width:40px;height:40px;object-fit:contain}
+.side-menu-logo-wrap{display:flex;flex-direction:column}
+.side-menu-logo-text{font-size:20px;font-weight:800;color:white;line-height:1.1}
 .side-menu-logo-text span{color:#60AFFF}
 .side-close{background:rgba(255,255,255,0.1);border:none;color:white;width:40px;height:40px;border-radius:10px;font-size:18px;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:background .2s}
 .side-close:hover{background:rgba(255,255,255,0.2)}
@@ -113,8 +116,8 @@ h1 em{font-style:normal;background:linear-gradient(90deg,#185FA5,#378ADD);-webki
 
 /* PRICING */
 .pricing{background:var(--gray)}
-.plans{display:flex;gap:24px;max-width:1000px;margin:0 auto;flex-wrap:wrap;justify-content:center}
-.plan{flex:1;min-width:260px;max-width:300px;background:white;border-radius:22px;padding:36px 28px;border:1.5px solid #dbeeff;position:relative;transition:all .25s}
+.plans{display:flex;gap:24px;max-width:1000px;margin:0 auto;flex-wrap:wrap;justify-content:center;align-items:stretch}
+.plan{flex:1;min-width:260px;max-width:300px;background:white;border-radius:22px;padding:36px 28px;border:1.5px solid #dbeeff;position:relative;transition:all .25s;display:flex;flex-direction:column}
 .plan:hover{transform:translateY(-4px);box-shadow:0 16px 40px rgba(12,68,124,0.12)}
 .plan.popular{border-color:var(--blue-main);box-shadow:0 8px 32px rgba(12,68,124,0.15)}
 .plan-badge{position:absolute;top:-14px;left:50%;transform:translateX(-50%);background:var(--blue-main);color:white;padding:5px 18px;border-radius:999px;font-size:12px;font-weight:700;white-space:nowrap}
@@ -123,7 +126,7 @@ h1 em{font-style:normal;background:linear-gradient(90deg,#185FA5,#378ADD);-webki
 .price{font-size:46px;font-weight:900;color:var(--blue-main);margin-bottom:8px}
 .price span{font-size:15px;font-weight:400;color:#999}
 .price-period{font-size:13px;color:#bbb;margin-bottom:28px}
-.plan-features{list-style:none;margin-bottom:28px;display:flex;flex-direction:column;gap:12px}
+.plan-features{list-style:none;flex:1;margin-bottom:28px;display:flex;flex-direction:column;gap:12px}
 .plan-features li{display:flex;align-items:center;gap:10px;font-size:14px;color:#555}
 .plan-features li i{color:var(--blue-vif);font-size:15px;width:16px}
 .plan.pro-dark{background:linear-gradient(135deg,var(--blue-main),#0d3570);color:white}
@@ -131,7 +134,7 @@ h1 em{font-style:normal;background:linear-gradient(90deg,#185FA5,#378ADD);-webki
 .plan.pro-dark .plan-desc,.plan.pro-dark .price span,.plan.pro-dark .price-period{color:#93c5fd}
 .plan.pro-dark .plan-features li{color:#dbeeff}
 .plan.pro-dark .plan-features li i{color:#a8d8ff}
-.plan-btn{width:100%;padding:14px;border-radius:12px;font-size:15px;font-weight:700;cursor:pointer;border:none}
+.plan-btn{width:100%;padding:14px;border-radius:12px;font-size:15px;font-weight:700;cursor:pointer;border:none;margin-top:auto}
 .plan-btn-outline{background:none;border:2px solid var(--blue-main);color:var(--blue-main)}
 .plan-btn-outline:hover{background:var(--blue-light)}
 .plan-btn-white{background:white;color:var(--blue-main)}
@@ -169,10 +172,12 @@ footer{background:#0a1628;color:white;padding:52px 32px 32px}
 .footer-top{max-width:1000px;margin:0 auto;display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:40px;margin-bottom:48px}
 .footer-brand{display:flex;flex-direction:column}
 .footer-logo-wrap{display:flex;align-items:center;gap:14px;margin-bottom:16px}
-.footer-logo-wrap img{width:64px;height:64px;border-radius:16px;object-fit:cover}
-.footer-logo-text{font-size:28px;font-weight:800;line-height:1}
+.footer-logo-wrap img{width:56px;height:56px;object-fit:contain}
+.footer-logo-info{display:flex;flex-direction:column;justify-content:center}
+.footer-logo-text{font-size:26px;font-weight:800;line-height:1.1}
 .footer-logo-text .clar{color:#60AFFF}
 .footer-logo-text .io{color:#a8d8ff}
+.footer-logo-tagline{font-size:11px;color:#4a7fa5;margin-top:3px}
 .footer-brand p{color:#93c5fd;font-size:13px;line-height:1.7}
 .footer-col h4{font-size:13px;font-weight:700;color:#93c5fd;text-transform:uppercase;letter-spacing:1px;margin-bottom:16px}
 .footer-col a{display:block;color:#aaa;font-size:14px;margin-bottom:10px;transition:color .2s}
@@ -201,7 +206,10 @@ footer{background:#0a1628;color:white;padding:52px 32px 32px}
 <header>
   <a class="logo" href="index.html">
     <img src="logo.png" alt="Clario">
-    <div class="logo-text"><span class="clar">Clar</span><span class="io">io</span></div>
+    <div class="logo-info">
+      <div class="logo-text"><span class="clar">Clar</span><span class="io">io</span></div>
+      <div class="logo-tagline">La relation client, simplifiée</div>
+    </div>
   </a>
   <nav>
     <a href="#fonctionnalites">Fonctionnalités</a>
@@ -223,7 +231,10 @@ footer{background:#0a1628;color:white;padding:52px 32px 32px}
   <div class="side-menu-header">
     <div class="side-menu-logo">
       <img src="logo.png" alt="Clario">
-      <div class="side-menu-logo-text"><span>Clar</span><span style="color:#60AFFF">io</span></div>
+      <div class="side-menu-logo-wrap">
+        <div class="side-menu-logo-text"><span>Clar</span><span style="color:#60AFFF">io</span></div>
+        <div style="font-size:10px;color:#4a7fa5;margin-top:2px">La relation client, simplifiée</div>
+      </div>
     </div>
     <button class="side-close" onclick="closeMenu()"><i class="fa-solid fa-arrow-left"></i></button>
   </div>
@@ -407,7 +418,10 @@ footer{background:#0a1628;color:white;padding:52px 32px 32px}
     <div class="footer-brand">
       <div class="footer-logo-wrap">
         <img src="logo.png" alt="Clario">
-        <div class="footer-logo-text"><span class="clar">Clar</span><span class="io">io</span></div>
+        <div class="footer-logo-info">
+          <div class="footer-logo-text"><span class="clar">Clar</span><span class="io">io</span></div>
+          <div class="footer-logo-tagline">La relation client, simplifiée</div>
+        </div>
       </div>
       <p>La plateforme qui simplifie la relation entre entrepreneurs et clients, partout dans le monde.</p>
     </div>
@@ -455,6 +469,5 @@ document.querySelectorAll('.faq-q').forEach(btn=>{
   });
 });
 </script>
-
 </body>
 </html>
