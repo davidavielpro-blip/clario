@@ -31,7 +31,7 @@ header{padding:20px 32px;display:flex;align-items:center;justify-content:space-b
 main{flex:1;display:flex;align-items:center;justify-content:center;padding:20px 24px;position:relative;z-index:10}
 .auth-card{background:white;border-radius:24px;padding:48px 44px;width:100%;max-width:440px;box-shadow:0 20px 60px rgba(12,68,124,0.12);border:1px solid #dbeeff}
 .auth-title{font-size:28px;font-weight:900;color:var(--blue-dark);margin-bottom:8px;text-align:center}
-.auth-sub{font-size:14px;color:#888;text-align:center;margin-bottom:36px;line-height:1.6}
+.auth-sub{font-size:14px;color:#888;text-align:center;margin-bottom:28px;line-height:1.6}
 .auth-sub span{color:var(--blue-main);font-weight:700}
 .lang-select{display:flex;align-items:center;gap:8px;font-size:13px;color:#888;margin-bottom:28px;justify-content:center}
 .lang-select i{color:var(--blue-vif)}
@@ -57,12 +57,10 @@ main{flex:1;display:flex;align-items:center;justify-content:center;padding:20px 
 .social-btns{display:flex;gap:12px;margin-bottom:28px}
 .social-btn{flex:1;padding:12px;border:1.5px solid #dbeeff;border-radius:12px;background:white;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:8px;font-size:14px;font-weight:600;color:#444;transition:all .2s}
 .social-btn:hover{border-color:var(--blue-vif);background:#f8fbff}
-.social-btn i{font-size:18px}
 .fa-google{color:#EA4335}
 .fa-apple{color:#000}
 .auth-switch{text-align:center;font-size:14px;color:#888}
 .auth-switch a{color:var(--blue-main);font-weight:700}
-.auth-switch a:hover{text-decoration:underline}
 .error-msg{display:none;background:#fff0f0;border:1px solid #ffcdd2;border-radius:10px;padding:12px 16px;text-align:center;color:#c62828;font-size:13px;font-weight:600;margin-bottom:16px}
 @media(max-width:480px){.auth-card{padding:32px 24px}header{padding:16px 20px}}
 </style>
@@ -78,33 +76,38 @@ main{flex:1;display:flex;align-items:center;justify-content:center;padding:20px 
     <img src="logo.png" alt="Clario">
     <div class="logo-info">
       <div class="logo-text"><span class="clar">Clar</span><span class="io">io</span></div>
-      <div class="logo-tagline">La relation client, simplifiée</div>
+      <div class="logo-tagline" id="tagline">La relation client, simplifiée</div>
     </div>
   </a>
-  <a class="back-btn" href="index.html"><i class="fa-solid fa-arrow-left"></i> Retour à l'accueil</a>
+  <a class="back-btn" href="index.html"><i class="fa-solid fa-arrow-left"></i> <span id="backText">Retour à l'accueil</span></a>
 </header>
 <main>
   <div class="auth-card">
-    <div class="auth-title">Bon retour !</div>
-    <div class="auth-sub">Connectez-vous à votre espace <span>Clario</span></div>
+    <div class="auth-title" id="titleText">Bon retour !</div>
+    <div class="auth-sub" id="subText">Connectez-vous à votre espace <span>Clario</span></div>
     <div class="lang-select">
       <i class="fa-solid fa-globe"></i>
-      <select>
-        <option>Français</option><option>English</option><option>Español</option>
-        <option>中文</option><option>العربية</option><option>Português</option>
-        <option>Deutsch</option><option>Italiano</option>
+      <select id="langSelect" onchange="changeLang(this.value)">
+        <option value="fr">Français</option>
+        <option value="en">English</option>
+        <option value="es">Español</option>
+        <option value="ar">العربية</option>
+        <option value="zh">中文</option>
+        <option value="pt">Português</option>
+        <option value="de">Deutsch</option>
+        <option value="it">Italiano</option>
       </select>
     </div>
     <div class="error-msg" id="errorMsg">Email ou mot de passe incorrect.</div>
     <div class="form-group">
-      <label>Adresse email</label>
+      <label id="emailLabel">Adresse email</label>
       <div class="input-wrap">
         <i class="fa-solid fa-envelope icon"></i>
         <input type="email" id="email" placeholder="votre@email.com">
       </div>
     </div>
     <div class="form-group">
-      <label>Mot de passe</label>
+      <label id="pwLabel">Mot de passe</label>
       <div class="input-wrap">
         <i class="fa-solid fa-lock icon"></i>
         <input type="password" id="password" placeholder="••••••••">
@@ -112,21 +115,50 @@ main{flex:1;display:flex;align-items:center;justify-content:center;padding:20px 
       </div>
     </div>
     <div class="form-options">
-      <label class="remember"><input type="checkbox"> Se souvenir de moi</label>
-      <a class="forgot" href="#">Mot de passe oublié ?</a>
+      <label class="remember"><input type="checkbox"> <span id="rememberText">Se souvenir de moi</span></label>
+      <a class="forgot" href="#" id="forgotText">Mot de passe oublié ?</a>
     </div>
     <button class="btn-submit" onclick="handleLogin()">
-      <i class="fa-solid fa-arrow-right-to-bracket"></i> Se connecter
+      <i class="fa-solid fa-arrow-right-to-bracket"></i> <span id="submitText">Se connecter</span>
     </button>
-    <div class="divider"><span>ou continuer avec</span></div>
+    <div class="divider"><span id="orText">ou continuer avec</span></div>
     <div class="social-btns">
       <button class="social-btn" onclick="location.href='dashboard.html'"><i class="fa-brands fa-google"></i> Google</button>
       <button class="social-btn" onclick="location.href='dashboard.html'"><i class="fa-brands fa-apple"></i> Apple</button>
     </div>
-    <div class="auth-switch">Pas encore de compte ? <a href="inscription.html">Créer un compte</a></div>
+    <div class="auth-switch" id="switchText">Pas encore de compte ? <a href="inscription.html">Créer un compte</a></div>
   </div>
 </main>
 <script>
+const translations = {
+  fr:{title:"Bon retour !",sub:"Connectez-vous à votre espace Clario",email:"Adresse email",emailPh:"votre@email.com",pw:"Mot de passe",remember:"Se souvenir de moi",forgot:"Mot de passe oublié ?",submit:"Se connecter",or:"ou continuer avec",switchT:"Pas encore de compte ? <a href='inscription.html'>Créer un compte</a>",back:"Retour à l'accueil",tagline:"La relation client, simplifiée",error:"Email ou mot de passe incorrect."},
+  en:{title:"Welcome back!",sub:"Sign in to your Clario account",email:"Email address",emailPh:"your@email.com",pw:"Password",remember:"Remember me",forgot:"Forgot password?",submit:"Sign in",or:"or continue with",switchT:"No account yet? <a href='inscription.html'>Create an account</a>",back:"Back to home",tagline:"Client relations, simplified",error:"Incorrect email or password."},
+  es:{title:"¡Bienvenido de nuevo!",sub:"Inicia sesión en tu espacio Clario",email:"Correo electrónico",emailPh:"tu@email.com",pw:"Contraseña",remember:"Recordarme",forgot:"¿Olvidaste tu contraseña?",submit:"Iniciar sesión",or:"o continuar con",switchT:"¿No tienes cuenta? <a href='inscription.html'>Crear una cuenta</a>",back:"Volver al inicio",tagline:"La relación con el cliente, simplificada",error:"Email o contraseña incorrectos."},
+  ar:{title:"مرحباً بعودتك!",sub:"سجل الدخول إلى حسابك في Clario",email:"البريد الإلكتروني",emailPh:"بريدك@email.com",pw:"كلمة المرور",remember:"تذكرني",forgot:"نسيت كلمة المرور؟",submit:"تسجيل الدخول",or:"أو المتابعة باستخدام",switchT:"ليس لديك حساب؟ <a href='inscription.html'>إنشاء حساب</a>",back:"العودة إلى الصفحة الرئيسية",tagline:"علاقة العملاء، مبسطة",error:"البريد الإلكتروني أو كلمة المرور غير صحيحة."},
+  zh:{title:"欢迎回来！",sub:"登录您的 Clario 账户",email:"电子邮件",emailPh:"您的@email.com",pw:"密码",remember:"记住我",forgot:"忘记密码？",submit:"登录",or:"或通过以下方式继续",switchT:"还没有账户？<a href='inscription.html'>创建账户</a>",back:"返回首页",tagline:"简化客户关系",error:"邮箱或密码错误。"},
+  pt:{title:"Bem-vindo de volta!",sub:"Entre na sua conta Clario",email:"Endereço de email",emailPh:"seu@email.com",pw:"Senha",remember:"Lembrar de mim",forgot:"Esqueceu a senha?",submit:"Entrar",or:"ou continuar com",switchT:"Não tem conta? <a href='inscription.html'>Criar uma conta</a>",back:"Voltar ao início",tagline:"Relacionamento com o cliente, simplificado",error:"Email ou senha incorretos."},
+  de:{title:"Willkommen zurück!",sub:"Melden Sie sich bei Ihrem Clario-Konto an",email:"E-Mail-Adresse",emailPh:"ihre@email.com",pw:"Passwort",remember:"Angemeldet bleiben",forgot:"Passwort vergessen?",submit:"Anmelden",or:"oder weiter mit",switchT:"Noch kein Konto? <a href='inscription.html'>Konto erstellen</a>",back:"Zurück zur Startseite",tagline:"Kundenbeziehungen vereinfacht",error:"E-Mail oder Passwort falsch."},
+  it:{title:"Bentornato!",sub:"Accedi al tuo account Clario",email:"Indirizzo email",emailPh:"tuo@email.com",pw:"Password",remember:"Ricordami",forgot:"Password dimenticata?",submit:"Accedi",or:"o continua con",switchT:"Non hai un account? <a href='inscription.html'>Crea un account</a>",back:"Torna alla home",tagline:"Relazione con il cliente, semplificata",error:"Email o password errati."}
+};
+let currentLang='fr';
+function changeLang(lang){
+  currentLang=lang;
+  const t=translations[lang];
+  document.getElementById('titleText').textContent=t.title;
+  document.getElementById('subText').innerHTML=t.sub.replace('Clario','<span>Clario</span>');
+  document.getElementById('emailLabel').textContent=t.email;
+  document.getElementById('email').placeholder=t.emailPh;
+  document.getElementById('pwLabel').textContent=t.pw;
+  document.getElementById('rememberText').textContent=t.remember;
+  document.getElementById('forgotText').textContent=t.forgot;
+  document.getElementById('submitText').textContent=t.submit;
+  document.getElementById('orText').textContent=t.or;
+  document.getElementById('switchText').innerHTML=t.switchT;
+  document.getElementById('backText').textContent=t.back;
+  document.getElementById('tagline').textContent=t.tagline;
+  document.getElementById('errorMsg').textContent=t.error;
+  document.body.dir=lang==='ar'?'rtl':'ltr';
+}
 function togglePw(){
   const pw=document.getElementById('password');
   const icon=document.getElementById('eyeIcon');
@@ -137,7 +169,7 @@ function handleLogin(){
   const email=document.getElementById('email').value;
   const pw=document.getElementById('password').value;
   const err=document.getElementById('errorMsg');
-  if(!email||!pw){err.style.display='block';err.textContent='Veuillez remplir tous les champs.';return;}
+  if(!email||!pw){err.style.display='block';return;}
   err.style.display='none';
   location.href='dashboard.html';
 }
