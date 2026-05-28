@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Inscription — Clario</title>
+<link rel="icon" href="logo.png">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{--blue-dark:#042C53;--blue-main:#0C447C;--blue-mid:#185FA5;--blue-vif:#378ADD;--blue-light:#E6F1FB}
+body{font-family:'Segoe UI',system-ui,sans-serif;background:linear-gradient(135deg,#dbeeff 0%,#fff 50%,#E6F1FB 100%);min-height:100vh;display:flex;flex-direction:column;overflow-x:hidden}
+a{text-decoration:none;color:inherit}
+@keyframes float1{0%,100%{transform:translateY(0)}50%{transform:translateY(-30px)}}
+@keyframes float2{0%,100%{transform:translateY(0)}50%{transform:translateY(25px)}}
+.bubbles{position:fixed;inset:0;overflow:hidden;pointer-events:none;z-index:0}
+.bubble{position:absolute;border-radius:50%;opacity:0.1}
+.bubble-1{width:500px;height:500px;background:#378ADD;top:-150px;left:-150px;animation:float1 10s ease-in-out infinite}
+.bubble-2{width:350px;height:350px;background:#0C447C;bottom:-100px;right:-100px;animation:float2 12s ease-in-out infinite}
+.bubble-3{width:200px;height:200px;background:#185FA5;top:50%;right:10%;animation:float1 8s ease-in-out infinite 2s}
+header{padding:20px 32px;display:flex;align-items:center;justify-content:space-between;position:relative;z-index:10}
+.logo{display:flex;align-items:center;gap:12px}
+.logo img{width:48px;height:48px;object-fit:contain}
+.logo-info{display:flex;flex-direction:column}
+.logo-text{font-size:22px;font-weight:800;line-height:1.1}
+.logo-text .clar{color:var(--blue-main)}
+.logo-text .io{color:var(--blue-vif)}
+.logo-tagline{font-size:11px;color:#999;margin-top:2px}
+.back-btn{display:flex;align-items:center;gap:8px;color:#666;font-size:14px;font-weight:600;transition:color .2s}
+.back-btn:hover{color:var(--blue-main)}
+main{flex:1;display:flex;align-items:center;justify-content:center;padding:20px 24px;position:relative;z-index:10}
+.auth-card{background:white;border-radius:24px;padding:48px 44px;width:100%;max-width:480px;box-shadow:0 20px 60px rgba(12,68,124,0.12);border:1px solid #dbeeff}
+.auth-title{font-size:28px;font-weight:900;color:var(--blue-dark);margin-bottom:8px;text-align:center}
+.auth-sub{font-size:14px;color:#888;text-align:center;margin-bottom:28px;line-height:1.6}
+.auth-sub span{color:var(--blue-main);font-weight:700}
+
+/* TYPE COMPTE */
+.account-type{display:flex;gap:12px;margin-bottom:28px}
+.type-btn{flex:1;padding:14px 10px;border:2px solid #dbeeff;border-radius:14px;background:white;cursor:pointer;text-align:center;transition:all .2s}
+.type-btn.active{border-color:var(--blue-main);background:var(--blue-light)}
+.type-btn i{font-size:22px;color:#aaa;display:block;margin-bottom:8px}
+.type-btn.active i{color:var(--blue-main)}
+.type-btn span{font-size:13px;font-weight:700;color:#666}
+.type-btn.active span{color:var(--blue-main)}
+
+.lang-select{display:flex;align-items:center;gap:8px;font-size:13px;color:#888;margin-bottom:24px;justify-content:center}
+.lang-select i{color:var(--blue-vif)}
+.lang-select select{border:1.5px solid #dbeeff;border-radius:8px;padding:6px 10px;font-size:13px;color:var(--blue-dark);background:white;outline:none;cursor:pointer}
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.form-group{margin-bottom:16px}
+.form-group label{display:block;font-size:13px;font-weight:700;color:#444;margin-bottom:8px}
+.input-wrap{position:relative}
+.input-wrap i.icon{position:absolute;left:14px;top:50%;transform:translateY(-50%);color:#aaa;font-size:16px}
+.input-wrap input,.input-wrap select{width:100%;padding:13px 14px 13px 42px;border:1.5px solid #dbeeff;border-radius:12px;font-size:15px;color:var(--blue-dark);background:#f8fbff;font-family:inherit;transition:all .2s;outline:none}
+.input-wrap input:focus,.input-wrap select:focus{border-color:var(--blue-vif);background:white;box-shadow:0 0 0 4px rgba(55,138,221,0.1)}
+.toggle-pw{position:absolute;right:14px;top:50%;transform:translateY(-50%);color:#aaa;font-size:16px;cursor:pointer;background:none;border:none;padding:0}
+.toggle-pw:hover{color:var(--blue-main)}
+.strength-bar{height:4px;background:#eee;border-radius:4px;margin-top:8px;overflow:hidden}
+.strength-fill{height:100%;border-radius:4px;transition:all .3s;width:0}
+.strength-text{font-size:11px;color:#aaa;margin-top:4px}
+.cgu{display:flex;align-items:flex-start;gap:10px;font-size:13px;color:#666;margin-bottom:24px;cursor:pointer;line-height:1.5}
+.cgu input{width:16px;height:16px;accent-color:var(--blue-main);cursor:pointer;margin-top:2px;flex-shrink:0}
+.cgu a{color:var(--blue-main);font-weight:700}
+.btn-submit{width:100%;padding:15px;background:var(--blue-main);color:white;border:none;border-radius:12px;font-size:16px;font-weight:700;cursor:pointer;transition:all .2s;display:flex;align-items:center;justify-content:center;gap:10px;margin-bottom:20px}
+.btn-submit:hover{background:var(--blue-mid);box-shadow:0 8px 24px rgba(12,68,124,0.3)}
+.divider{display:flex;align-items:center;gap:12px;margin-bottom:20px}
+.divider::before,.divider::after{content:'';flex:1;height:1px;background:#e8f0fa}
+.divider span{font-size:12px;color:#bbb;font-weight:600}
+.social-btns{display:flex;gap:12px;margin-bottom:24px}
+.social-btn{flex:1;padding:12px;border:1.5px solid #dbeeff;border-radius:12px;background:white;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:8px;font-size:14px;font-weight:600;color:#444;transition:all .2s}
+.social-btn:hover{border-color:var(--blue-vif);background:#f8fbff}
+.social-btn i{font-size:18px}
+.fa-google{color:#EA4335}
+.fa-apple{color:#000}
+.auth-switch{text-align:center;font-size:14px;color:#888}
+.auth-switch a{color:var(--blue-main);font-weight:700}
+.auth-switch a:hover{text-decoration:underline}
+@media(max-width:480px){.auth-card{padding:32px 20px}header{padding:16px 20px}.form-row{grid-template-columns:1fr}.account-type{flex-direction:column}}
+</style>
+</head>
+<body>
+<div class="bubbles">
+  <div class="bubble bubble-1"></div>
+  <div class="bubble bubble-2"></div>
+  <div class="bubble bubble-3"></div>
+</div>
+<header>
+  <a class="logo" href="index.html">
+    <img src="logo.png" alt="Clario">
+    <div class="logo-info">
+      <div class="logo-text"><span class="clar">Clar</span><span class="io">io</span></div>
+      <div class="logo-tagline">La relation client, simplifiée</div>
+    </div>
+  </a>
+  <a class="back-btn" href="index.html"><i class="fa-solid fa-arrow-left"></i> Retour à l'accueil</a>
+</header>
+<main>
+  <div class="auth-card">
+    <div class="auth-title">Créer un compte</div>
+    <div class="auth-sub">Rejoignez <span>Clario</span> et gérez vos clients comme un pro</div>
+
+    <div class="account-type">
+      <button class="type-btn active" id="typeEntrepreneur" onclick="selectType('entrepreneur')">
+        <i class="fa-solid fa-briefcase"></i>
+        <span>Entrepreneur</span>
+      </button>
+      <button class="type-btn" id="typeClient" onclick="selectType('client')">
+        <i class="fa-solid fa-user"></i>
+        <span>Client</span>
+      </button>
+    </div>
+
+    <div class="lang-select">
+      <i class="fa-solid fa-globe"></i>
+      <select>
+        <option>Français</option><option>English</option><option>Español</option>
+        <option>中文</option><option>العربية</option><option>Português</option>
+        <option>Deutsch</option><option>Italiano</option>
+      </select>
+    </div>
+
+    <div class="form-row">
+      <div class="form-group">
+        <label>Prénom</label>
+        <div class="input-wrap">
+          <i class="fa-solid fa-user icon"></i>
+          <input type="text" id="prenom" placeholder="Votre prénom">
+        </div>
+      </div>
+      <div class="form-group">
+        <label>Nom</label>
+        <div class="input-wrap">
+          <i class="fa-solid fa-user icon"></i>
+          <input type="text" id="nom" placeholder="Votre nom">
+        </div>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label>Adresse email</label>
+      <div class="input-wrap">
+        <i class="fa-solid fa-envelope icon"></i>
+        <input type="email" id="email" placeholder="votre@email.com">
+      </div>
+    </div>
+
+    <div class="form-group" id="entrepriseField">
+      <label>Nom de votre entreprise</label>
+      <div class="input-wrap">
+        <i class="fa-solid fa-building icon"></i>
+        <input type="text" id="entreprise" placeholder="Ex: Plomberie Martin">
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label>Mot de passe</label>
+      <div class="input-wrap">
+        <i class="fa-solid fa-lock icon"></i>
+        <input type="password" id="password" placeholder="••••••••" oninput="checkStrength(this.value)">
+        <button class="toggle-pw" onclick="togglePw()"><i class="fa-solid fa-eye" id="eyeIcon"></i></button>
+      </div>
+      <div class="strength-bar"><div class="strength-fill" id="strengthFill"></div></div>
+      <div class="strength-text" id="strengthText"></div>
+    </div>
+
+    <label class="cgu">
+      <input type="checkbox" id="cguCheck">
+      J'accepte les <a href="#">conditions d'utilisation</a> et la <a href="#">politique de confidentialité</a> de Clario.
+    </label>
+
+    <button class="btn-submit" onclick="handleRegister()">
+      <i class="fa-solid fa-rocket"></i> Créer mon compte
+    </button>
+
+    <div class="divider"><span>ou s'inscrire avec</span></div>
+    <div class="social-btns">
+      <button class="social-btn" onclick="location.href='dashboard.html'"><i class="fa-brands fa-google"></i> Google</button>
+      <button class="social-btn" onclick="location.href='dashboard.html'"><i class="fa-brands fa-apple"></i> Apple</button>
+    </div>
+    <div class="auth-switch">Déjà un compte ? <a href="connexion.html">Se connecter</a></div>
+  </div>
+</main>
+<script>
+function selectType(type){
+  document.getElementById('typeEntrepreneur').classList.toggle('active', type==='entrepreneur');
+  document.getElementById('typeClient').classList.toggle('active', type==='client');
+  document.getElementById('entrepriseField').style.display = type==='entrepreneur' ? 'block' : 'none';
+}
+function togglePw(){
+  const pw=document.getElementById('password');
+  const icon=document.getElementById('eyeIcon');
+  if(pw.type==='password'){pw.type='text';icon.className='fa-solid fa-eye-slash';}
+  else{pw.type='password';icon.className='fa-solid fa-eye';}
+}
+function checkStrength(val){
+  const fill=document.getElementById('strengthFill');
+  const text=document.getElementById('strengthText');
+  if(val.length===0){fill.style.width='0';fill.style.background='';text.textContent='';return;}
+  let score=0;
+  if(val.length>=8)score++;
+  if(/[A-Z]/.test(val))score++;
+  if(/[0-9]/.test(val))score++;
+  if(/[^A-Za-z0-9]/.test(val))score++;
+  const levels=[['25%','#ef5350','Faible'],['50%','#ff9800','Moyen'],['75%','#42a5f5','Bon'],['100%','#66bb6a','Fort']];
+  const [w,c,t]=levels[score-1]||['10%','#ef5350','Trop court'];
+  fill.style.width=w;fill.style.background=c;text.textContent='Force : '+t;text.style.color=c;
+}
+function handleRegister(){
+  const prenom=document.getElementById('prenom').value;
+  const email=document.getElementById('email').value;
+  const pw=document.getElementById('password').value;
+  const cgu=document.getElementById('cguCheck').checked;
+  if(!prenom||!email||!pw){alert('Veuillez remplir tous les champs obligatoires.');return;}
+  if(!cgu){alert('Veuillez accepter les conditions d\'utilisation.');return;}
+  location.href='dashboard.html';
+}
+</script>
+</body>
+</html>
