@@ -4,103 +4,109 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Contact — Clario</title>
-<meta name="theme-color" content="#0C1F3F">
-<link rel="manifest" href="manifest.json">
 <link rel="icon" href="logo.png">
-<link rel="apple-touch-icon" href="logo.png">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
 :root{--blue-dark:#042C53;--blue-main:#0C447C;--blue-mid:#185FA5;--blue-vif:#378ADD;--blue-light:#E6F1FB;--white:#fff;--gray:#f8fbff}
-body{font-family:'Segoe UI',system-ui,sans-serif;background:var(--gray);color:var(--blue-dark)}
+body{font-family:'Segoe UI',system-ui,sans-serif;background:var(--gray);color:var(--blue-dark);overflow-x:hidden}
 a{text-decoration:none;color:inherit}
-header{position:sticky;top:0;background:rgba(255,255,255,0.97);backdrop-filter:blur(12px);border-bottom:1px solid #dbeeff;padding:14px 32px;display:flex;align-items:center;justify-content:space-between;z-index:100}
-.logo{display:flex;align-items:center;gap:10px}
-.logo img{width:38px;height:38px;border-radius:10px}
-.logo-text{font-size:21px;font-weight:800}
+header{position:sticky;top:0;background:rgba(255,255,255,0.97);backdrop-filter:blur(12px);border-bottom:1px solid #dbeeff;padding:12px 32px;display:flex;align-items:center;justify-content:space-between;z-index:100}
+.logo{display:flex;align-items:center;gap:12px}
+.logo img{width:52px;height:52px;object-fit:contain}
+.logo-info{display:flex;flex-direction:column;justify-content:center}
+.logo-text{font-size:22px;font-weight:800;line-height:1.1}
 .logo-text .clar{color:var(--blue-main)}
 .logo-text .io{color:var(--blue-vif)}
+.logo-tagline{font-size:11px;color:#999;margin-top:2px}
 nav{display:flex;gap:32px}
 nav a{font-size:14px;color:#555;font-weight:500;transition:color .2s}
-nav a:hover{color:var(--blue-main)}
-nav a.active{color:var(--blue-main)}
+nav a:hover,nav a.active{color:var(--blue-main)}
 .header-btns{display:flex;gap:10px}
 .btn{padding:10px 22px;border-radius:10px;font-size:14px;font-weight:700;cursor:pointer;border:none;transition:all .2s}
 .btn-ghost{background:none;border:1.5px solid var(--blue-main);color:var(--blue-main)}
 .btn-ghost:hover{background:var(--blue-light)}
 .btn-solid{background:var(--blue-main);color:white}
 .btn-solid:hover{background:var(--blue-mid)}
-.burger{display:none;background:none;border:none;font-size:22px;color:var(--blue-main);cursor:pointer}
-.mobile-nav{display:none;position:fixed;bottom:0;left:0;right:0;background:white;border-top:1px solid #dbeeff;padding:10px 0;z-index:200;justify-content:space-around}
-.mobile-nav a{display:flex;flex-direction:column;align-items:center;gap:4px;font-size:11px;color:#888;font-weight:600}
-.mobile-nav a i{font-size:20px}
-.mobile-nav a:hover,.mobile-nav a.active{color:var(--blue-main)}
-
-/* HERO CONTACT */
+.burger{display:none;background:none;border:none;font-size:24px;color:var(--blue-main);cursor:pointer;padding:6px}
+.side-overlay{position:fixed;inset:0;background:rgba(4,44,83,0.35);backdrop-filter:blur(4px);z-index:300;opacity:0;pointer-events:none;transition:opacity .3s}
+.side-overlay.open{opacity:1;pointer-events:all}
+.side-menu{position:fixed;top:0;right:-320px;width:300px;height:100%;background:linear-gradient(160deg,#0C1F3F 0%,#0d3570 60%,#185FA5 100%);z-index:400;transition:right .35s cubic-bezier(.4,0,.2,1);display:flex;flex-direction:column}
+.side-menu.open{right:0}
+.side-menu-header{display:flex;align-items:center;justify-content:space-between;padding:24px 20px 20px}
+.side-menu-logo{display:flex;align-items:center;gap:10px}
+.side-menu-logo img{width:44px;height:44px;object-fit:contain}
+.side-menu-logo-info{display:flex;flex-direction:column}
+.side-menu-logo-text{font-size:20px;font-weight:800;color:white}
+.side-menu-logo-text .io{color:#60AFFF}
+.side-menu-tagline{font-size:11px;color:#60AFFF;margin-top:2px}
+.side-close{background:rgba(255,255,255,0.1);border:none;color:white;width:40px;height:40px;border-radius:10px;font-size:18px;cursor:pointer;display:flex;align-items:center;justify-content:center}
+.side-close:hover{background:rgba(255,255,255,0.2)}
+.side-divider{height:1px;background:rgba(255,255,255,0.1);margin:0 20px}
+.side-nav{display:flex;flex-direction:column;padding:16px;gap:4px;flex:1}
+.side-nav a{display:flex;align-items:center;gap:14px;padding:14px 16px;border-radius:12px;color:rgba(255,255,255,0.8);font-size:15px;font-weight:600;transition:all .2s}
+.side-nav a i{width:22px;font-size:17px;color:#60AFFF;text-align:center}
+.side-nav a:hover,.side-nav a.active{background:rgba(255,255,255,0.1);color:white}
+.side-footer{padding:20px;border-top:1px solid rgba(255,255,255,0.1)}
+.side-btns{display:flex;flex-direction:column;gap:10px}
+.side-btn{padding:13px;border-radius:12px;font-size:14px;font-weight:700;cursor:pointer;border:none;text-align:center}
+.side-btn-outline{background:rgba(255,255,255,0.08);color:white;border:1px solid rgba(255,255,255,0.2)}
+.side-btn-solid{background:white;color:var(--blue-main)}
 .contact-hero{background:linear-gradient(135deg,#dbeeff 0%,#fff 60%,#E6F1FB 100%);padding:80px 32px 60px;text-align:center}
 .contact-hero h1{font-size:clamp(32px,5vw,56px);font-weight:900;margin-bottom:16px}
 .contact-hero h1 em{font-style:normal;background:linear-gradient(90deg,#185FA5,#378ADD);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
 .contact-hero p{color:#666;font-size:16px;max-width:500px;margin:0 auto}
-
-/* CONTACT MAIN */
 .contact-main{max-width:1000px;margin:0 auto;padding:60px 32px;display:grid;grid-template-columns:1fr 1.6fr;gap:48px;align-items:start}
-
-/* INFO */
 .contact-info{display:flex;flex-direction:column;gap:24px}
 .info-card{background:white;border:1px solid #dbeeff;border-radius:16px;padding:24px;display:flex;align-items:flex-start;gap:16px}
 .info-icon{width:44px;height:44px;background:linear-gradient(135deg,#E6F1FB,#dbeeff);border-radius:12px;display:flex;align-items:center;justify-content:center;color:var(--blue-main);font-size:18px;flex-shrink:0}
 .info-card h4{font-size:14px;font-weight:700;color:var(--blue-dark);margin-bottom:4px}
 .info-card p{font-size:14px;color:#666;line-height:1.6}
 .info-card a{color:var(--blue-vif);font-weight:600}
-
-/* FORM */
 .contact-form{background:white;border:1px solid #dbeeff;border-radius:20px;padding:40px}
 .form-title{font-size:20px;font-weight:800;color:var(--blue-dark);margin-bottom:8px}
 .form-sub{font-size:14px;color:#888;margin-bottom:28px}
-
-/* SUGGESTIONS */
-.suggestions{margin-bottom:24px}
 .suggestions p{font-size:13px;font-weight:700;color:#555;margin-bottom:12px;text-transform:uppercase;letter-spacing:0.5px}
-.suggestion-tags{display:flex;flex-wrap:wrap;gap:8px}
+.suggestion-tags{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:24px}
 .tag{background:var(--blue-light);color:var(--blue-main);border:1px solid #b5d4f4;border-radius:999px;padding:6px 14px;font-size:13px;font-weight:600;cursor:pointer;transition:all .2s}
 .tag:hover,.tag.selected{background:var(--blue-main);color:white;border-color:var(--blue-main)}
-
-/* INPUTS */
 .form-row{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:16px}
 .form-group{margin-bottom:16px}
 .form-group label{display:block;font-size:13px;font-weight:700;color:#444;margin-bottom:8px}
-.form-group input,.form-group textarea,.form-group select{width:100%;padding:12px 16px;border:1.5px solid #dbeeff;border-radius:10px;font-size:14px;color:var(--blue-dark);background:var(--gray);font-family:inherit;transition:border .2s;outline:none}
-.form-group input:focus,.form-group textarea:focus,.form-group select:focus{border-color:var(--blue-vif);background:white}
+.form-group input,.form-group textarea{width:100%;padding:12px 16px;border:1.5px solid #dbeeff;border-radius:10px;font-size:14px;color:var(--blue-dark);background:var(--gray);font-family:inherit;transition:border .2s;outline:none}
+.form-group input:focus,.form-group textarea:focus{border-color:var(--blue-vif);background:white}
 .form-group textarea{resize:vertical;min-height:130px;line-height:1.6}
 .submit-btn{width:100%;padding:16px;background:var(--blue-main);color:white;border:none;border-radius:12px;font-size:16px;font-weight:700;cursor:pointer;transition:all .2s;display:flex;align-items:center;justify-content:center;gap:10px}
 .submit-btn:hover{background:var(--blue-mid)}
 .success-msg{display:none;background:#e8f5e9;border:1px solid #a5d6a7;border-radius:10px;padding:16px;text-align:center;color:#2e7d32;font-weight:600;margin-top:16px;font-size:14px}
-
-/* FOOTER */
-footer{background:#0a1628;color:white;padding:40px 32px 32px;margin-top:60px}
+footer{background:#0a1628;color:white;padding:40px 32px 32px}
 .footer-bottom{max-width:1000px;margin:0 auto;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:16px}
 .footer-bottom p{color:#666;font-size:13px}
-.footer-logo{display:flex;align-items:center;gap:8px}
-.footer-logo img{width:28px;height:28px;border-radius:8px}
-
+.footer-logo{display:flex;align-items:center;gap:10px}
+.footer-logo img{width:44px;height:44px;object-fit:contain}
+.footer-logo-info{display:flex;flex-direction:column}
+.footer-logo-text{font-size:20px;font-weight:800;line-height:1.1}
+.footer-logo-text .clar{color:#60AFFF}
+.footer-logo-text .io{color:#a8d8ff}
+.footer-logo-tagline{font-size:11px;color:#4a7fa5;margin-top:2px}
 @media(max-width:768px){
   nav,.header-btns{display:none}
   .burger{display:block}
-  .mobile-nav{display:flex}
-  body{padding-bottom:70px}
   .contact-main{grid-template-columns:1fr;padding:32px 20px}
   .form-row{grid-template-columns:1fr}
   .contact-hero{padding:60px 20px 40px}
-  header{padding:14px 20px}
+  header{padding:12px 20px}
 }
 </style>
 </head>
 <body>
-
 <header>
   <a class="logo" href="index.html">
-    <img src="logo.png" alt="Clario logo">
-    <div class="logo-text"><span class="clar">Clar</span><span class="io">io</span></div>
+    <img src="logo.png" alt="Clario">
+    <div class="logo-info">
+      <div class="logo-text"><span class="clar">Clar</span><span class="io">io</span></div>
+      <div class="logo-tagline">La relation client, simplifiée</div>
+    </div>
   </a>
   <nav>
     <a href="index.html#fonctionnalites">Fonctionnalités</a>
@@ -110,18 +116,39 @@ footer{background:#0a1628;color:white;padding:40px 32px 32px;margin-top:60px}
     <a href="contact.html" class="active">Contact</a>
   </nav>
   <div class="header-btns">
-    <button class="btn btn-ghost">Connexion</button>
-    <button class="btn btn-solid">Commencer</button>
+    <button class="btn btn-ghost" onclick="location.href='connexion.html'">Connexion</button>
+    <button class="btn btn-solid" onclick="location.href='inscription.html'">Commencer</button>
   </div>
-  <button class="burger"><i class="fa-solid fa-bars"></i></button>
+  <button class="burger" onclick="openMenu()"><i class="fa-solid fa-bars"></i></button>
 </header>
 
-<nav class="mobile-nav">
-  <a href="index.html#fonctionnalites"><i class="fa-solid fa-grid-2"></i>Fonctionnalités</a>
-  <a href="index.html#apropos"><i class="fa-solid fa-circle-info"></i>À propos</a>
-  <a href="index.html#faq"><i class="fa-solid fa-circle-question"></i>FAQ</a>
-  <a href="contact.html" class="active"><i class="fa-solid fa-envelope"></i>Contact</a>
-</nav>
+<div class="side-overlay" id="overlay" onclick="closeMenu()"></div>
+<div class="side-menu" id="sideMenu">
+  <div class="side-menu-header">
+    <div class="side-menu-logo">
+      <img src="logo.png" alt="Clario">
+      <div class="side-menu-logo-info">
+        <div class="side-menu-logo-text"><span>Clar</span><span class="io">io</span></div>
+        <div class="side-menu-tagline">La relation client, simplifiée</div>
+      </div>
+    </div>
+    <button class="side-close" onclick="closeMenu()"><i class="fa-solid fa-arrow-left"></i></button>
+  </div>
+  <div class="side-divider"></div>
+  <div class="side-nav">
+    <a href="index.html#fonctionnalites" onclick="closeMenu()"><i class="fa-solid fa-table-cells-large"></i>Fonctionnalités</a>
+    <a href="index.html#apropos" onclick="closeMenu()"><i class="fa-solid fa-circle-info"></i>À propos</a>
+    <a href="index.html#tarifs" onclick="closeMenu()"><i class="fa-solid fa-tag"></i>Tarifs</a>
+    <a href="index.html#faq" onclick="closeMenu()"><i class="fa-solid fa-circle-question"></i>FAQ</a>
+    <a href="contact.html" class="active" onclick="closeMenu()"><i class="fa-solid fa-envelope"></i>Contact</a>
+  </div>
+  <div class="side-footer">
+    <div class="side-btns">
+      <button class="side-btn side-btn-outline" onclick="location.href='connexion.html'">Connexion</button>
+      <button class="side-btn side-btn-solid" onclick="location.href='inscription.html'">Commencer gratuitement</button>
+    </div>
+  </div>
+</div>
 
 <section class="contact-hero">
   <h1>Contactez <em>notre équipe</em></h1>
@@ -130,81 +157,33 @@ footer{background:#0a1628;color:white;padding:40px 32px 32px;margin-top:60px}
 
 <div class="contact-main">
   <div class="contact-info">
-    <div class="info-card">
-      <div class="info-icon"><i class="fa-solid fa-phone"></i></div>
-      <div>
-        <h4>Téléphone</h4>
-        <p><a href="tel:0749942081">07 49 94 20 81</a></p>
-        <p style="font-size:12px;color:#aaa;margin-top:4px">Lun–Ven, 9h–18h</p>
-      </div>
-    </div>
-    <div class="info-card">
-      <div class="info-icon"><i class="fa-solid fa-envelope"></i></div>
-      <div>
-        <h4>Email</h4>
-        <p><a href="mailto:contact@clario.app">contact@clario.app</a></p>
-        <p style="font-size:12px;color:#aaa;margin-top:4px">Réponse sous 24h</p>
-      </div>
-    </div>
-    <div class="info-card">
-      <div class="info-icon"><i class="fa-solid fa-location-dot"></i></div>
-      <div>
-        <h4>Adresse</h4>
-        <p>Paris, France</p>
-      </div>
-    </div>
-    <div class="info-card">
-      <div class="info-icon"><i class="fa-solid fa-clock"></i></div>
-      <div>
-        <h4>Horaires du support</h4>
-        <p>Lundi – Vendredi<br>9h00 – 18h00</p>
-      </div>
-    </div>
+    <div class="info-card"><div class="info-icon"><i class="fa-solid fa-phone"></i></div><div><h4>Téléphone</h4><p><a href="tel:0749942081">07 49 94 20 81</a></p><p style="font-size:12px;color:#aaa;margin-top:4px">Lun–Ven, 9h–18h</p></div></div>
+    <div class="info-card"><div class="info-icon"><i class="fa-solid fa-envelope"></i></div><div><h4>Email</h4><p><a href="mailto:contact@clario.app">contact@clario.app</a></p><p style="font-size:12px;color:#aaa;margin-top:4px">Réponse sous 24h</p></div></div>
+    <div class="info-card"><div class="info-icon"><i class="fa-solid fa-location-dot"></i></div><div><h4>Adresse</h4><p>Paris, France</p></div></div>
+    <div class="info-card"><div class="info-icon"><i class="fa-solid fa-clock"></i></div><div><h4>Horaires</h4><p>Lundi – Vendredi<br>9h00 – 18h00</p></div></div>
   </div>
-
   <div class="contact-form">
     <div class="form-title">Envoyez-nous un message</div>
     <div class="form-sub">On vous répond dans les 24h ouvrées.</div>
-
     <div class="suggestions">
       <p>Votre demande concerne</p>
       <div class="suggestion-tags">
         <span class="tag" onclick="selectTag(this,'Je souhaite en savoir plus sur Clario')">En savoir plus</span>
         <span class="tag" onclick="selectTag(this,'J\'ai un problème technique')">Problème technique</span>
         <span class="tag" onclick="selectTag(this,'Je voudrais changer d\'abonnement')">Abonnement</span>
-        <span class="tag" onclick="selectTag(this,'J\'ai une suggestion d\'amélioration')">Suggestion</span>
+        <span class="tag" onclick="selectTag(this,'J\'ai une suggestion')">Suggestion</span>
         <span class="tag" onclick="selectTag(this,'Autre demande')">Autre</span>
       </div>
     </div>
-
     <div class="form-row">
-      <div class="form-group">
-        <label>Prénom</label>
-        <input type="text" id="prenom" placeholder="Votre prénom">
-      </div>
-      <div class="form-group">
-        <label>Nom</label>
-        <input type="text" id="nom" placeholder="Votre nom">
-      </div>
+      <div class="form-group"><label>Prénom</label><input type="text" id="prenom" placeholder="Votre prénom"></div>
+      <div class="form-group"><label>Nom</label><input type="text" id="nom" placeholder="Votre nom"></div>
     </div>
-    <div class="form-group">
-      <label>Email</label>
-      <input type="email" id="email" placeholder="votre@email.com">
-    </div>
-    <div class="form-group">
-      <label>Téléphone (optionnel)</label>
-      <input type="tel" id="tel" placeholder="07 00 00 00 00">
-    </div>
-    <div class="form-group">
-      <label>Message</label>
-      <textarea id="message" placeholder="Décrivez votre demande en détail..."></textarea>
-    </div>
-    <button class="submit-btn" onclick="sendMessage()">
-      <i class="fa-solid fa-paper-plane"></i> Envoyer le message
-    </button>
-    <div class="success-msg" id="success">
-      <i class="fa-solid fa-circle-check"></i> Message envoyé ! On vous répond dans les 24h.
-    </div>
+    <div class="form-group"><label>Email</label><input type="email" id="email" placeholder="votre@email.com"></div>
+    <div class="form-group"><label>Téléphone (optionnel)</label><input type="tel" id="tel" placeholder="07 00 00 00 00"></div>
+    <div class="form-group"><label>Message</label><textarea id="message" placeholder="Décrivez votre demande..."></textarea></div>
+    <button class="submit-btn" onclick="sendMessage()"><i class="fa-solid fa-paper-plane"></i> Envoyer le message</button>
+    <div class="success-msg" id="success"><i class="fa-solid fa-circle-check"></i> Message envoyé ! On vous répond dans les 24h.</div>
   </div>
 </div>
 
@@ -212,19 +191,20 @@ footer{background:#0a1628;color:white;padding:40px 32px 32px;margin-top:60px}
   <div class="footer-bottom">
     <div class="footer-logo">
       <img src="logo.png" alt="Clario">
-      <span style="font-weight:800;font-size:16px"><span style="color:#378ADD">Clar</span><span style="color:#60AFFF">io</span></span>
+      <div class="footer-logo-info">
+        <div class="footer-logo-text"><span class="clar">Clar</span><span class="io">io</span></div>
+        <div class="footer-logo-tagline">La relation client, simplifiée</div>
+      </div>
     </div>
     <p>© 2026 Clario — Tous droits réservés.</p>
-    <p style="color:#93c5fd"><a href="index.html" style="color:#93c5fd">Retour à l'accueil</a></p>
+    <p><a href="index.html" style="color:#93c5fd">Retour à l'accueil</a></p>
   </div>
 </footer>
 
 <script>
-function selectTag(el,text){
-  document.querySelectorAll('.tag').forEach(t=>t.classList.remove('selected'));
-  el.classList.add('selected');
-  document.getElementById('message').placeholder=''+text+'...';
-}
+function openMenu(){document.getElementById('sideMenu').classList.add('open');document.getElementById('overlay').classList.add('open');document.body.style.overflow='hidden'}
+function closeMenu(){document.getElementById('sideMenu').classList.remove('open');document.getElementById('overlay').classList.remove('open');document.body.style.overflow=''}
+function selectTag(el,text){document.querySelectorAll('.tag').forEach(t=>t.classList.remove('selected'));el.classList.add('selected');document.getElementById('message').placeholder=text+'...';}
 function sendMessage(){
   const p=document.getElementById('prenom').value;
   const e=document.getElementById('email').value;
