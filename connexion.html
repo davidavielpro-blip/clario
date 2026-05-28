@@ -5,15 +5,12 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Connexion — Clario</title>
 <link rel="icon" href="logo.png">
-<link rel="apple-touch-icon" href="logo.png">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
-:root{--blue-dark:#042C53;--blue-main:#0C447C;--blue-mid:#185FA5;--blue-vif:#378ADD;--blue-light:#E6F1FB;--white:#fff}
+:root{--blue-dark:#042C53;--blue-main:#0C447C;--blue-mid:#185FA5;--blue-vif:#378ADD;--blue-light:#E6F1FB}
 body{font-family:'Segoe UI',system-ui,sans-serif;background:linear-gradient(135deg,#dbeeff 0%,#fff 50%,#E6F1FB 100%);min-height:100vh;display:flex;flex-direction:column;overflow-x:hidden}
 a{text-decoration:none;color:inherit}
-
-/* BULLES */
 @keyframes float1{0%,100%{transform:translateY(0)}50%{transform:translateY(-30px)}}
 @keyframes float2{0%,100%{transform:translateY(0)}50%{transform:translateY(25px)}}
 .bubbles{position:fixed;inset:0;overflow:hidden;pointer-events:none;z-index:0}
@@ -21,8 +18,6 @@ a{text-decoration:none;color:inherit}
 .bubble-1{width:500px;height:500px;background:#378ADD;top:-150px;left:-150px;animation:float1 10s ease-in-out infinite}
 .bubble-2{width:350px;height:350px;background:#0C447C;bottom:-100px;right:-100px;animation:float2 12s ease-in-out infinite}
 .bubble-3{width:200px;height:200px;background:#185FA5;top:50%;right:10%;animation:float1 8s ease-in-out infinite 2s}
-
-/* HEADER */
 header{padding:20px 32px;display:flex;align-items:center;justify-content:space-between;position:relative;z-index:10}
 .logo{display:flex;align-items:center;gap:12px}
 .logo img{width:48px;height:48px;object-fit:contain}
@@ -33,75 +28,51 @@ header{padding:20px 32px;display:flex;align-items:center;justify-content:space-b
 .logo-tagline{font-size:11px;color:#999;margin-top:2px}
 .back-btn{display:flex;align-items:center;gap:8px;color:#666;font-size:14px;font-weight:600;transition:color .2s}
 .back-btn:hover{color:var(--blue-main)}
-.back-btn i{font-size:16px}
-
-/* MAIN */
 main{flex:1;display:flex;align-items:center;justify-content:center;padding:20px 24px;position:relative;z-index:10}
-
-/* CARD */
 .auth-card{background:white;border-radius:24px;padding:48px 44px;width:100%;max-width:440px;box-shadow:0 20px 60px rgba(12,68,124,0.12);border:1px solid #dbeeff}
 .auth-title{font-size:28px;font-weight:900;color:var(--blue-dark);margin-bottom:8px;text-align:center}
 .auth-sub{font-size:14px;color:#888;text-align:center;margin-bottom:36px;line-height:1.6}
 .auth-sub span{color:var(--blue-main);font-weight:700}
-
-/* FORM */
+.lang-select{display:flex;align-items:center;gap:8px;font-size:13px;color:#888;margin-bottom:28px;justify-content:center}
+.lang-select i{color:var(--blue-vif)}
+.lang-select select{border:1.5px solid #dbeeff;border-radius:8px;padding:6px 10px;font-size:13px;color:var(--blue-dark);background:white;outline:none;cursor:pointer}
 .form-group{margin-bottom:20px}
 .form-group label{display:block;font-size:13px;font-weight:700;color:#444;margin-bottom:8px}
 .input-wrap{position:relative}
-.input-wrap i{position:absolute;left:14px;top:50%;transform:translateY(-50%);color:#aaa;font-size:16px}
+.input-wrap i.icon{position:absolute;left:14px;top:50%;transform:translateY(-50%);color:#aaa;font-size:16px}
 .input-wrap input{width:100%;padding:13px 14px 13px 42px;border:1.5px solid #dbeeff;border-radius:12px;font-size:15px;color:var(--blue-dark);background:#f8fbff;font-family:inherit;transition:all .2s;outline:none}
 .input-wrap input:focus{border-color:var(--blue-vif);background:white;box-shadow:0 0 0 4px rgba(55,138,221,0.1)}
-.input-wrap .toggle-pw{position:absolute;right:14px;top:50%;transform:translateY(-50%);color:#aaa;font-size:16px;cursor:pointer;background:none;border:none;padding:0}
-.input-wrap .toggle-pw:hover{color:var(--blue-main)}
-
-/* OPTIONS */
+.toggle-pw{position:absolute;right:14px;top:50%;transform:translateY(-50%);color:#aaa;font-size:16px;cursor:pointer;background:none;border:none;padding:0}
+.toggle-pw:hover{color:var(--blue-main)}
 .form-options{display:flex;justify-content:space-between;align-items:center;margin-bottom:24px}
 .remember{display:flex;align-items:center;gap:8px;font-size:13px;color:#666;cursor:pointer}
 .remember input{width:16px;height:16px;accent-color:var(--blue-main);cursor:pointer}
 .forgot{font-size:13px;color:var(--blue-vif);font-weight:600}
 .forgot:hover{text-decoration:underline}
-
-/* BOUTON */
 .btn-submit{width:100%;padding:15px;background:var(--blue-main);color:white;border:none;border-radius:12px;font-size:16px;font-weight:700;cursor:pointer;transition:all .2s;display:flex;align-items:center;justify-content:center;gap:10px;margin-bottom:20px}
 .btn-submit:hover{background:var(--blue-mid);box-shadow:0 8px 24px rgba(12,68,124,0.3)}
-
-/* DIVIDER */
 .divider{display:flex;align-items:center;gap:12px;margin-bottom:20px}
 .divider::before,.divider::after{content:'';flex:1;height:1px;background:#e8f0fa}
 .divider span{font-size:12px;color:#bbb;font-weight:600}
-
-/* SOCIAL */
 .social-btns{display:flex;gap:12px;margin-bottom:28px}
 .social-btn{flex:1;padding:12px;border:1.5px solid #dbeeff;border-radius:12px;background:white;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:8px;font-size:14px;font-weight:600;color:#444;transition:all .2s}
 .social-btn:hover{border-color:var(--blue-vif);background:#f8fbff}
 .social-btn i{font-size:18px}
 .fa-google{color:#EA4335}
 .fa-apple{color:#000}
-
-/* SWITCH */
 .auth-switch{text-align:center;font-size:14px;color:#888}
 .auth-switch a{color:var(--blue-main);font-weight:700}
 .auth-switch a:hover{text-decoration:underline}
-
-/* LANGUE */
-.lang-select{display:flex;align-items:center;gap:8px;font-size:13px;color:#888;margin-bottom:28px;justify-content:center}
-.lang-select i{color:var(--blue-vif)}
-.lang-select select{border:1.5px solid #dbeeff;border-radius:8px;padding:6px 10px;font-size:13px;color:var(--blue-dark);background:white;outline:none;cursor:pointer}
-
-@media(max-width:480px){
-  .auth-card{padding:32px 24px}
-  header{padding:16px 20px}
-}
+.error-msg{display:none;background:#fff0f0;border:1px solid #ffcdd2;border-radius:10px;padding:12px 16px;text-align:center;color:#c62828;font-size:13px;font-weight:600;margin-bottom:16px}
+@media(max-width:480px){.auth-card{padding:32px 24px}header{padding:16px 20px}}
 </style>
 </head>
 <body>
-
 <div class="bubbles">
   <div class="bubble bubble-1"></div>
   <div class="bubble bubble-2"></div>
   <div class="bubble bubble-3"></div>
 </div>
-
 <header>
   <a class="logo" href="index.html">
     <img src="logo.png" alt="Clario">
@@ -112,67 +83,49 @@ main{flex:1;display:flex;align-items:center;justify-content:center;padding:20px 
   </a>
   <a class="back-btn" href="index.html"><i class="fa-solid fa-arrow-left"></i> Retour à l'accueil</a>
 </header>
-
 <main>
   <div class="auth-card">
     <div class="auth-title">Bon retour !</div>
     <div class="auth-sub">Connectez-vous à votre espace <span>Clario</span></div>
-
     <div class="lang-select">
       <i class="fa-solid fa-globe"></i>
-      <select id="langSelect">
-        <option value="fr">Français</option>
-        <option value="en">English</option>
-        <option value="es">Español</option>
-        <option value="zh">中文</option>
-        <option value="ar">العربية</option>
-        <option value="pt">Português</option>
-        <option value="de">Deutsch</option>
-        <option value="it">Italiano</option>
+      <select>
+        <option>Français</option><option>English</option><option>Español</option>
+        <option>中文</option><option>العربية</option><option>Português</option>
+        <option>Deutsch</option><option>Italiano</option>
       </select>
     </div>
-
+    <div class="error-msg" id="errorMsg">Email ou mot de passe incorrect.</div>
     <div class="form-group">
       <label>Adresse email</label>
       <div class="input-wrap">
-        <i class="fa-solid fa-envelope"></i>
+        <i class="fa-solid fa-envelope icon"></i>
         <input type="email" id="email" placeholder="votre@email.com">
       </div>
     </div>
-
     <div class="form-group">
       <label>Mot de passe</label>
       <div class="input-wrap">
-        <i class="fa-solid fa-lock"></i>
+        <i class="fa-solid fa-lock icon"></i>
         <input type="password" id="password" placeholder="••••••••">
         <button class="toggle-pw" onclick="togglePw()"><i class="fa-solid fa-eye" id="eyeIcon"></i></button>
       </div>
     </div>
-
     <div class="form-options">
-      <label class="remember">
-        <input type="checkbox"> Se souvenir de moi
-      </label>
+      <label class="remember"><input type="checkbox"> Se souvenir de moi</label>
       <a class="forgot" href="#">Mot de passe oublié ?</a>
     </div>
-
     <button class="btn-submit" onclick="handleLogin()">
       <i class="fa-solid fa-arrow-right-to-bracket"></i> Se connecter
     </button>
-
     <div class="divider"><span>ou continuer avec</span></div>
-
     <div class="social-btns">
-      <button class="social-btn"><i class="fa-brands fa-google"></i> Google</button>
-      <button class="social-btn"><i class="fa-brands fa-apple"></i> Apple</button>
+      <button class="social-btn" onclick="location.href='dashboard.html'"><i class="fa-brands fa-google"></i> Google</button>
+      <button class="social-btn" onclick="location.href='dashboard.html'"><i class="fa-brands fa-apple"></i> Apple</button>
     </div>
-
-    <div class="auth-switch">
-      Pas encore de compte ? <a href="inscription.html">Créer un compte</a>
-    </div>
+    <div class="auth-switch">Pas encore de compte ? <a href="inscription.html">Créer un compte</a></div>
   </div>
 </main>
-
 <script>
 function togglePw(){
   const pw=document.getElementById('password');
@@ -183,8 +136,10 @@ function togglePw(){
 function handleLogin(){
   const email=document.getElementById('email').value;
   const pw=document.getElementById('password').value;
-  if(!email||!pw){alert('Veuillez remplir tous les champs.');return;}
-  window.location.href='dashboard.html';
+  const err=document.getElementById('errorMsg');
+  if(!email||!pw){err.style.display='block';err.textContent='Veuillez remplir tous les champs.';return;}
+  err.style.display='none';
+  location.href='dashboard.html';
 }
 </script>
 </body>
