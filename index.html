@@ -14,8 +14,6 @@
 :root{--blue-dark:#042C53;--blue-main:#0C447C;--blue-mid:#185FA5;--blue-vif:#378ADD;--blue-light:#E6F1FB;--white:#fff;--gray:#f8fbff}
 body{font-family:'Segoe UI',system-ui,sans-serif;background:var(--white);color:var(--blue-dark);overflow-x:hidden}
 a{text-decoration:none;color:inherit}
-
-/* HEADER */
 header{position:sticky;top:0;background:rgba(255,255,255,0.97);backdrop-filter:blur(12px);border-bottom:1px solid #dbeeff;padding:12px 32px;display:flex;align-items:center;justify-content:space-between;z-index:100}
 .logo{display:flex;align-items:center;gap:12px}
 .logo img{width:52px;height:52px;object-fit:contain}
@@ -34,8 +32,6 @@ nav a:hover{color:var(--blue-main)}
 .btn-solid{background:var(--blue-main);color:white}
 .btn-solid:hover{background:var(--blue-mid)}
 .burger{display:none;background:none;border:none;font-size:24px;color:var(--blue-main);cursor:pointer;padding:6px}
-
-/* SIDE MENU */
 .side-overlay{position:fixed;inset:0;background:rgba(4,44,83,0.35);backdrop-filter:blur(4px);z-index:300;opacity:0;pointer-events:none;transition:opacity .3s}
 .side-overlay.open{opacity:1;pointer-events:all}
 .side-menu{position:fixed;top:0;right:-320px;width:300px;height:100%;background:linear-gradient(160deg,#0C1F3F 0%,#0d3570 60%,#185FA5 100%);z-index:400;transition:right .35s cubic-bezier(.4,0,.2,1);display:flex;flex-direction:column}
@@ -50,15 +46,12 @@ nav a:hover{color:var(--blue-main)}
 .side-nav a{display:flex;align-items:center;gap:14px;padding:14px 16px;border-radius:12px;color:rgba(255,255,255,0.8);font-size:15px;font-weight:600;transition:all .2s}
 .side-nav a i{width:22px;font-size:17px;color:#60AFFF;text-align:center}
 .side-nav a:hover{background:rgba(255,255,255,0.1);color:white}
-.side-nav a:hover i{color:white}
 .side-footer{padding:20px;border-top:1px solid rgba(255,255,255,0.1)}
 .side-btns{display:flex;flex-direction:column;gap:10px}
 .side-btn{padding:13px;border-radius:12px;font-size:14px;font-weight:700;cursor:pointer;border:none;text-align:center;transition:all .2s}
 .side-btn-outline{background:rgba(255,255,255,0.08);color:white;border:1px solid rgba(255,255,255,0.2)}
 .side-btn-solid{background:white;color:var(--blue-main)}
 .side-btn:hover{opacity:0.85}
-
-/* BULLES */
 @keyframes float1{0%,100%{transform:translateY(0) scale(1)}50%{transform:translateY(-30px) scale(1.05)}}
 @keyframes float2{0%,100%{transform:translateY(0) scale(1)}50%{transform:translateY(25px) scale(0.95)}}
 @keyframes float3{0%,100%{transform:translateX(0)}50%{transform:translateX(20px)}}
@@ -69,8 +62,6 @@ nav a:hover{color:var(--blue-main)}
 .bubble-3{width:200px;height:200px;background:var(--blue-mid);top:40%;left:30%;animation:float3 12s ease-in-out infinite}
 .bubble-4{width:150px;height:150px;background:#60AFFF;top:20%;right:20%;animation:float1 9s ease-in-out infinite 2s}
 .bubble-5{width:100px;height:100px;background:var(--blue-vif);bottom:20%;left:20%;animation:float2 11s ease-in-out infinite 1s}
-
-/* HERO */
 .hero{background:linear-gradient(135deg,#dbeeff 0%,#fff 55%,#E6F1FB 100%);padding:110px 32px 80px;text-align:center;position:relative;overflow:hidden}
 .hero-content{position:relative;z-index:1}
 .badge{display:inline-block;background:var(--blue-main);color:white;padding:7px 22px;border-radius:999px;font-size:11px;font-weight:700;letter-spacing:2px;margin-bottom:28px;text-transform:uppercase}
@@ -86,22 +77,16 @@ h1 em{font-style:normal;background:linear-gradient(90deg,#185FA5,#378ADD);-webki
 .stats{display:flex;justify-content:center;gap:64px;margin-top:72px;flex-wrap:wrap}
 .stat-val{font-size:38px;font-weight:900;color:var(--blue-main)}
 .stat-label{font-size:13px;color:#999;margin-top:4px}
-
-/* SECTIONS */
 .section{padding:96px 32px}
 .section-center{text-align:center;margin-bottom:60px}
 .section-center h2{font-size:clamp(28px,4vw,44px);font-weight:900;margin-bottom:14px}
 .section-center p{color:#888;font-size:16px;max-width:540px;margin:0 auto}
-
-/* FEATURES */
 .features-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(290px,1fr));gap:24px;max-width:1000px;margin:0 auto}
 .feature-card{background:white;border:1px solid #dbeeff;border-radius:18px;padding:32px;transition:all .25s}
 .feature-card:hover{transform:translateY(-5px);box-shadow:0 18px 40px rgba(12,68,124,0.1);border-color:#b5d4f4}
 .feature-icon{width:52px;height:52px;background:linear-gradient(135deg,#E6F1FB,#dbeeff);border-radius:14px;display:flex;align-items:center;justify-content:center;margin-bottom:18px;color:var(--blue-main);font-size:22px}
 .feature-card h3{font-size:17px;font-weight:800;margin-bottom:10px;color:var(--blue-dark)}
 .feature-card p{color:#777;font-size:14px;line-height:1.7}
-
-/* HOW */
 .how{background:linear-gradient(135deg,#0C1F3F,#0d3570);color:white;position:relative;overflow:hidden}
 .how .section-center h2{color:white}
 .how .section-center p{color:#93c5fd}
@@ -110,8 +95,6 @@ h1 em{font-style:normal;background:linear-gradient(90deg,#185FA5,#378ADD);-webki
 .step-num{font-size:44px;font-weight:900;color:#378ADD;opacity:0.5;margin-bottom:14px}
 .step h3{font-size:18px;font-weight:800;margin-bottom:10px;color:white}
 .step p{color:#93c5fd;font-size:14px;line-height:1.7}
-
-/* PRICING */
 .pricing{background:var(--gray)}
 .plans{display:flex;gap:24px;max-width:1000px;margin:0 auto;flex-wrap:wrap;justify-content:center;align-items:stretch}
 .plan{flex:1;min-width:260px;max-width:300px;background:white;border-radius:22px;padding:36px 28px;border:1.5px solid #dbeeff;position:relative;transition:all .25s;display:flex;flex-direction:column}
@@ -126,7 +109,7 @@ h1 em{font-style:normal;background:linear-gradient(90deg,#185FA5,#378ADD);-webki
 .plan-features{list-style:none;flex:1;display:flex;flex-direction:column;gap:12px;margin-bottom:28px}
 .plan-features li{display:flex;align-items:center;gap:10px;font-size:14px;color:#555}
 .plan-features li i{color:var(--blue-vif);font-size:15px;width:16px}
-.plan.pro-dark{background:linear-gradient(135deg,var(--blue-main),#0d3570);color:white}
+.plan.pro-dark{background:linear-gradient(135deg,var(--blue-main),#0d3570)}
 .plan.pro-dark h3,.plan.pro-dark .price{color:white}
 .plan.pro-dark .plan-desc,.plan.pro-dark .price span,.plan.pro-dark .price-period{color:#93c5fd}
 .plan.pro-dark .plan-features li{color:#dbeeff}
@@ -136,8 +119,6 @@ h1 em{font-style:normal;background:linear-gradient(90deg,#185FA5,#378ADD);-webki
 .plan-btn-outline:hover{background:var(--blue-light)}
 .plan-btn-white{background:white;color:var(--blue-main)}
 .plan-btn-white:hover{background:#f0f7ff}
-
-/* ABOUT */
 .about{background:white}
 .about-inner{max-width:900px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center}
 .about-text h2{font-size:clamp(26px,3.5vw,40px);font-weight:900;margin-bottom:20px;color:var(--blue-dark)}
@@ -146,8 +127,6 @@ h1 em{font-style:normal;background:linear-gradient(90deg,#185FA5,#378ADD);-webki
 .about-stat{background:white;border-radius:14px;padding:18px 22px}
 .about-stat-val{font-size:26px;font-weight:900;color:var(--blue-main)}
 .about-stat-label{font-size:13px;color:#888;margin-top:4px}
-
-/* FAQ */
 .faq{background:var(--gray)}
 .faq-list{max-width:740px;margin:0 auto;display:flex;flex-direction:column;gap:14px}
 .faq-item{background:white;border:1px solid #dbeeff;border-radius:14px;overflow:hidden}
@@ -156,15 +135,11 @@ h1 em{font-style:normal;background:linear-gradient(90deg,#185FA5,#378ADD);-webki
 .faq-a{display:none;padding:0 24px 20px;font-size:14px;color:#666;line-height:1.75}
 .faq-item.open .faq-a{display:block}
 .faq-item.open .faq-q i{transform:rotate(180deg)}
-
-/* CTA */
 .cta-section{background:linear-gradient(135deg,#0C1F3F,#0d3570);padding:100px 32px;text-align:center;color:white;position:relative;overflow:hidden}
 .cta-section h2{font-size:clamp(28px,4vw,48px);font-weight:900;max-width:600px;margin:0 auto 20px;position:relative;z-index:1}
 .cta-section p{color:#93c5fd;font-size:17px;margin-bottom:40px;position:relative;z-index:1}
 .btn-cta{background:white;color:var(--blue-main);padding:18px 44px;border-radius:14px;font-size:16px;font-weight:800;cursor:pointer;border:none;position:relative;z-index:1}
 .btn-cta:hover{background:#f0f7ff}
-
-/* FOOTER */
 footer{background:#0a1628;color:white;padding:52px 32px 32px}
 .footer-top{max-width:1000px;margin:0 auto;display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:40px;margin-bottom:48px}
 .footer-brand{display:flex;flex-direction:column}
@@ -181,25 +156,11 @@ footer{background:#0a1628;color:white;padding:52px 32px 32px}
 .footer-col a:hover{color:white}
 .footer-bottom{max-width:1000px;margin:0 auto;border-top:1px solid rgba(255,255,255,0.08);padding-top:24px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:16px}
 .footer-bottom p{color:#666;font-size:13px}
-
-/* RESPONSIVE */
-@media(max-width:768px){
-  nav,.header-btns{display:none}
-  .burger{display:block}
-  .hero{padding:80px 20px 60px}
-  .section{padding:70px 20px}
-  .stats{gap:32px}
-  .about-inner{grid-template-columns:1fr}
-  .footer-top{grid-template-columns:1fr 1fr}
-  header{padding:12px 20px}
-}
-@media(max-width:480px){
-  .footer-top{grid-template-columns:1fr}
-}
+@media(max-width:768px){nav,.header-btns{display:none}.burger{display:block}.hero{padding:80px 20px 60px}.section{padding:70px 20px}.stats{gap:32px}.about-inner{grid-template-columns:1fr}.footer-top{grid-template-columns:1fr 1fr}header{padding:12px 20px}}
+@media(max-width:480px){.footer-top{grid-template-columns:1fr}}
 </style>
 </head>
 <body>
-
 <header>
   <a class="logo" href="index.html">
     <img src="logo.png" alt="Clario">
@@ -216,19 +177,16 @@ footer{background:#0a1628;color:white;padding:52px 32px 32px}
     <a href="contact.html">Contact</a>
   </nav>
   <div class="header-btns">
-    <button class="btn btn-ghost">Connexion</button>
-    <button class="btn btn-solid">Commencer</button>
+    <button class="btn btn-ghost" onclick="location.href='connexion.html'">Connexion</button>
+    <button class="btn btn-solid" onclick="location.href='inscription.html'">Commencer</button>
   </div>
   <button class="burger" onclick="openMenu()"><i class="fa-solid fa-bars"></i></button>
 </header>
 
-<!-- SIDE MENU -->
 <div class="side-overlay" id="overlay" onclick="closeMenu()"></div>
 <div class="side-menu" id="sideMenu">
   <div class="side-menu-header">
-    <div class="side-menu-logo">
-      <img src="logo.png" alt="Clario">
-    </div>
+    <div class="side-menu-logo"><img src="logo.png" alt="Clario"></div>
     <button class="side-close" onclick="closeMenu()"><i class="fa-solid fa-arrow-left"></i></button>
   </div>
   <div class="side-divider"></div>
@@ -241,19 +199,16 @@ footer{background:#0a1628;color:white;padding:52px 32px 32px}
   </div>
   <div class="side-footer">
     <div class="side-btns">
-      <button class="side-btn side-btn-outline">Connexion</button>
-      <button class="side-btn side-btn-solid">Commencer gratuitement</button>
+      <button class="side-btn side-btn-outline" onclick="location.href='connexion.html'">Connexion</button>
+      <button class="side-btn side-btn-solid" onclick="location.href='inscription.html'">Commencer gratuitement</button>
     </div>
   </div>
 </div>
 
-<!-- HERO -->
 <section class="hero">
   <div class="bubbles">
-    <div class="bubble bubble-1"></div>
-    <div class="bubble bubble-2"></div>
-    <div class="bubble bubble-3"></div>
-    <div class="bubble bubble-4"></div>
+    <div class="bubble bubble-1"></div><div class="bubble bubble-2"></div>
+    <div class="bubble bubble-3"></div><div class="bubble bubble-4"></div>
     <div class="bubble bubble-5"></div>
   </div>
   <div class="hero-content">
@@ -261,8 +216,8 @@ footer{background:#0a1628;color:white;padding:52px 32px 32px}
     <h1>Gérez vos clients comme un <em>vrai pro</em></h1>
     <p>Clario connecte les entrepreneurs à leurs clients en un seul lien. Suivi de projets, messagerie traduite automatiquement, besoins en temps réel.</p>
     <div class="hero-btns">
-      <button class="btn-hero btn-hero-solid">Créer mon espace gratuit</button>
-      <button class="btn-hero btn-hero-outline">Voir la démo</button>
+      <button class="btn-hero btn-hero-solid" onclick="location.href='inscription.html'">Créer mon espace gratuit</button>
+      <button class="btn-hero btn-hero-outline" onclick="location.href='connexion.html'">Se connecter</button>
     </div>
     <div class="stats">
       <div><div class="stat-val">500+</div><div class="stat-label">Entrepreneurs</div></div>
@@ -272,12 +227,8 @@ footer{background:#0a1628;color:white;padding:52px 32px 32px}
   </div>
 </section>
 
-<!-- FONCTIONNALITÉS -->
 <section class="section" id="fonctionnalites" style="background:var(--gray)">
-  <div class="section-center">
-    <h2>Tout ce dont vous avez besoin</h2>
-    <p>Une plateforme complète pour gérer la relation avec vos clients, de A à Z</p>
-  </div>
+  <div class="section-center"><h2>Tout ce dont vous avez besoin</h2><p>Une plateforme complète pour gérer la relation avec vos clients, de A à Z</p></div>
   <div class="features-grid">
     <div class="feature-card"><div class="feature-icon"><i class="fa-solid fa-link"></i></div><h3>Lien unique par client</h3><p>Générez un lien personnalisé pour chaque client en un clic. Simple, rapide, professionnel.</p></div>
     <div class="feature-card"><div class="feature-icon"><i class="fa-solid fa-comments"></i></div><h3>Messagerie traduite</h3><p>Communiquez dans votre langue, vos clients dans la leur. Traduction automatique en temps réel.</p></div>
@@ -288,16 +239,9 @@ footer{background:#0a1628;color:white;padding:52px 32px 32px}
   </div>
 </section>
 
-<!-- COMMENT CA MARCHE -->
 <section class="section how">
-  <div class="bubbles">
-    <div class="bubble bubble-1"></div>
-    <div class="bubble bubble-2"></div>
-  </div>
-  <div class="section-center" style="position:relative;z-index:1">
-    <h2>Comment ça marche ?</h2>
-    <p>Lancez-vous en 3 étapes simples</p>
-  </div>
+  <div class="bubbles"><div class="bubble bubble-1"></div><div class="bubble bubble-2"></div></div>
+  <div class="section-center" style="position:relative;z-index:1"><h2>Comment ça marche ?</h2><p>Lancez-vous en 3 étapes simples</p></div>
   <div class="steps">
     <div class="step"><div class="step-num">01</div><h3>Créez votre espace</h3><p>Inscrivez-vous, choisissez votre langue et personnalisez votre profil entrepreneur en 2 minutes.</p></div>
     <div class="step"><div class="step-num">02</div><h3>Ajoutez vos clients</h3><p>Générez un lien unique pour chaque client et envoyez-le leur par SMS, mail ou WhatsApp.</p></div>
@@ -305,32 +249,24 @@ footer{background:#0a1628;color:white;padding:52px 32px 32px}
   </div>
 </section>
 
-<!-- TARIFS -->
 <section class="section pricing" id="tarifs">
-  <div class="section-center">
-    <h2>Des tarifs simples et transparents</h2>
-    <p>Commencez gratuitement, évoluez quand vous voulez</p>
-  </div>
+  <div class="section-center"><h2>Des tarifs simples et transparents</h2><p>Commencez gratuitement, évoluez quand vous voulez</p></div>
   <div class="plans">
     <div class="plan">
-      <h3>Gratuit</h3>
-      <div class="plan-desc">Pour démarrer</div>
-      <div class="price">0€</div>
-      <div class="price-period">Pour toujours</div>
+      <h3>Gratuit</h3><div class="plan-desc">Pour démarrer</div>
+      <div class="price">0€</div><div class="price-period">Pour toujours</div>
       <ul class="plan-features">
         <li><i class="fa-solid fa-check"></i>3 clients maximum</li>
         <li><i class="fa-solid fa-check"></i>Messagerie basique</li>
         <li><i class="fa-solid fa-check"></i>Suivi de projet</li>
         <li><i class="fa-solid fa-check"></i>Lien unique par client</li>
       </ul>
-      <button class="plan-btn plan-btn-outline">Commencer gratuitement</button>
+      <button class="plan-btn plan-btn-outline" onclick="location.href='inscription.html'">Commencer gratuitement</button>
     </div>
     <div class="plan popular pro-dark">
       <div class="plan-badge">Populaire</div>
-      <h3>Pro</h3>
-      <div class="plan-desc">Pour les professionnels</div>
-      <div class="price">8,99€<span>/mois</span></div>
-      <div class="price-period">Facturation mensuelle</div>
+      <h3>Pro</h3><div class="plan-desc">Pour les professionnels</div>
+      <div class="price">8,99€<span>/mois</span></div><div class="price-period">Facturation mensuelle</div>
       <ul class="plan-features">
         <li><i class="fa-solid fa-check"></i>20 clients maximum</li>
         <li><i class="fa-solid fa-check"></i>Messagerie + traduction auto</li>
@@ -339,13 +275,11 @@ footer{background:#0a1628;color:white;padding:52px 32px 32px}
         <li><i class="fa-solid fa-check"></i>Statistiques de base</li>
         <li><i class="fa-solid fa-check"></i>Support prioritaire</li>
       </ul>
-      <button class="plan-btn plan-btn-white">Commencer avec Pro</button>
+      <button class="plan-btn plan-btn-white" onclick="location.href='inscription.html'">Commencer avec Pro</button>
     </div>
     <div class="plan">
-      <h3>Business</h3>
-      <div class="plan-desc">Pour les entreprises</div>
-      <div class="price">19,99€<span>/mois</span></div>
-      <div class="price-period">Facturation mensuelle</div>
+      <h3>Business</h3><div class="plan-desc">Pour les entreprises</div>
+      <div class="price">19,99€<span>/mois</span></div><div class="price-period">Facturation mensuelle</div>
       <ul class="plan-features">
         <li><i class="fa-solid fa-check"></i>Clients illimités</li>
         <li><i class="fa-solid fa-check"></i>Messagerie + traduction auto</li>
@@ -355,12 +289,11 @@ footer{background:#0a1628;color:white;padding:52px 32px 32px}
         <li><i class="fa-solid fa-check"></i>Support dédié 24h/7j</li>
         <li><i class="fa-solid fa-check"></i>Accès API</li>
       </ul>
-      <button class="plan-btn plan-btn-outline">Commencer avec Business</button>
+      <button class="plan-btn plan-btn-outline" onclick="location.href='inscription.html'">Commencer avec Business</button>
     </div>
   </div>
 </section>
 
-<!-- À PROPOS -->
 <section class="section about" id="apropos">
   <div class="about-inner">
     <div class="about-text">
@@ -378,34 +311,25 @@ footer{background:#0a1628;color:white;padding:52px 32px 32px}
   </div>
 </section>
 
-<!-- FAQ -->
 <section class="section faq" id="faq">
-  <div class="section-center">
-    <h2>Questions fréquentes</h2>
-    <p>Tout ce que vous devez savoir sur Clario</p>
-  </div>
+  <div class="section-center"><h2>Questions fréquentes</h2><p>Tout ce que vous devez savoir sur Clario</p></div>
   <div class="faq-list">
     <div class="faq-item"><button class="faq-q">Comment mon client accède à son espace ?<i class="fa-solid fa-chevron-down"></i></button><div class="faq-a">Vous générez un lien unique depuis votre tableau de bord et vous l'envoyez à votre client. Il clique dessus et accède directement à son espace sans avoir à créer de compte.</div></div>
-    <div class="faq-item"><button class="faq-q">La traduction automatique fonctionne dans quelles langues ?<i class="fa-solid fa-chevron-down"></i></button><div class="faq-a">Clario supporte plus de 20 langues dont le français, l'anglais, l'espagnol, le mandarin, l'arabe, le portugais, l'allemand et bien d'autres. La traduction se fait automatiquement en temps réel.</div></div>
-    <div class="faq-item"><button class="faq-q">Puis-je essayer Clario gratuitement ?<i class="fa-solid fa-chevron-down"></i></button><div class="faq-a">Oui, le plan gratuit est disponible sans limite de temps. Vous pouvez gérer jusqu'à 3 clients gratuitement et passer à un plan payant quand vous le souhaitez.</div></div>
-    <div class="faq-item"><button class="faq-q">Mes données sont-elles sécurisées ?<i class="fa-solid fa-chevron-down"></i></button><div class="faq-a">Absolument. Toutes vos données sont chiffrées et hébergées en Europe. Nous respectons le RGPD et ne partageons jamais vos données avec des tiers.</div></div>
-    <div class="faq-item"><button class="faq-q">Puis-je utiliser Clario sur mon téléphone ?<i class="fa-solid fa-chevron-down"></i></button><div class="faq-a">Oui, Clario est entièrement responsive et fonctionne parfaitement sur mobile. Vous pouvez même l'installer sur votre écran d'accueil comme une vraie application.</div></div>
-    <div class="faq-item"><button class="faq-q">Comment annuler mon abonnement ?<i class="fa-solid fa-chevron-down"></i></button><div class="faq-a">Vous pouvez annuler votre abonnement à tout moment depuis votre tableau de bord, sans frais ni engagement. Vous gardez l'accès jusqu'à la fin de la période payée.</div></div>
+    <div class="faq-item"><button class="faq-q">La traduction automatique fonctionne dans quelles langues ?<i class="fa-solid fa-chevron-down"></i></button><div class="faq-a">Clario supporte plus de 20 langues dont le français, l'anglais, l'espagnol, le mandarin, l'arabe, le portugais, l'allemand et bien d'autres.</div></div>
+    <div class="faq-item"><button class="faq-q">Puis-je essayer Clario gratuitement ?<i class="fa-solid fa-chevron-down"></i></button><div class="faq-a">Oui, le plan gratuit est disponible sans limite de temps. Vous pouvez gérer jusqu'à 3 clients gratuitement.</div></div>
+    <div class="faq-item"><button class="faq-q">Mes données sont-elles sécurisées ?<i class="fa-solid fa-chevron-down"></i></button><div class="faq-a">Absolument. Toutes vos données sont chiffrées et hébergées en Europe. Nous respectons le RGPD.</div></div>
+    <div class="faq-item"><button class="faq-q">Puis-je utiliser Clario sur mon téléphone ?<i class="fa-solid fa-chevron-down"></i></button><div class="faq-a">Oui, Clario est entièrement responsive. Vous pouvez même l'installer sur votre écran d'accueil comme une vraie application.</div></div>
+    <div class="faq-item"><button class="faq-q">Comment annuler mon abonnement ?<i class="fa-solid fa-chevron-down"></i></button><div class="faq-a">Vous pouvez annuler à tout moment depuis votre tableau de bord, sans frais ni engagement.</div></div>
   </div>
 </section>
 
-<!-- CTA -->
 <section class="cta-section">
-  <div class="bubbles">
-    <div class="bubble bubble-1"></div>
-    <div class="bubble bubble-2"></div>
-  </div>
+  <div class="bubbles"><div class="bubble bubble-1"></div><div class="bubble bubble-2"></div></div>
   <h2>Prêt à transformer votre relation client ?</h2>
   <p>Rejoignez des centaines d'entrepreneurs qui font confiance à Clario.</p>
-  <button class="btn-cta">Créer mon compte gratuit</button>
+  <button class="btn-cta" onclick="location.href='inscription.html'">Créer mon compte gratuit</button>
 </section>
 
-<!-- FOOTER -->
 <footer>
   <div class="footer-top">
     <div class="footer-brand">
@@ -418,49 +342,19 @@ footer{background:#0a1628;color:white;padding:52px 32px 32px}
       </div>
       <p>La plateforme qui simplifie la relation entre entrepreneurs et clients, partout dans le monde.</p>
     </div>
-    <div class="footer-col">
-      <h4>Produit</h4>
-      <a href="#fonctionnalites">Fonctionnalités</a>
-      <a href="#tarifs">Tarifs</a>
-      <a href="#faq">FAQ</a>
-    </div>
-    <div class="footer-col">
-      <h4>Entreprise</h4>
-      <a href="#apropos">À propos</a>
-      <a href="contact.html">Contact</a>
-    </div>
-    <div class="footer-col">
-      <h4>Légal</h4>
-      <a href="#">Confidentialité</a>
-      <a href="#">CGU</a>
-      <a href="#">Mentions légales</a>
-    </div>
+    <div class="footer-col"><h4>Produit</h4><a href="#fonctionnalites">Fonctionnalités</a><a href="#tarifs">Tarifs</a><a href="#faq">FAQ</a></div>
+    <div class="footer-col"><h4>Entreprise</h4><a href="#apropos">À propos</a><a href="contact.html">Contact</a></div>
+    <div class="footer-col"><h4>Légal</h4><a href="#">Confidentialité</a><a href="#">CGU</a><a href="#">Mentions légales</a></div>
   </div>
   <div class="footer-bottom">
     <p>© 2026 Clario — Tous droits réservés.</p>
     <p>La relation client, simplifiée.</p>
   </div>
 </footer>
-
 <script>
-function openMenu(){
-  document.getElementById('sideMenu').classList.add('open');
-  document.getElementById('overlay').classList.add('open');
-  document.body.style.overflow='hidden';
-}
-function closeMenu(){
-  document.getElementById('sideMenu').classList.remove('open');
-  document.getElementById('overlay').classList.remove('open');
-  document.body.style.overflow='';
-}
-document.querySelectorAll('.faq-q').forEach(btn=>{
-  btn.addEventListener('click',()=>{
-    const item=btn.parentElement;
-    const wasOpen=item.classList.contains('open');
-    document.querySelectorAll('.faq-item').forEach(i=>i.classList.remove('open'));
-    if(!wasOpen)item.classList.add('open');
-  });
-});
+function openMenu(){document.getElementById('sideMenu').classList.add('open');document.getElementById('overlay').classList.add('open');document.body.style.overflow='hidden'}
+function closeMenu(){document.getElementById('sideMenu').classList.remove('open');document.getElementById('overlay').classList.remove('open');document.body.style.overflow=''}
+document.querySelectorAll('.faq-q').forEach(btn=>{btn.addEventListener('click',()=>{const item=btn.parentElement;const wasOpen=item.classList.contains('open');document.querySelectorAll('.faq-item').forEach(i=>i.classList.remove('open'));if(!wasOpen)item.classList.add('open')})})
 </script>
 </body>
 </html>
