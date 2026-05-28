@@ -33,16 +33,13 @@ main{flex:1;display:flex;align-items:center;justify-content:center;padding:20px 
 .auth-title{font-size:28px;font-weight:900;color:var(--blue-dark);margin-bottom:8px;text-align:center}
 .auth-sub{font-size:14px;color:#888;text-align:center;margin-bottom:28px;line-height:1.6}
 .auth-sub span{color:var(--blue-main);font-weight:700}
-
-/* TYPE COMPTE */
-.account-type{display:flex;gap:12px;margin-bottom:28px}
+.account-type{display:flex;gap:12px;margin-bottom:24px}
 .type-btn{flex:1;padding:14px 10px;border:2px solid #dbeeff;border-radius:14px;background:white;cursor:pointer;text-align:center;transition:all .2s}
 .type-btn.active{border-color:var(--blue-main);background:var(--blue-light)}
 .type-btn i{font-size:22px;color:#aaa;display:block;margin-bottom:8px}
 .type-btn.active i{color:var(--blue-main)}
 .type-btn span{font-size:13px;font-weight:700;color:#666}
 .type-btn.active span{color:var(--blue-main)}
-
 .lang-select{display:flex;align-items:center;gap:8px;font-size:13px;color:#888;margin-bottom:24px;justify-content:center}
 .lang-select i{color:var(--blue-vif)}
 .lang-select select{border:1.5px solid #dbeeff;border-radius:8px;padding:6px 10px;font-size:13px;color:var(--blue-dark);background:white;outline:none;cursor:pointer}
@@ -51,16 +48,18 @@ main{flex:1;display:flex;align-items:center;justify-content:center;padding:20px 
 .form-group label{display:block;font-size:13px;font-weight:700;color:#444;margin-bottom:8px}
 .input-wrap{position:relative}
 .input-wrap i.icon{position:absolute;left:14px;top:50%;transform:translateY(-50%);color:#aaa;font-size:16px}
-.input-wrap input,.input-wrap select{width:100%;padding:13px 14px 13px 42px;border:1.5px solid #dbeeff;border-radius:12px;font-size:15px;color:var(--blue-dark);background:#f8fbff;font-family:inherit;transition:all .2s;outline:none}
-.input-wrap input:focus,.input-wrap select:focus{border-color:var(--blue-vif);background:white;box-shadow:0 0 0 4px rgba(55,138,221,0.1)}
+.input-wrap input{width:100%;padding:13px 14px 13px 42px;border:1.5px solid #dbeeff;border-radius:12px;font-size:15px;color:var(--blue-dark);background:#f8fbff;font-family:inherit;transition:all .2s;outline:none}
+.input-wrap input:focus{border-color:var(--blue-vif);background:white;box-shadow:0 0 0 4px rgba(55,138,221,0.1)}
 .toggle-pw{position:absolute;right:14px;top:50%;transform:translateY(-50%);color:#aaa;font-size:16px;cursor:pointer;background:none;border:none;padding:0}
 .toggle-pw:hover{color:var(--blue-main)}
 .strength-bar{height:4px;background:#eee;border-radius:4px;margin-top:8px;overflow:hidden}
 .strength-fill{height:100%;border-radius:4px;transition:all .3s;width:0}
 .strength-text{font-size:11px;color:#aaa;margin-top:4px}
-.cgu{display:flex;align-items:flex-start;gap:10px;font-size:13px;color:#666;margin-bottom:24px;cursor:pointer;line-height:1.5}
-.cgu input{width:16px;height:16px;accent-color:var(--blue-main);cursor:pointer;margin-top:2px;flex-shrink:0}
-.cgu a{color:var(--blue-main);font-weight:700}
+.cgu-group{margin-bottom:24px;display:flex;flex-direction:column;gap:10px}
+.cgu-line{display:flex;align-items:center;gap:10px;font-size:13px;color:#555;cursor:pointer;line-height:1.5}
+.cgu-line input{width:16px;height:16px;accent-color:var(--blue-main);cursor:pointer;flex-shrink:0}
+.cgu-line a{color:var(--blue-main);font-weight:700}
+.cgu-line a:hover{text-decoration:underline}
 .btn-submit{width:100%;padding:15px;background:var(--blue-main);color:white;border:none;border-radius:12px;font-size:16px;font-weight:700;cursor:pointer;transition:all .2s;display:flex;align-items:center;justify-content:center;gap:10px;margin-bottom:20px}
 .btn-submit:hover{background:var(--blue-mid);box-shadow:0 8px 24px rgba(12,68,124,0.3)}
 .divider{display:flex;align-items:center;gap:12px;margin-bottom:20px}
@@ -89,71 +88,76 @@ main{flex:1;display:flex;align-items:center;justify-content:center;padding:20px 
     <img src="logo.png" alt="Clario">
     <div class="logo-info">
       <div class="logo-text"><span class="clar">Clar</span><span class="io">io</span></div>
-      <div class="logo-tagline">La relation client, simplifiée</div>
+      <div class="logo-tagline" id="tagline">La relation client, simplifiée</div>
     </div>
   </a>
-  <a class="back-btn" href="index.html"><i class="fa-solid fa-arrow-left"></i> Retour à l'accueil</a>
+  <a class="back-btn" href="index.html"><i class="fa-solid fa-arrow-left"></i> <span id="backText">Retour à l'accueil</span></a>
 </header>
 <main>
   <div class="auth-card">
-    <div class="auth-title">Créer un compte</div>
-    <div class="auth-sub">Rejoignez <span>Clario</span> et gérez vos clients comme un pro</div>
+    <div class="auth-title" id="titleText">Créer un compte</div>
+    <div class="auth-sub" id="subText">Rejoignez <span>Clario</span> et gérez vos clients comme un pro</div>
 
     <div class="account-type">
       <button class="type-btn active" id="typeEntrepreneur" onclick="selectType('entrepreneur')">
         <i class="fa-solid fa-briefcase"></i>
-        <span>Entrepreneur</span>
+        <span id="entrepreneurLabel">Entrepreneur</span>
       </button>
       <button class="type-btn" id="typeClient" onclick="selectType('client')">
         <i class="fa-solid fa-user"></i>
-        <span>Client</span>
+        <span id="clientLabel">Client</span>
       </button>
     </div>
 
     <div class="lang-select">
       <i class="fa-solid fa-globe"></i>
-      <select>
-        <option>Français</option><option>English</option><option>Español</option>
-        <option>中文</option><option>العربية</option><option>Português</option>
-        <option>Deutsch</option><option>Italiano</option>
+      <select id="langSelect" onchange="changeLang(this.value)">
+        <option value="fr">Français</option>
+        <option value="en">English</option>
+        <option value="es">Español</option>
+        <option value="ar">العربية</option>
+        <option value="zh">中文</option>
+        <option value="pt">Português</option>
+        <option value="de">Deutsch</option>
+        <option value="it">Italiano</option>
       </select>
     </div>
 
     <div class="form-row">
       <div class="form-group">
-        <label>Prénom</label>
+        <label id="prenomLabel">Prénom</label>
         <div class="input-wrap">
           <i class="fa-solid fa-user icon"></i>
-          <input type="text" id="prenom" placeholder="Votre prénom">
+          <input type="text" id="prenom" placeholder="Jean">
         </div>
       </div>
       <div class="form-group">
-        <label>Nom</label>
+        <label id="nomLabel">Nom</label>
         <div class="input-wrap">
           <i class="fa-solid fa-user icon"></i>
-          <input type="text" id="nom" placeholder="Votre nom">
+          <input type="text" id="nom" placeholder="Dupont">
         </div>
       </div>
     </div>
 
     <div class="form-group">
-      <label>Adresse email</label>
+      <label id="emailLabel">Adresse email</label>
       <div class="input-wrap">
         <i class="fa-solid fa-envelope icon"></i>
-        <input type="email" id="email" placeholder="votre@email.com">
+        <input type="email" id="email" placeholder="jean.dupont@email.com">
       </div>
     </div>
 
     <div class="form-group" id="entrepriseField">
-      <label>Nom de votre entreprise</label>
+      <label id="entrepriseLabel">Nom de votre entreprise</label>
       <div class="input-wrap">
         <i class="fa-solid fa-building icon"></i>
-        <input type="text" id="entreprise" placeholder="Ex: Plomberie Martin">
+        <input type="text" id="entreprise" placeholder="Ex: Plomberie Dupont">
       </div>
     </div>
 
     <div class="form-group">
-      <label>Mot de passe</label>
+      <label id="pwLabel">Mot de passe</label>
       <div class="input-wrap">
         <i class="fa-solid fa-lock icon"></i>
         <input type="password" id="password" placeholder="••••••••" oninput="checkStrength(this.value)">
@@ -163,56 +167,207 @@ main{flex:1;display:flex;align-items:center;justify-content:center;padding:20px 
       <div class="strength-text" id="strengthText"></div>
     </div>
 
-    <label class="cgu">
-      <input type="checkbox" id="cguCheck">
-      J'accepte les <a href="#">conditions d'utilisation</a> et la <a href="#">politique de confidentialité</a> de Clario.
-    </label>
+    <div class="cgu-group">
+      <label class="cgu-line">
+        <input type="checkbox" id="cguCheck">
+        <span id="cguText">J'accepte les <a href="#">conditions d'utilisation</a> de Clario.</span>
+      </label>
+      <label class="cgu-line">
+        <input type="checkbox" id="privacyCheck">
+        <span id="privacyText">J'accepte la <a href="#">politique de confidentialité</a> de Clario.</span>
+      </label>
+    </div>
 
     <button class="btn-submit" onclick="handleRegister()">
-      <i class="fa-solid fa-rocket"></i> Créer mon compte
+      <i class="fa-solid fa-user-plus"></i> <span id="submitText">Créer mon compte</span>
     </button>
 
-    <div class="divider"><span>ou s'inscrire avec</span></div>
+    <div class="divider"><span id="orText">ou s'inscrire avec</span></div>
     <div class="social-btns">
-      <button class="social-btn" onclick="location.href='dashboard.html'"><i class="fa-brands fa-google"></i> Google</button>
-      <button class="social-btn" onclick="location.href='dashboard.html'"><i class="fa-brands fa-apple"></i> Apple</button>
+      <button class="social-btn" onclick="socialLogin()"><i class="fa-brands fa-google"></i> Google</button>
+      <button class="social-btn" onclick="socialLogin()"><i class="fa-brands fa-apple"></i> Apple</button>
     </div>
-    <div class="auth-switch">Déjà un compte ? <a href="connexion.html">Se connecter</a></div>
+    <div class="auth-switch" id="switchText">Déjà un compte ? <a href="connexion.html">Se connecter</a></div>
   </div>
 </main>
+
 <script>
-function selectType(type){
+const translations = {
+  fr: {
+    title:"Créer un compte", sub:"Rejoignez Clario et gérez vos clients comme un pro",
+    entrepreneur:"Entrepreneur", client:"Client",
+    prenom:"Prénom", nom:"Nom", email:"Adresse email",
+    entreprise:"Nom de votre entreprise", entreprisePh:"Ex: Plomberie Dupont",
+    pw:"Mot de passe", prenomPh:"Jean", nomPh:"Dupont",
+    cgu:"J'accepte les <a href='#'>conditions d'utilisation</a> de Clario.",
+    privacy:"J'accepte la <a href='#'>politique de confidentialité</a> de Clario.",
+    submit:"Créer mon compte", or:"ou s'inscrire avec",
+    switchT:"Déjà un compte ? <a href='connexion.html'>Se connecter</a>",
+    back:"Retour à l'accueil", tagline:"La relation client, simplifiée",
+    weak:"Faible", medium:"Moyen", good:"Bon", strong:"Fort", short:"Trop court", strength:"Force : "
+  },
+  en: {
+    title:"Create an account", sub:"Join Clario and manage your clients like a pro",
+    entrepreneur:"Entrepreneur", client:"Client",
+    prenom:"First name", nom:"Last name", email:"Email address",
+    entreprise:"Your company name", entreprisePh:"Ex: Martin Plumbing",
+    pw:"Password", prenomPh:"John", nomPh:"Smith",
+    cgu:"I accept the <a href='#'>terms of use</a> of Clario.",
+    privacy:"I accept the <a href='#'>privacy policy</a> of Clario.",
+    submit:"Create my account", or:"or sign up with",
+    switchT:"Already have an account? <a href='connexion.html'>Sign in</a>",
+    back:"Back to home", tagline:"Client relations, simplified",
+    weak:"Weak", medium:"Medium", good:"Good", strong:"Strong", short:"Too short", strength:"Strength: "
+  },
+  es: {
+    title:"Crear una cuenta", sub:"Únete a Clario y gestiona tus clientes como un pro",
+    entrepreneur:"Empresario", client:"Cliente",
+    prenom:"Nombre", nom:"Apellido", email:"Correo electrónico",
+    entreprise:"Nombre de tu empresa", entreprisePh:"Ej: Fontanería Martín",
+    pw:"Contraseña", prenomPh:"Juan", nomPh:"García",
+    cgu:"Acepto los <a href='#'>términos de uso</a> de Clario.",
+    privacy:"Acepto la <a href='#'>política de privacidad</a> de Clario.",
+    submit:"Crear mi cuenta", or:"o registrarse con",
+    switchT:"¿Ya tienes cuenta? <a href='connexion.html'>Iniciar sesión</a>",
+    back:"Volver al inicio", tagline:"La relación con el cliente, simplificada",
+    weak:"Débil", medium:"Medio", good:"Bueno", strong:"Fuerte", short:"Demasiado corto", strength:"Fuerza: "
+  },
+  ar: {
+    title:"إنشاء حساب", sub:"انضم إلى Clario وأدر عملاءك كالمحترفين",
+    entrepreneur:"رجل أعمال", client:"عميل",
+    prenom:"الاسم الأول", nom:"اسم العائلة", email:"البريد الإلكتروني",
+    entreprise:"اسم شركتك", entreprisePh:"مثال: شركة النجوم",
+    pw:"كلمة المرور", prenomPh:"أحمد", nomPh:"محمد",
+    cgu:"أوافق على <a href='#'>شروط الاستخدام</a> الخاصة بـ Clario.",
+    privacy:"أوافق على <a href='#'>سياسة الخصوصية</a> الخاصة بـ Clario.",
+    submit:"إنشاء حسابي", or:"أو التسجيل باستخدام",
+    switchT:"لديك حساب بالفعل؟ <a href='connexion.html'>تسجيل الدخول</a>",
+    back:"العودة إلى الصفحة الرئيسية", tagline:"علاقة العملاء، مبسطة",
+    weak:"ضعيف", medium:"متوسط", good:"جيد", strong:"قوي", short:"قصير جداً", strength:"القوة: "
+  },
+  zh: {
+    title:"创建账户", sub:"加入 Clario，像专业人士一样管理您的客户",
+    entrepreneur:"企业家", client:"客户",
+    prenom:"名字", nom:"姓氏", email:"电子邮件",
+    entreprise:"公司名称", entreprisePh:"例：李氏水管公司",
+    pw:"密码", prenomPh:"伟", nomPh:"李",
+    cgu:"我接受 Clario 的<a href='#'>使用条款</a>。",
+    privacy:"我接受 Clario 的<a href='#'>隐私政策</a>。",
+    submit:"创建我的账户", or:"或通过以下方式注册",
+    switchT:"已有账户？<a href='connexion.html'>登录</a>",
+    back:"返回首页", tagline:"简化客户关系",
+    weak:"弱", medium:"中等", good:"良好", strong:"强", short:"太短", strength:"强度："
+  },
+  pt: {
+    title:"Criar uma conta", sub:"Junte-se ao Clario e gerencie seus clientes como um profissional",
+    entrepreneur:"Empresário", client:"Cliente",
+    prenom:"Nome", nom:"Sobrenome", email:"Endereço de email",
+    entreprise:"Nome da sua empresa", entreprisePh:"Ex: Encanamento Silva",
+    pw:"Senha", prenomPh:"João", nomPh:"Silva",
+    cgu:"Aceito os <a href='#'>termos de uso</a> do Clario.",
+    privacy:"Aceito a <a href='#'>política de privacidade</a> do Clario.",
+    submit:"Criar minha conta", or:"ou cadastrar com",
+    switchT:"Já tem uma conta? <a href='connexion.html'>Entrar</a>",
+    back:"Voltar ao início", tagline:"Relacionamento com o cliente, simplificado",
+    weak:"Fraco", medium:"Médio", good:"Bom", strong:"Forte", short:"Muito curto", strength:"Força: "
+  },
+  de: {
+    title:"Konto erstellen", sub:"Treten Sie Clario bei und verwalten Sie Ihre Kunden wie ein Profi",
+    entrepreneur:"Unternehmer", client:"Kunde",
+    prenom:"Vorname", nom:"Nachname", email:"E-Mail-Adresse",
+    entreprise:"Name Ihres Unternehmens", entreprisePh:"z.B. Klempner Müller",
+    pw:"Passwort", prenomPh:"Hans", nomPh:"Müller",
+    cgu:"Ich akzeptiere die <a href='#'>Nutzungsbedingungen</a> von Clario.",
+    privacy:"Ich akzeptiere die <a href='#'>Datenschutzrichtlinie</a> von Clario.",
+    submit:"Mein Konto erstellen", or:"oder registrieren mit",
+    switchT:"Bereits ein Konto? <a href='connexion.html'>Anmelden</a>",
+    back:"Zurück zur Startseite", tagline:"Kundenbeziehungen vereinfacht",
+    weak:"Schwach", medium:"Mittel", good:"Gut", strong:"Stark", short:"Zu kurz", strength:"Stärke: "
+  },
+  it: {
+    title:"Crea un account", sub:"Unisciti a Clario e gestisci i tuoi clienti come un professionista",
+    entrepreneur:"Imprenditore", client:"Cliente",
+    prenom:"Nome", nom:"Cognome", email:"Indirizzo email",
+    entreprise:"Nome della tua azienda", entreprisePh:"Es: Idraulica Rossi",
+    pw:"Password", prenomPh:"Marco", nomPh:"Rossi",
+    cgu:"Accetto i <a href='#'>termini di utilizzo</a> di Clario.",
+    privacy:"Accetto la <a href='#'>politica sulla privacy</a> di Clario.",
+    submit:"Crea il mio account", or:"o registrati con",
+    switchT:"Hai già un account? <a href='connexion.html'>Accedi</a>",
+    back:"Torna alla home", tagline:"Relazione con il cliente, semplificata",
+    weak:"Debole", medium:"Medio", good:"Buono", strong:"Forte", short:"Troppo corto", strength:"Forza: "
+  }
+};
+
+let currentLang = 'fr';
+
+function changeLang(lang) {
+  currentLang = lang;
+  const t = translations[lang];
+  document.getElementById('titleText').textContent = t.title;
+  document.getElementById('subText').innerHTML = t.sub.replace('Clario','<span>Clario</span>');
+  document.getElementById('entrepreneurLabel').textContent = t.entrepreneur;
+  document.getElementById('clientLabel').textContent = t.client;
+  document.getElementById('prenomLabel').textContent = t.prenom;
+  document.getElementById('nomLabel').textContent = t.nom;
+  document.getElementById('emailLabel').textContent = t.email;
+  document.getElementById('entrepriseLabel').textContent = t.entreprise;
+  document.getElementById('entreprise').placeholder = t.entreprisePh;
+  document.getElementById('pwLabel').textContent = t.pw;
+  document.getElementById('prenom').placeholder = t.prenomPh;
+  document.getElementById('nom').placeholder = t.nomPh;
+  document.getElementById('cguText').innerHTML = t.cgu;
+  document.getElementById('privacyText').innerHTML = t.privacy;
+  document.getElementById('submitText').textContent = t.submit;
+  document.getElementById('orText').textContent = t.or;
+  document.getElementById('switchText').innerHTML = t.switchT;
+  document.getElementById('backText').textContent = t.back;
+  document.getElementById('tagline').textContent = t.tagline;
+  document.body.dir = lang === 'ar' ? 'rtl' : 'ltr';
+}
+
+function selectType(type) {
   document.getElementById('typeEntrepreneur').classList.toggle('active', type==='entrepreneur');
   document.getElementById('typeClient').classList.toggle('active', type==='client');
   document.getElementById('entrepriseField').style.display = type==='entrepreneur' ? 'block' : 'none';
 }
-function togglePw(){
-  const pw=document.getElementById('password');
-  const icon=document.getElementById('eyeIcon');
+
+function togglePw() {
+  const pw = document.getElementById('password');
+  const icon = document.getElementById('eyeIcon');
   if(pw.type==='password'){pw.type='text';icon.className='fa-solid fa-eye-slash';}
   else{pw.type='password';icon.className='fa-solid fa-eye';}
 }
-function checkStrength(val){
-  const fill=document.getElementById('strengthFill');
-  const text=document.getElementById('strengthText');
-  if(val.length===0){fill.style.width='0';fill.style.background='';text.textContent='';return;}
+
+function checkStrength(val) {
+  const fill = document.getElementById('strengthFill');
+  const text = document.getElementById('strengthText');
+  const t = translations[currentLang];
+  if(val.length===0){fill.style.width='0';text.textContent='';return;}
   let score=0;
   if(val.length>=8)score++;
   if(/[A-Z]/.test(val))score++;
   if(/[0-9]/.test(val))score++;
   if(/[^A-Za-z0-9]/.test(val))score++;
-  const levels=[['25%','#ef5350','Faible'],['50%','#ff9800','Moyen'],['75%','#42a5f5','Bon'],['100%','#66bb6a','Fort']];
-  const [w,c,t]=levels[score-1]||['10%','#ef5350','Trop court'];
-  fill.style.width=w;fill.style.background=c;text.textContent='Force : '+t;text.style.color=c;
+  const levels=[['25%','#ef5350',t.weak],['50%','#ff9800',t.medium],['75%','#42a5f5',t.good],['100%','#66bb6a',t.strong]];
+  const [w,c,label] = val.length < 4 ? ['10%','#ef5350',t.short] : (levels[score-1]||levels[0]);
+  fill.style.width=w; fill.style.background=c;
+  text.textContent=t.strength+label; text.style.color=c;
 }
-function handleRegister(){
-  const prenom=document.getElementById('prenom').value;
-  const email=document.getElementById('email').value;
-  const pw=document.getElementById('password').value;
-  const cgu=document.getElementById('cguCheck').checked;
+
+function socialLogin() {
+  location.href = 'dashboard.html';
+}
+
+function handleRegister() {
+  const prenom = document.getElementById('prenom').value;
+  const email = document.getElementById('email').value;
+  const pw = document.getElementById('password').value;
+  const cgu = document.getElementById('cguCheck').checked;
+  const privacy = document.getElementById('privacyCheck').checked;
   if(!prenom||!email||!pw){alert('Veuillez remplir tous les champs obligatoires.');return;}
-  if(!cgu){alert('Veuillez accepter les conditions d\'utilisation.');return;}
-  location.href='dashboard.html';
+  if(!cgu||!privacy){alert('Veuillez accepter les conditions et la politique de confidentialité.');return;}
+  location.href = 'dashboard.html';
 }
 </script>
 </body>
