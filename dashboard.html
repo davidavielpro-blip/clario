@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="fr">
+<html lang="fr" data-theme="light">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,423 +7,527 @@
 <link rel="icon" href="logo.png">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 <style>
-*{margin:0;padding:0;box-sizing:border-box}
-:root{--blue-dark:#042C53;--blue-main:#0C447C;--blue-mid:#185FA5;--blue-vif:#378ADD;--blue-light:#E6F1FB;--gray:#f8fbff;--white:#fff}
-body{font-family:'Segoe UI',system-ui,sans-serif;background:var(--gray);color:var(--blue-dark);display:flex;min-height:100vh;overflow-x:hidden}
+:root{
+  --bg:#f4f7fb;--bg2:#fff;--bg3:#eef2f7;
+  --text:#042C53;--text2:#555;--text3:#999;
+  --border:#dbeeff;--border2:#b5d4f4;
+  --blue:#0C447C;--blue2:#185FA5;--blue3:#378ADD;--blue-light:#E6F1FB;
+  --sidebar-bg:linear-gradient(160deg,#0C1F3F 0%,#0d3570 100%);
+  --sidebar-text:rgba(255,255,255,0.7);--sidebar-active:rgba(255,255,255,0.12);
+  --shadow:0 4px 20px rgba(12,68,124,0.08);
+  --radius:14px;--radius2:10px;
+}
+[data-theme="dark"]{
+  --bg:#0f1923;--bg2:#1a2535;--bg3:#232f42;
+  --text:#e8f0fb;--text2:#a0b4cc;--text3:#6a86a0;
+  --border:#1e3050;--border2:#2a4570;
+  --blue-light:#0d2040;
+  --shadow:0 4px 20px rgba(0,0,0,0.3);
+}
+*{margin:0;padding:0;box-sizing:border-box;transition:background .2s,color .2s,border-color .2s}
+body{font-family:'Segoe UI',system-ui,sans-serif;background:var(--bg);color:var(--text);display:flex;min-height:100vh;overflow-x:hidden}
 a{text-decoration:none;color:inherit}
+button{font-family:inherit;cursor:pointer}
+input,textarea,select{font-family:inherit}
+
+/* SCROLLBAR */
+::-webkit-scrollbar{width:6px}
+::-webkit-scrollbar-track{background:transparent}
+::-webkit-scrollbar-thumb{background:var(--border2);border-radius:3px}
 
 /* SIDEBAR */
-.sidebar{width:260px;background:linear-gradient(160deg,#0C1F3F 0%,#0d3570 100%);display:flex;flex-direction:column;position:fixed;top:0;left:0;height:100vh;z-index:100;transition:transform .3s}
-.sidebar-logo{display:flex;align-items:center;gap:12px;padding:28px 24px 24px}
-.sidebar-logo img{width:44px;height:44px;object-fit:contain}
-.sidebar-logo-info{display:flex;flex-direction:column}
-.sidebar-logo-text{font-size:20px;font-weight:800;color:white;line-height:1.1}
+.sidebar{width:240px;background:var(--sidebar-bg);display:flex;flex-direction:column;position:fixed;top:0;left:0;height:100vh;z-index:100;transition:transform .3s}
+.sidebar-logo{display:flex;align-items:center;gap:10px;padding:24px 20px 20px}
+.sidebar-logo img{width:40px;height:40px;object-fit:contain}
+.sidebar-logo-text{font-size:18px;font-weight:800;color:white;line-height:1}
 .sidebar-logo-text .io{color:#60AFFF}
-.sidebar-logo-tagline{font-size:10px;color:#4a7fa5;margin-top:2px}
-.sidebar-divider{height:1px;background:rgba(255,255,255,0.1);margin:0 24px 16px}
-.sidebar-nav{flex:1;padding:0 12px;display:flex;flex-direction:column;gap:4px}
-.nav-item{display:flex;align-items:center;gap:12px;padding:13px 16px;border-radius:12px;color:rgba(255,255,255,0.65);font-size:14px;font-weight:600;cursor:pointer;transition:all .2s;border:none;background:none;width:100%;text-align:left}
-.nav-item i{width:20px;font-size:17px;color:#60AFFF;text-align:center}
-.nav-item:hover{background:rgba(255,255,255,0.08);color:white}
-.nav-item.active{background:rgba(255,255,255,0.12);color:white}
+.sidebar-logo-tag{font-size:10px;color:#4a7fa5;margin-top:2px}
+.s-div{height:1px;background:rgba(255,255,255,0.08);margin:0 20px 12px}
+.sidebar-nav{flex:1;padding:0 10px;display:flex;flex-direction:column;gap:2px;overflow-y:auto}
+.nav-item{display:flex;align-items:center;gap:10px;padding:11px 14px;border-radius:10px;color:var(--sidebar-text);font-size:13px;font-weight:600;cursor:pointer;transition:all .2s;border:none;background:none;width:100%;text-align:left}
+.nav-item i{width:18px;font-size:15px;color:#60AFFF;text-align:center;flex-shrink:0}
+.nav-item:hover{background:rgba(255,255,255,0.07);color:rgba(255,255,255,0.9)}
+.nav-item.active{background:var(--sidebar-active);color:white}
 .nav-item.active i{color:white}
-.sidebar-bottom{padding:16px 12px 24px}
-.sidebar-divider2{height:1px;background:rgba(255,255,255,0.1);margin-bottom:16px}
-.nav-item-danger{color:rgba(255,100,100,0.8) !important}
-.nav-item-danger i{color:rgba(255,100,100,0.8) !important}
-.nav-item-danger:hover{background:rgba(255,100,100,0.1) !important;color:rgba(255,100,100,1) !important}
+.nav-danger{color:rgba(255,130,130,0.75)!important}
+.nav-danger i{color:rgba(255,130,130,0.75)!important}
+.nav-danger:hover{background:rgba(255,100,100,0.08)!important;color:rgba(255,150,150,1)!important}
+.sidebar-bottom{padding:10px 10px 20px}
 
 /* MAIN */
-.main{margin-left:260px;flex:1;display:flex;flex-direction:column;min-height:100vh}
+.main{margin-left:240px;flex:1;display:flex;flex-direction:column;min-height:100vh}
 
 /* TOPBAR */
-.topbar{background:white;border-bottom:1px solid #dbeeff;padding:16px 32px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:50}
-.topbar-left{display:flex;flex-direction:column}
-.topbar-title{font-size:20px;font-weight:900;color:var(--blue-dark)}
-.topbar-sub{font-size:13px;color:#999;margin-top:2px}
-.topbar-right{display:flex;align-items:center;gap:16px}
-.topbar-btn{background:none;border:none;cursor:pointer;color:#888;font-size:18px;position:relative;transition:color .2s}
-.topbar-btn:hover{color:var(--blue-main)}
-.notif-dot{position:absolute;top:0;right:0;width:8px;height:8px;background:#ef5350;border-radius:50%}
-.user-avatar{width:38px;height:38px;background:linear-gradient(135deg,var(--blue-main),var(--blue-vif));border-radius:50%;display:flex;align-items:center;justify-content:center;color:white;font-size:14px;font-weight:700;cursor:pointer}
-.burger-dash{display:none;background:none;border:none;font-size:22px;color:var(--blue-main);cursor:pointer}
+.topbar{background:var(--bg2);border-bottom:1px solid var(--border);padding:14px 28px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:50}
+.topbar-left{display:flex;align-items:center;gap:14px}
+.burger-dash{display:none;background:none;border:none;font-size:20px;color:var(--blue);cursor:pointer}
+.page-title{font-size:18px;font-weight:900;color:var(--text)}
+.page-sub{font-size:12px;color:var(--text3);margin-top:1px}
+.topbar-right{display:flex;align-items:center;gap:12px}
+.tb-btn{background:none;border:none;color:var(--text2);font-size:17px;position:relative;padding:6px;border-radius:8px;transition:all .2s}
+.tb-btn:hover{background:var(--bg3);color:var(--blue)}
+.notif-dot{position:absolute;top:4px;right:4px;width:7px;height:7px;background:#ef5350;border-radius:50%}
+.user-avatar{width:36px;height:36px;background:linear-gradient(135deg,var(--blue),var(--blue3));border-radius:50%;display:flex;align-items:center;justify-content:center;color:white;font-size:12px;font-weight:700;cursor:pointer;overflow:hidden}
+.user-avatar img{width:100%;height:100%;object-fit:cover}
 
 /* CONTENT */
-.content{padding:32px;flex:1}
+.content{padding:24px 28px;flex:1}
+
+/* CARDS */
+.card{background:var(--bg2);border:1px solid var(--border);border-radius:var(--radius);padding:20px;box-shadow:var(--shadow)}
+.card-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:16px}
+.card-title{font-size:14px;font-weight:800;color:var(--text)}
+.card-btn{background:var(--blue-light);color:var(--blue);border:none;padding:6px 12px;border-radius:7px;font-size:12px;font-weight:700;transition:all .2s}
+.card-btn:hover{background:var(--blue);color:white}
 
 /* STATS */
-.stats-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:20px;margin-bottom:32px}
-.stat-card{background:white;border:1px solid #dbeeff;border-radius:18px;padding:24px;display:flex;align-items:center;gap:16px;transition:all .25s}
-.stat-card:hover{transform:translateY(-3px);box-shadow:0 12px 32px rgba(12,68,124,0.1)}
-.stat-icon{width:52px;height:52px;border-radius:14px;display:flex;align-items:center;justify-content:center;font-size:22px;flex-shrink:0}
-.stat-icon.blue{background:linear-gradient(135deg,#E6F1FB,#dbeeff);color:var(--blue-main)}
-.stat-icon.green{background:linear-gradient(135deg,#e8f5e9,#c8e6c9);color:#2e7d32}
-.stat-icon.orange{background:linear-gradient(135deg,#fff3e0,#ffe0b2);color:#e65100}
-.stat-icon.purple{background:linear-gradient(135deg,#f3e5f5,#e1bee7);color:#6a1b9a}
-.stat-info{}
-.stat-val{font-size:28px;font-weight:900;color:var(--blue-dark)}
-.stat-label{font-size:13px;color:#999;margin-top:2px}
-.stat-change{font-size:12px;margin-top:4px;font-weight:600}
-.stat-change.up{color:#2e7d32}
-.stat-change.down{color:#c62828}
+.stats-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-bottom:20px}
+.stat-card{background:var(--bg2);border:1px solid var(--border);border-radius:var(--radius);padding:18px;display:flex;align-items:center;gap:14px;box-shadow:var(--shadow);transition:all .25s}
+.stat-card:hover{transform:translateY(-2px);box-shadow:0 8px 24px rgba(12,68,124,0.12)}
+.stat-icon{width:44px;height:44px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0;background:var(--blue-light);color:var(--blue)}
+.stat-val{font-size:24px;font-weight:900;color:var(--text);line-height:1}
+.stat-label{font-size:11px;color:var(--text3);margin-top:3px}
+.stat-change{font-size:11px;margin-top:3px;font-weight:600;color:#2e7d32}
 
-/* SECTIONS */
-.dash-grid{display:grid;grid-template-columns:1.5fr 1fr;gap:24px;margin-bottom:24px}
-.card{background:white;border:1px solid #dbeeff;border-radius:18px;padding:24px}
-.card-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:20px}
-.card-title{font-size:16px;font-weight:800;color:var(--blue-dark)}
-.card-btn{background:var(--blue-light);color:var(--blue-main);border:none;padding:7px 14px;border-radius:8px;font-size:12px;font-weight:700;cursor:pointer;transition:all .2s}
-.card-btn:hover{background:var(--blue-main);color:white}
+/* GRID */
+.dash-grid{display:grid;grid-template-columns:1.4fr 1fr;gap:18px;margin-bottom:18px}
 
-/* CLIENTS */
-.client-list{display:flex;flex-direction:column;gap:12px}
-.client-item{display:flex;align-items:center;gap:12px;padding:12px;border:1px solid #f0f7ff;border-radius:12px;transition:all .2s;cursor:pointer}
-.client-item:hover{border-color:#b5d4f4;background:#f8fbff}
-.client-avatar{width:40px;height:40px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:700;color:white;flex-shrink:0}
-.client-info{flex:1}
-.client-name{font-size:14px;font-weight:700;color:var(--blue-dark)}
-.client-project{font-size:12px;color:#999;margin-top:2px}
-.client-status{padding:4px 10px;border-radius:999px;font-size:11px;font-weight:700}
-.status-active{background:#e8f5e9;color:#2e7d32}
-.status-pending{background:#fff3e0;color:#e65100}
-.status-done{background:#E6F1FB;color:var(--blue-main)}
+/* CLIENT LIST */
+.client-list{display:flex;flex-direction:column;gap:8px}
+.client-item{display:flex;align-items:center;gap:10px;padding:10px 12px;border:1px solid var(--border);border-radius:10px;cursor:pointer;transition:all .2s}
+.client-item:hover{border-color:var(--border2);background:var(--blue-light)}
+.c-avatar{width:36px;height:36px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;color:white;flex-shrink:0}
+.c-name{font-size:13px;font-weight:700;color:var(--text)}
+.c-project{font-size:11px;color:var(--text3);margin-top:1px}
+.c-status{padding:3px 9px;border-radius:999px;font-size:10px;font-weight:700;flex-shrink:0}
+.s-active{background:#e8f5e9;color:#2e7d32}
+.s-pending{background:#fff3e0;color:#e65100}
+.s-done{background:var(--blue-light);color:var(--blue)}
 
 /* MESSAGES */
-.msg-list{display:flex;flex-direction:column;gap:12px}
-.msg-item{display:flex;align-items:flex-start;gap:12px;padding:12px;border:1px solid #f0f7ff;border-radius:12px;cursor:pointer;transition:all .2s}
-.msg-item:hover{border-color:#b5d4f4;background:#f8fbff}
-.msg-item.unread{border-color:#b5d4f4;background:#f0f7ff}
-.msg-avatar{width:36px;height:36px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;color:white;flex-shrink:0}
-.msg-content{flex:1}
-.msg-name{font-size:13px;font-weight:700;color:var(--blue-dark)}
-.msg-text{font-size:12px;color:#888;margin-top:2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:180px}
-.msg-time{font-size:11px;color:#bbb;flex-shrink:0}
-.msg-dot{width:8px;height:8px;background:var(--blue-vif);border-radius:50%;margin-top:4px;flex-shrink:0}
+.msg-list{display:flex;flex-direction:column;gap:8px}
+.msg-item{display:flex;align-items:center;gap:10px;padding:10px 12px;border:1px solid var(--border);border-radius:10px;cursor:pointer;transition:all .2s}
+.msg-item:hover{border-color:var(--border2);background:var(--bg3)}
+.msg-item.unread{border-color:var(--border2);background:var(--blue-light)}
+.msg-content{flex:1;min-width:0}
+.msg-name{font-size:13px;font-weight:700;color:var(--text)}
+.msg-text{font-size:11px;color:var(--text3);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.msg-meta{display:flex;flex-direction:column;align-items:flex-end;gap:3px;flex-shrink:0}
+.msg-time{font-size:10px;color:var(--text3)}
+.msg-dot{width:7px;height:7px;background:var(--blue3);border-radius:50%}
 
-/* PLANNING */
-.planning-list{display:flex;flex-direction:column;gap:10px}
-.planning-item{display:flex;align-items:center;gap:12px;padding:12px;border-left:3px solid var(--blue-vif);background:#f8fbff;border-radius:0 10px 10px 0}
-.planning-date{font-size:11px;font-weight:700;color:var(--blue-vif);min-width:60px}
-.planning-title{font-size:13px;font-weight:700;color:var(--blue-dark)}
-.planning-client{font-size:11px;color:#999}
+/* CALENDAR */
+.cal-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:16px}
+.cal-nav{background:none;border:1px solid var(--border);color:var(--text2);width:30px;height:30px;border-radius:8px;font-size:14px;display:flex;align-items:center;justify-content:center}
+.cal-nav:hover{background:var(--blue-light);border-color:var(--border2)}
+.cal-month{font-size:14px;font-weight:800;color:var(--text)}
+.cal-days-header{display:grid;grid-template-columns:repeat(7,1fr);gap:2px;margin-bottom:4px}
+.cal-day-name{text-align:center;font-size:10px;font-weight:700;color:var(--text3);padding:4px 0}
+.cal-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:2px}
+.cal-day{aspect-ratio:1;display:flex;align-items:center;justify-content:center;font-size:12px;border-radius:7px;cursor:pointer;transition:all .2s;color:var(--text2);position:relative}
+.cal-day:hover{background:var(--blue-light);color:var(--blue)}
+.cal-day.today{background:var(--blue);color:white;font-weight:700}
+.cal-day.has-event::after{content:'';position:absolute;bottom:2px;left:50%;transform:translateX(-50%);width:4px;height:4px;background:var(--blue3);border-radius:50%}
+.cal-day.today.has-event::after{background:white}
+.cal-day.other-month{color:var(--text3);opacity:0.4}
+.cal-events{margin-top:16px;display:flex;flex-direction:column;gap:6px}
+.cal-event{display:flex;align-items:center;gap:8px;padding:8px 12px;background:var(--bg3);border-radius:8px;font-size:12px}
+.cal-event-dot{width:8px;height:8px;border-radius:50%;flex-shrink:0}
+.cal-event-title{font-weight:700;color:var(--text);flex:1}
+.cal-event-time{color:var(--text3);font-size:11px}
 
-/* LIEN RAPIDE */
-.quick-actions{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:16px;margin-bottom:24px}
-.quick-btn{background:white;border:1px solid #dbeeff;border-radius:16px;padding:20px 16px;text-align:center;cursor:pointer;transition:all .2s}
-.quick-btn:hover{transform:translateY(-3px);box-shadow:0 12px 28px rgba(12,68,124,0.1);border-color:#b5d4f4}
-.quick-btn i{font-size:26px;color:var(--blue-main);margin-bottom:10px;display:block}
-.quick-btn span{font-size:13px;font-weight:700;color:var(--blue-dark)}
+/* QUICK ACTIONS */
+.quick-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:18px}
+.quick-btn{background:var(--bg2);border:1px solid var(--border);border-radius:var(--radius2);padding:16px 12px;text-align:center;transition:all .2s}
+.quick-btn:hover{transform:translateY(-2px);box-shadow:0 8px 20px rgba(12,68,124,0.1);border-color:var(--border2)}
+.quick-btn i{font-size:22px;color:var(--blue);margin-bottom:8px;display:block}
+.quick-btn span{font-size:12px;font-weight:700;color:var(--text)}
+
+/* IA ASSISTANT */
+.ia-chat{display:flex;flex-direction:column;height:400px}
+.ia-messages{flex:1;overflow-y:auto;display:flex;flex-direction:column;gap:10px;padding:4px 0;margin-bottom:12px}
+.ia-msg{max-width:85%;padding:10px 14px;border-radius:12px;font-size:13px;line-height:1.6}
+.ia-msg.bot{background:var(--blue-light);color:var(--text);border-radius:4px 12px 12px 12px}
+.ia-msg.user{background:var(--blue);color:white;align-self:flex-end;border-radius:12px 4px 12px 12px}
+.ia-input-wrap{display:flex;gap:8px}
+.ia-input{flex:1;padding:10px 14px;border:1.5px solid var(--border);border-radius:10px;font-size:13px;background:var(--bg3);color:var(--text);outline:none}
+.ia-input:focus{border-color:var(--blue3)}
+.ia-send{background:var(--blue);color:white;border:none;width:38px;height:38px;border-radius:10px;font-size:15px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.ia-send:hover{background:var(--blue2)}
+
+/* PROFIL */
+.profil-photo{position:relative;width:80px;height:80px;margin-bottom:20px}
+.profil-photo .avatar-big{width:80px;height:80px;border-radius:50%;background:linear-gradient(135deg,var(--blue),var(--blue3));display:flex;align-items:center;justify-content:center;color:white;font-size:26px;font-weight:700;overflow:hidden}
+.profil-photo .avatar-big img{width:100%;height:100%;object-fit:cover}
+.photo-edit-btn{position:absolute;bottom:0;right:0;width:26px;height:26px;background:var(--blue);color:white;border:none;border-radius:50%;font-size:11px;display:flex;align-items:center;justify-content:center}
+.photo-menu{position:absolute;bottom:32px;right:-60px;background:var(--bg2);border:1px solid var(--border);border-radius:10px;padding:6px;display:none;z-index:10;min-width:160px;box-shadow:0 8px 24px rgba(0,0,0,0.12)}
+.photo-menu.open{display:block}
+.photo-opt{display:flex;align-items:center;gap:8px;padding:8px 10px;border-radius:7px;font-size:12px;font-weight:600;color:var(--text);cursor:pointer;transition:background .2s}
+.photo-opt:hover{background:var(--bg3)}
+.photo-opt i{width:16px;color:var(--blue)}
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.form-group{margin-bottom:14px}
+.form-group label{display:block;font-size:12px;font-weight:700;color:var(--text2);margin-bottom:6px}
+.form-group input,.form-group select,.form-group textarea{width:100%;padding:10px 14px;border:1.5px solid var(--border);border-radius:9px;font-size:13px;color:var(--text);background:var(--bg3);outline:none;transition:border .2s}
+.form-group input:focus,.form-group select:focus{border-color:var(--blue3);background:var(--bg2)}
+.save-btn{background:var(--blue);color:white;border:none;padding:12px 28px;border-radius:10px;font-size:14px;font-weight:700}
+.save-btn:hover{background:var(--blue2)}
+
+/* PARAMÈTRES */
+.param-section{margin-bottom:24px}
+.param-title{font-size:12px;font-weight:700;color:var(--text3);text-transform:uppercase;letter-spacing:1px;margin-bottom:12px}
+.param-item{display:flex;align-items:center;justify-content:space-between;padding:14px 16px;background:var(--bg3);border-radius:10px;margin-bottom:8px}
+.param-item-left{display:flex;align-items:center;gap:12px}
+.param-item-left i{width:18px;font-size:16px;color:var(--blue)}
+.param-label{font-size:13px;font-weight:700;color:var(--text)}
+.param-sub{font-size:11px;color:var(--text3);margin-top:2px}
+.toggle{width:44px;height:24px;background:var(--border);border-radius:12px;position:relative;cursor:pointer;transition:background .3s;border:none;flex-shrink:0}
+.toggle.on{background:var(--blue)}
+.toggle::after{content:'';position:absolute;width:18px;height:18px;background:white;border-radius:50%;top:3px;left:3px;transition:transform .3s}
+.toggle.on::after{transform:translateX(20px)}
+.theme-btns{display:flex;gap:8px}
+.theme-btn{padding:6px 14px;border:1.5px solid var(--border);border-radius:8px;font-size:12px;font-weight:700;color:var(--text2);background:var(--bg2)}
+.theme-btn.active{border-color:var(--blue);color:var(--blue);background:var(--blue-light)}
+.lang-btn{display:flex;flex-wrap:wrap;gap:6px}
+.lang-opt{padding:5px 12px;border:1.5px solid var(--border);border-radius:7px;font-size:12px;font-weight:600;color:var(--text2);background:var(--bg2)}
+.lang-opt.active{border-color:var(--blue);color:var(--blue);background:var(--blue-light)}
+.pw-input{display:flex;gap:8px;align-items:center}
+.pw-input input{flex:1;padding:10px 14px;border:1.5px solid var(--border);border-radius:9px;font-size:13px;background:var(--bg3);color:var(--text);outline:none}
+.pw-input input:focus{border-color:var(--blue3)}
+.pw-save{background:var(--blue);color:white;border:none;padding:10px 18px;border-radius:9px;font-size:13px;font-weight:700}
+
+/* CLIENT DETAIL */
+.client-detail{display:none}
+.client-detail.open{display:block}
+.back-link{display:flex;align-items:center;gap:8px;color:var(--blue);font-size:13px;font-weight:600;margin-bottom:16px;cursor:pointer}
+.client-header{display:flex;align-items:center;gap:16px;margin-bottom:20px}
+.client-header-avatar{width:64px;height:64px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:22px;font-weight:700;color:white}
+.client-header-name{font-size:20px;font-weight:900;color:var(--text)}
+.client-header-project{font-size:13px;color:var(--text3);margin-top:3px}
+.client-info-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:20px}
+.client-info-item{background:var(--bg3);border-radius:10px;padding:14px}
+.client-info-label{font-size:11px;color:var(--text3);margin-bottom:4px}
+.client-info-val{font-size:13px;font-weight:700;color:var(--text)}
+.client-chat{border:1px solid var(--border);border-radius:12px;overflow:hidden}
+.client-chat-header{background:var(--blue);color:white;padding:12px 16px;display:flex;align-items:center;gap:10px;font-size:13px;font-weight:700}
+.client-chat-messages{height:220px;overflow-y:auto;padding:14px;display:flex;flex-direction:column;gap:8px;background:var(--bg3)}
+.chat-msg{max-width:80%;padding:8px 12px;border-radius:10px;font-size:12px;line-height:1.5}
+.chat-msg.sent{background:var(--blue);color:white;align-self:flex-end;border-radius:10px 2px 10px 10px}
+.chat-msg.received{background:var(--bg2);color:var(--text);border:1px solid var(--border);border-radius:2px 10px 10px 10px}
+.chat-msg .translated{font-size:10px;opacity:0.7;margin-top:3px;font-style:italic}
+.client-chat-input{display:flex;gap:8px;padding:10px;border-top:1px solid var(--border);background:var(--bg2)}
+.client-chat-input input{flex:1;padding:8px 12px;border:1.5px solid var(--border);border-radius:8px;font-size:13px;background:var(--bg3);color:var(--text);outline:none}
+.chat-send{background:var(--blue);color:white;border:none;width:34px;height:34px;border-radius:8px;font-size:14px}
 
 /* MODAL */
 .modal-overlay{position:fixed;inset:0;background:rgba(4,44,83,0.4);backdrop-filter:blur(4px);z-index:500;display:none;align-items:center;justify-content:center;padding:20px}
 .modal-overlay.open{display:flex}
-.modal{background:white;border-radius:20px;padding:36px;width:100%;max-width:440px;box-shadow:0 24px 60px rgba(12,68,124,0.2)}
-.modal-title{font-size:20px;font-weight:900;color:var(--blue-dark);margin-bottom:8px}
-.modal-sub{font-size:14px;color:#888;margin-bottom:24px}
-.modal-input-group{margin-bottom:16px}
-.modal-input-group label{display:block;font-size:13px;font-weight:700;color:#444;margin-bottom:8px}
-.modal-input-group input{width:100%;padding:12px 16px;border:1.5px solid #dbeeff;border-radius:10px;font-size:14px;outline:none;transition:border .2s;font-family:inherit}
-.modal-input-group input:focus{border-color:var(--blue-vif)}
-.modal-btns{display:flex;gap:12px;margin-top:24px}
-.modal-btn-cancel{flex:1;padding:13px;border:1.5px solid #dbeeff;border-radius:10px;background:none;color:#666;font-weight:700;cursor:pointer;font-size:14px}
-.modal-btn-confirm{flex:2;padding:13px;background:var(--blue-main);color:white;border:none;border-radius:10px;font-weight:700;cursor:pointer;font-size:14px}
-.modal-btn-confirm:hover{background:var(--blue-mid)}
-.link-result{background:var(--blue-light);border:1px solid #b5d4f4;border-radius:10px;padding:12px 16px;font-size:13px;color:var(--blue-main);font-weight:600;display:none;margin-top:16px;word-break:break-all}
-.link-copy{background:var(--blue-main);color:white;border:none;padding:8px 14px;border-radius:8px;font-size:12px;font-weight:700;cursor:pointer;margin-top:8px;display:none}
+.modal{background:var(--bg2);border-radius:18px;padding:28px;width:100%;max-width:420px;box-shadow:0 24px 60px rgba(12,68,124,0.2)}
+.modal-title{font-size:18px;font-weight:900;color:var(--text);margin-bottom:6px}
+.modal-sub{font-size:13px;color:var(--text3);margin-bottom:20px}
+.modal-btns{display:flex;gap:10px;margin-top:20px}
+.modal-cancel{flex:1;padding:11px;border:1.5px solid var(--border);border-radius:9px;background:none;color:var(--text2);font-weight:700;font-size:13px}
+.modal-confirm{flex:2;padding:11px;background:var(--blue);color:white;border:none;border-radius:9px;font-weight:700;font-size:13px}
+.modal-confirm:hover{background:var(--blue2)}
+.link-box{background:var(--blue-light);border:1px solid var(--border2);border-radius:8px;padding:10px 14px;font-size:12px;color:var(--blue);font-weight:600;display:none;margin-top:12px;word-break:break-all}
+.copy-btn{background:var(--blue);color:white;border:none;padding:7px 14px;border-radius:7px;font-size:12px;font-weight:700;margin-top:8px;display:none}
 
-/* MOBILE OVERLAY */
-.mob-overlay{position:fixed;inset:0;background:rgba(4,44,83,0.35);z-index:90;display:none}
+/* RDV MODAL */
+.rappel-options{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px}
+.rappel-opt{padding:5px 12px;border:1.5px solid var(--border);border-radius:7px;font-size:12px;font-weight:600;color:var(--text2);background:var(--bg2)}
+.rappel-opt.selected{border-color:var(--blue);color:var(--blue);background:var(--blue-light)}
+
+/* MOB */
+.mob-overlay{position:fixed;inset:0;background:rgba(4,44,83,0.3);z-index:90;display:none}
 .mob-overlay.open{display:block}
 
-@media(max-width:900px){
-  .sidebar{transform:translateX(-100%)}
-  .sidebar.open{transform:translateX(0)}
-  .main{margin-left:0}
-  .burger-dash{display:block}
-  .dash-grid{grid-template-columns:1fr}
-  .content{padding:20px}
-  .topbar{padding:14px 20px}
-}
-@media(max-width:480px){
-  .stats-grid{grid-template-columns:1fr 1fr}
-  .quick-actions{grid-template-columns:1fr 1fr}
-}
+@media(max-width:1100px){.stats-grid{grid-template-columns:repeat(2,1fr)}.quick-grid{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:900px){.sidebar{transform:translateX(-100%)}.sidebar.open{transform:translateX(0)}.main{margin-left:0}.burger-dash{display:block}.dash-grid{grid-template-columns:1fr}.content{padding:16px 18px}.topbar{padding:12px 18px}}
+@media(max-width:600px){.stats-grid{grid-template-columns:repeat(2,1fr)}.form-row{grid-template-columns:1fr}.client-info-grid{grid-template-columns:1fr}}
 </style>
 </head>
 <body>
 
-<!-- SIDEBAR -->
 <aside class="sidebar" id="sidebar">
   <div class="sidebar-logo">
     <img src="logo.png" alt="Clario">
-    <div class="sidebar-logo-info">
-      <div class="sidebar-logo-text"><span>Clar</span><span class="io">io</span></div>
-      <div class="sidebar-logo-tagline">La relation client, simplifiée</div>
+    <div>
+      <div class="sidebar-logo-text">Clar<span class="io">io</span></div>
+      <div class="sidebar-logo-tag">La relation client, simplifiée</div>
     </div>
   </div>
-  <div class="sidebar-divider"></div>
+  <div class="s-div"></div>
   <nav class="sidebar-nav">
-    <button class="nav-item active" onclick="showPage('accueil')"><i class="fa-solid fa-house"></i>Tableau de bord</button>
-    <button class="nav-item" onclick="showPage('clients')"><i class="fa-solid fa-users"></i>Mes clients</button>
-    <button class="nav-item" onclick="showPage('messages')"><i class="fa-solid fa-comments"></i>Messages</button>
-    <button class="nav-item" onclick="showPage('planning')"><i class="fa-solid fa-calendar-days"></i>Planning</button>
-    <button class="nav-item" onclick="showPage('stats')"><i class="fa-solid fa-chart-line"></i>Statistiques</button>
-    <button class="nav-item" onclick="showPage('profil')"><i class="fa-solid fa-user"></i>Mon profil</button>
-    <button class="nav-item" onclick="showPage('parametres')"><i class="fa-solid fa-gear"></i>Paramètres</button>
+    <button class="nav-item active" onclick="showPage('accueil',this)"><i class="fa-solid fa-house"></i>Tableau de bord</button>
+    <button class="nav-item" onclick="showPage('clients',this)"><i class="fa-solid fa-users"></i>Mes clients</button>
+    <button class="nav-item" onclick="showPage('messages',this)"><i class="fa-solid fa-comments"></i>Messages</button>
+    <button class="nav-item" onclick="showPage('planning',this)"><i class="fa-solid fa-calendar-days"></i>Planning</button>
+    <button class="nav-item" onclick="showPage('ia',this)"><i class="fa-solid fa-robot"></i>Assistant IA</button>
+    <button class="nav-item" onclick="showPage('stats',this)"><i class="fa-solid fa-chart-line"></i>Statistiques</button>
+    <button class="nav-item" onclick="showPage('profil',this)"><i class="fa-solid fa-user"></i>Mon profil</button>
+    <button class="nav-item" onclick="showPage('parametres',this)"><i class="fa-solid fa-gear"></i>Paramètres</button>
   </nav>
   <div class="sidebar-bottom">
-    <div class="sidebar-divider2"></div>
+    <div class="s-div"></div>
     <button class="nav-item" onclick="location.href='index.html'"><i class="fa-solid fa-arrow-left"></i>Retour à l'accueil</button>
-    <button class="nav-item nav-item-danger" onclick="location.href='connexion.html'"><i class="fa-solid fa-arrow-right-from-bracket"></i>Déconnexion</button>
+    <button class="nav-item nav-danger" onclick="location.href='connexion.html'"><i class="fa-solid fa-arrow-right-from-bracket"></i>Déconnexion</button>
   </div>
 </aside>
 
 <div class="mob-overlay" id="mobOverlay" onclick="closeSidebar()"></div>
 
-<!-- MAIN -->
 <div class="main">
   <div class="topbar">
-    <div style="display:flex;align-items:center;gap:16px">
+    <div class="topbar-left">
       <button class="burger-dash" onclick="openSidebar()"><i class="fa-solid fa-bars"></i></button>
-      <div class="topbar-left">
-        <div class="topbar-title" id="pageTitle">Tableau de bord</div>
-        <div class="topbar-sub" id="pageSub">Bonjour, bienvenue sur Clario</div>
+      <div>
+        <div class="page-title" id="pageTitle">Tableau de bord</div>
+        <div class="page-sub" id="pageSub">Bonjour, bienvenue sur Clario</div>
       </div>
     </div>
     <div class="topbar-right">
-      <button class="topbar-btn" title="Notifications">
-        <i class="fa-solid fa-bell"></i>
-        <span class="notif-dot"></span>
-      </button>
-      <button class="topbar-btn" title="Aide"><i class="fa-solid fa-circle-question"></i></button>
-      <div class="user-avatar" title="Mon profil">JD</div>
+      <button class="tb-btn" onclick="showPage('messages',null)"><i class="fa-solid fa-comments"></i></button>
+      <button class="tb-btn" title="Notifications"><i class="fa-solid fa-bell"></i><span class="notif-dot"></span></button>
+      <div class="user-avatar" id="topAvatar" onclick="showPage('profil',null)">JD</div>
     </div>
   </div>
 
-  <div class="content" id="mainContent">
+  <div class="content">
 
-    <!-- PAGE ACCUEIL -->
+    <!-- ACCUEIL -->
     <div id="page-accueil">
-      <!-- STATS -->
       <div class="stats-grid">
-        <div class="stat-card">
-          <div class="stat-icon blue"><i class="fa-solid fa-users"></i></div>
-          <div class="stat-info">
-            <div class="stat-val">12</div>
-            <div class="stat-label">Clients actifs</div>
-            <div class="stat-change up"><i class="fa-solid fa-arrow-up"></i> +2 ce mois</div>
-          </div>
-        </div>
-        <div class="stat-card">
-          <div class="stat-icon green"><i class="fa-solid fa-chart-line"></i></div>
-          <div class="stat-info">
-            <div class="stat-val">8</div>
-            <div class="stat-label">Projets en cours</div>
-            <div class="stat-change up"><i class="fa-solid fa-arrow-up"></i> +1 cette semaine</div>
-          </div>
-        </div>
-        <div class="stat-card">
-          <div class="stat-icon orange"><i class="fa-solid fa-comments"></i></div>
-          <div class="stat-info">
-            <div class="stat-val">24</div>
-            <div class="stat-label">Messages non lus</div>
-            <div class="stat-change down"><i class="fa-solid fa-arrow-down"></i> -5 aujourd'hui</div>
-          </div>
-        </div>
-        <div class="stat-card">
-          <div class="stat-icon purple"><i class="fa-solid fa-star"></i></div>
-          <div class="stat-info">
-            <div class="stat-val">4.9</div>
-            <div class="stat-label">Note moyenne</div>
-            <div class="stat-change up"><i class="fa-solid fa-arrow-up"></i> Excellent</div>
-          </div>
-        </div>
+        <div class="stat-card"><div class="stat-icon"><i class="fa-solid fa-users"></i></div><div><div class="stat-val">12</div><div class="stat-label">Clients actifs</div><div class="stat-change">↑ +2 ce mois</div></div></div>
+        <div class="stat-card"><div class="stat-icon"><i class="fa-solid fa-chart-line"></i></div><div><div class="stat-val">8</div><div class="stat-label">Projets en cours</div><div class="stat-change">↑ +1 cette semaine</div></div></div>
+        <div class="stat-card"><div class="stat-icon"><i class="fa-solid fa-comments"></i></div><div><div class="stat-val">24</div><div class="stat-label">Messages non lus</div><div class="stat-change" style="color:#e65100">↓ -5 aujourd'hui</div></div></div>
+        <div class="stat-card"><div class="stat-icon"><i class="fa-solid fa-star"></i></div><div><div class="stat-val">4.9</div><div class="stat-label">Note moyenne</div><div class="stat-change">★ Excellent</div></div></div>
       </div>
-
-      <!-- ACTIONS RAPIDES -->
-      <div class="quick-actions">
-        <div class="quick-btn" onclick="openModal()"><i class="fa-solid fa-user-plus"></i><span>Ajouter un client</span></div>
-        <div class="quick-btn" onclick="showPage('messages')"><i class="fa-solid fa-paper-plane"></i><span>Envoyer message</span></div>
-        <div class="quick-btn" onclick="showPage('planning')"><i class="fa-solid fa-calendar-plus"></i><span>Planifier RDV</span></div>
-        <div class="quick-btn" onclick="showPage('stats')"><i class="fa-solid fa-chart-bar"></i><span>Voir stats</span></div>
+      <div class="quick-grid">
+        <div class="quick-btn" onclick="openAddClient()"><i class="fa-solid fa-user-plus"></i><span>Ajouter client</span></div>
+        <div class="quick-btn" onclick="showPage('messages',null)"><i class="fa-solid fa-paper-plane"></i><span>Messages</span></div>
+        <div class="quick-btn" onclick="openRdvModal()"><i class="fa-solid fa-calendar-plus"></i><span>Planifier RDV</span></div>
+        <div class="quick-btn" onclick="showPage('ia',null)"><i class="fa-solid fa-robot"></i><span>Assistant IA</span></div>
       </div>
-
       <div class="dash-grid">
-        <!-- CLIENTS RÉCENTS -->
         <div class="card">
-          <div class="card-header">
-            <div class="card-title">Clients récents</div>
-            <button class="card-btn" onclick="showPage('clients')">Voir tous</button>
-          </div>
-          <div class="client-list">
-            <div class="client-item">
-              <div class="client-avatar" style="background:linear-gradient(135deg,#185FA5,#378ADD)">MB</div>
-              <div class="client-info"><div class="client-name">Marie Blanc</div><div class="client-project">Rénovation cuisine</div></div>
-              <span class="client-status status-active">En cours</span>
-            </div>
-            <div class="client-item">
-              <div class="client-avatar" style="background:linear-gradient(135deg,#2e7d32,#66bb6a)">TM</div>
-              <div class="client-info"><div class="client-name">Thomas Martin</div><div class="client-project">Installation chauffage</div></div>
-              <span class="client-status status-pending">En attente</span>
-            </div>
-            <div class="client-item">
-              <div class="client-avatar" style="background:linear-gradient(135deg,#6a1b9a,#ab47bc)">SL</div>
-              <div class="client-info"><div class="client-name">Sophie Laurent</div><div class="client-project">Devis plomberie</div></div>
-              <span class="client-status status-done">Terminé</span>
-            </div>
-            <div class="client-item">
-              <div class="client-avatar" style="background:linear-gradient(135deg,#e65100,#ff9800)">PD</div>
-              <div class="client-info"><div class="client-name">Pierre Dubois</div><div class="client-project">Fuite d'eau urgente</div></div>
-              <span class="client-status status-active">En cours</span>
-            </div>
-          </div>
+          <div class="card-header"><div class="card-title">Clients récents</div><button class="card-btn" onclick="showPage('clients',null)">Voir tous</button></div>
+          <div class="client-list" id="clientListHome"></div>
         </div>
-
-        <!-- MESSAGES -->
         <div class="card">
-          <div class="card-header">
-            <div class="card-title">Derniers messages</div>
-            <button class="card-btn" onclick="showPage('messages')">Voir tous</button>
-          </div>
-          <div class="msg-list">
-            <div class="msg-item unread">
-              <div class="msg-avatar" style="background:linear-gradient(135deg,#185FA5,#378ADD)">MB</div>
-              <div class="msg-content"><div class="msg-name">Marie Blanc</div><div class="msg-text">Bonjour, pouvez-vous me confirmer...</div></div>
-              <div style="display:flex;flex-direction:column;align-items:flex-end;gap:4px"><div class="msg-time">14:32</div><div class="msg-dot"></div></div>
-            </div>
-            <div class="msg-item unread">
-              <div class="msg-avatar" style="background:linear-gradient(135deg,#2e7d32,#66bb6a)">TM</div>
-              <div class="msg-content"><div class="msg-name">Thomas Martin</div><div class="msg-text">Il faudrait acheter les tuyaux...</div></div>
-              <div style="display:flex;flex-direction:column;align-items:flex-end;gap:4px"><div class="msg-time">11:15</div><div class="msg-dot"></div></div>
-            </div>
-            <div class="msg-item">
-              <div class="msg-avatar" style="background:linear-gradient(135deg,#6a1b9a,#ab47bc)">SL</div>
-              <div class="msg-content"><div class="msg-name">Sophie Laurent</div><div class="msg-text">Merci pour l'intervention !</div></div>
-              <div class="msg-time">Hier</div>
-            </div>
-            <div class="msg-item">
-              <div class="msg-avatar" style="background:linear-gradient(135deg,#e65100,#ff9800)">PD</div>
-              <div class="msg-content"><div class="msg-name">Pierre Dubois</div><div class="msg-text">Je suis malade aujourd'hui...</div></div>
-              <div class="msg-time">Lun</div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- PLANNING -->
-      <div class="card">
-        <div class="card-header">
-          <div class="card-title">Planning de la semaine</div>
-          <button class="card-btn" onclick="showPage('planning')">Voir tout</button>
-        </div>
-        <div class="planning-list">
-          <div class="planning-item">
-            <div class="planning-date">Auj. 9h</div>
-            <div><div class="planning-title">Intervention plomberie</div><div class="planning-client">Pierre Dubois</div></div>
-          </div>
-          <div class="planning-item" style="border-left-color:#2e7d32">
-            <div class="planning-date">Auj. 14h</div>
-            <div><div class="planning-title">Devis rénovation</div><div class="planning-client">Marie Blanc</div></div>
-          </div>
-          <div class="planning-item" style="border-left-color:#6a1b9a">
-            <div class="planning-date">Dem. 10h</div>
-            <div><div class="planning-title">Installation chauffage</div><div class="planning-client">Thomas Martin</div></div>
-          </div>
-          <div class="planning-item" style="border-left-color:#e65100">
-            <div class="planning-date">Jeu. 15h</div>
-            <div><div class="planning-title">Visite de contrôle</div><div class="planning-client">Sophie Laurent</div></div>
-          </div>
+          <div class="card-header"><div class="card-title">Derniers messages</div><button class="card-btn" onclick="showPage('messages',null)">Voir tous</button></div>
+          <div class="msg-list" id="msgListHome"></div>
         </div>
       </div>
     </div>
 
-    <!-- PAGE CLIENTS -->
+    <!-- CLIENTS -->
     <div id="page-clients" style="display:none">
-      <div class="card">
-        <div class="card-header">
-          <div class="card-title">Tous mes clients (12)</div>
-          <button class="card-btn" onclick="openModal()"><i class="fa-solid fa-plus"></i> Ajouter</button>
+      <div id="clients-list-view">
+        <div class="card">
+          <div class="card-header"><div class="card-title">Mes clients</div><button class="card-btn" onclick="openAddClient()"><i class="fa-solid fa-plus"></i> Ajouter</button></div>
+          <div class="client-list" id="clientListFull"></div>
         </div>
-        <div class="client-list">
-          <div class="client-item"><div class="client-avatar" style="background:linear-gradient(135deg,#185FA5,#378ADD)">MB</div><div class="client-info"><div class="client-name">Marie Blanc</div><div class="client-project">Rénovation cuisine</div></div><span class="client-status status-active">En cours</span></div>
-          <div class="client-item"><div class="client-avatar" style="background:linear-gradient(135deg,#2e7d32,#66bb6a)">TM</div><div class="client-info"><div class="client-name">Thomas Martin</div><div class="client-project">Installation chauffage</div></div><span class="client-status status-pending">En attente</span></div>
-          <div class="client-item"><div class="client-avatar" style="background:linear-gradient(135deg,#6a1b9a,#ab47bc)">SL</div><div class="client-info"><div class="client-name">Sophie Laurent</div><div class="client-project">Devis plomberie</div></div><span class="client-status status-done">Terminé</span></div>
-          <div class="client-item"><div class="client-avatar" style="background:linear-gradient(135deg,#e65100,#ff9800)">PD</div><div class="client-info"><div class="client-name">Pierre Dubois</div><div class="client-project">Fuite d'eau urgente</div></div><span class="client-status status-active">En cours</span></div>
-          <div class="client-item"><div class="client-avatar" style="background:linear-gradient(135deg,#0d47a1,#1976d2)">CL</div><div class="client-info"><div class="client-name">Claire Leroy</div><div class="client-project">Salle de bain complète</div></div><span class="client-status status-active">En cours</span></div>
+      </div>
+      <div id="client-detail-view" class="client-detail">
+        <div class="back-link" onclick="closeClientDetail()"><i class="fa-solid fa-arrow-left"></i> Retour aux clients</div>
+        <div class="card">
+          <div class="client-header">
+            <div class="client-header-avatar" id="detailAvatar"></div>
+            <div><div class="client-header-name" id="detailName"></div><div class="client-header-project" id="detailProject"></div></div>
+          </div>
+          <div class="client-info-grid">
+            <div class="client-info-item"><div class="client-info-label">Email</div><div class="client-info-val" id="detailEmail">—</div></div>
+            <div class="client-info-item"><div class="client-info-label">Téléphone</div><div class="client-info-val" id="detailPhone">—</div></div>
+            <div class="client-info-item"><div class="client-info-label">Statut</div><div class="client-info-val" id="detailStatus">—</div></div>
+            <div class="client-info-item"><div class="client-info-label">Lien unique</div><div class="client-info-val" id="detailLink" style="font-size:11px;color:var(--blue);cursor:pointer">Copier le lien</div></div>
+          </div>
+          <div class="client-chat">
+            <div class="client-chat-header"><i class="fa-solid fa-comments"></i> Messagerie — <span id="chatClientName"></span> <span style="font-size:11px;opacity:0.7;margin-left:4px">(traduction auto)</span></div>
+            <div class="client-chat-messages" id="chatMessages">
+              <div class="chat-msg received">Bonjour, pouvez-vous me donner des nouvelles du projet ?<div class="translated">Hello, can you give me news about the project?</div></div>
+              <div class="chat-msg sent">Bonjour ! Tout avance bien, je vous tiens informé demain.</div>
+              <div class="chat-msg received">Merci beaucoup, j'attends votre retour.<div class="translated">Thank you very much, I await your return.</div></div>
+            </div>
+            <div class="client-chat-input">
+              <input type="text" id="chatInput" placeholder="Écrire un message...">
+              <button class="chat-send" onclick="sendChatMsg()"><i class="fa-solid fa-paper-plane"></i></button>
+            </div>
+          </div>
         </div>
       </div>
     </div>
 
-    <!-- PAGE MESSAGES -->
+    <!-- MESSAGES -->
     <div id="page-messages" style="display:none">
       <div class="card">
-        <div class="card-header"><div class="card-title">Messagerie</div></div>
-        <div style="text-align:center;padding:60px 20px;color:#999">
-          <i class="fa-solid fa-comments" style="font-size:48px;color:#b5d4f4;margin-bottom:16px;display:block"></i>
-          <div style="font-size:16px;font-weight:700;color:#888;margin-bottom:8px">Messagerie avec traduction automatique</div>
-          <div style="font-size:14px">Sélectionnez un client pour démarrer une conversation</div>
-        </div>
+        <div class="card-header"><div class="card-title">Messagerie</div><div style="font-size:12px;color:var(--text3)"><i class="fa-solid fa-globe" style="color:var(--blue)"></i> Traduction automatique activée</div></div>
+        <div class="msg-list" id="msgListFull"></div>
       </div>
     </div>
 
-    <!-- PAGE PLANNING -->
+    <!-- PLANNING -->
     <div id="page-planning" style="display:none">
-      <div class="card">
-        <div class="card-header"><div class="card-title">Planning complet</div><button class="card-btn"><i class="fa-solid fa-plus"></i> Ajouter</button></div>
-        <div class="planning-list" style="display:flex;flex-direction:column;gap:12px">
-          <div class="planning-item"><div class="planning-date">Auj. 9h</div><div><div class="planning-title">Intervention plomberie</div><div class="planning-client">Pierre Dubois</div></div></div>
-          <div class="planning-item" style="border-left-color:#2e7d32"><div class="planning-date">Auj. 14h</div><div><div class="planning-title">Devis rénovation</div><div class="planning-client">Marie Blanc</div></div></div>
-          <div class="planning-item" style="border-left-color:#6a1b9a"><div class="planning-date">Dem. 10h</div><div><div class="planning-title">Installation chauffage</div><div class="planning-client">Thomas Martin</div></div></div>
-          <div class="planning-item" style="border-left-color:#e65100"><div class="planning-date">Jeu. 15h</div><div><div class="planning-title">Visite de contrôle</div><div class="planning-client">Sophie Laurent</div></div></div>
+      <div class="dash-grid">
+        <div class="card">
+          <div class="card-header">
+            <button class="cal-nav" onclick="changeMonth(-1)"><i class="fa-solid fa-chevron-left"></i></button>
+            <div class="cal-month" id="calMonthTitle"></div>
+            <button class="cal-nav" onclick="changeMonth(1)"><i class="fa-solid fa-chevron-right"></i></button>
+          </div>
+          <div class="cal-days-header">
+            <div class="cal-day-name">Lun</div><div class="cal-day-name">Mar</div><div class="cal-day-name">Mer</div>
+            <div class="cal-day-name">Jeu</div><div class="cal-day-name">Ven</div><div class="cal-day-name">Sam</div><div class="cal-day-name">Dim</div>
+          </div>
+          <div class="cal-grid" id="calGrid"></div>
+        </div>
+        <div class="card">
+          <div class="card-header"><div class="card-title">Événements du mois</div><button class="card-btn" onclick="openRdvModal()"><i class="fa-solid fa-plus"></i> Ajouter</button></div>
+          <div class="cal-events" id="calEvents"></div>
         </div>
       </div>
     </div>
 
-    <!-- PAGE STATS -->
+    <!-- IA -->
+    <div id="page-ia" style="display:none">
+      <div class="card">
+        <div class="card-header"><div class="card-title"><i class="fa-solid fa-robot" style="color:var(--blue)"></i> Assistant IA Clario</div></div>
+        <div class="ia-chat">
+          <div class="ia-messages" id="iaMessages">
+            <div class="ia-msg bot">Bonjour ! Je suis votre assistant IA Clario. Je peux vous aider à rédiger des messages, analyser vos clients, suggérer des réponses ou répondre à vos questions. Comment puis-je vous aider ?</div>
+          </div>
+          <div class="ia-input-wrap">
+            <input class="ia-input" id="iaInput" placeholder="Posez votre question ou demandez de l'aide..." onkeydown="if(event.key==='Enter')sendIA()">
+            <button class="ia-send" onclick="sendIA()"><i class="fa-solid fa-paper-plane"></i></button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- STATS -->
     <div id="page-stats" style="display:none">
       <div class="stats-grid">
-        <div class="stat-card"><div class="stat-icon blue"><i class="fa-solid fa-users"></i></div><div class="stat-info"><div class="stat-val">12</div><div class="stat-label">Total clients</div></div></div>
-        <div class="stat-card"><div class="stat-icon green"><i class="fa-solid fa-check"></i></div><div class="stat-info"><div class="stat-val">34</div><div class="stat-label">Projets terminés</div></div></div>
-        <div class="stat-card"><div class="stat-icon orange"><i class="fa-solid fa-clock"></i></div><div class="stat-info"><div class="stat-val">8</div><div class="stat-label">En cours</div></div></div>
-        <div class="stat-card"><div class="stat-icon purple"><i class="fa-solid fa-star"></i></div><div class="stat-info"><div class="stat-val">4.9/5</div><div class="stat-label">Satisfaction</div></div></div>
+        <div class="stat-card"><div class="stat-icon"><i class="fa-solid fa-users"></i></div><div><div class="stat-val">12</div><div class="stat-label">Total clients</div></div></div>
+        <div class="stat-card"><div class="stat-icon"><i class="fa-solid fa-check"></i></div><div><div class="stat-val">34</div><div class="stat-label">Projets terminés</div></div></div>
+        <div class="stat-card"><div class="stat-icon"><i class="fa-solid fa-clock"></i></div><div><div class="stat-val">8</div><div class="stat-label">En cours</div></div></div>
+        <div class="stat-card"><div class="stat-icon"><i class="fa-solid fa-star"></i></div><div><div class="stat-val">4.9/5</div><div class="stat-label">Satisfaction</div></div></div>
+      </div>
+      <div class="card" style="margin-top:18px">
+        <div class="card-header"><div class="card-title">Activité mensuelle</div></div>
+        <div style="display:flex;gap:8px;align-items:flex-end;height:120px;padding:8px 0">
+          <div style="flex:1;display:flex;flex-direction:column;align-items:center;gap:4px"><div style="background:var(--blue);border-radius:4px;width:100%;height:60%"></div><div style="font-size:10px;color:var(--text3)">Jan</div></div>
+          <div style="flex:1;display:flex;flex-direction:column;align-items:center;gap:4px"><div style="background:var(--blue);border-radius:4px;width:100%;height:80%"></div><div style="font-size:10px;color:var(--text3)">Fév</div></div>
+          <div style="flex:1;display:flex;flex-direction:column;align-items:center;gap:4px"><div style="background:var(--blue);border-radius:4px;width:100%;height:70%"></div><div style="font-size:10px;color:var(--text3)">Mar</div></div>
+          <div style="flex:1;display:flex;flex-direction:column;align-items:center;gap:4px"><div style="background:var(--blue3);border-radius:4px;width:100%;height:90%"></div><div style="font-size:10px;color:var(--text3)">Avr</div></div>
+          <div style="flex:1;display:flex;flex-direction:column;align-items:center;gap:4px"><div style="background:var(--blue3);border-radius:4px;width:100%;height:100%"></div><div style="font-size:10px;color:var(--text3)">Mai</div></div>
+          <div style="flex:1;display:flex;flex-direction:column;align-items:center;gap:4px"><div style="background:var(--blue-light);border-radius:4px;width:100%;height:40%;border:1px solid var(--border2)"></div><div style="font-size:10px;color:var(--text3)">Jun</div></div>
+        </div>
       </div>
     </div>
 
-    <!-- PAGE PROFIL -->
+    <!-- PROFIL -->
     <div id="page-profil" style="display:none">
-      <div class="card" style="max-width:600px">
-        <div class="card-header"><div class="card-title">Mon profil</div><button class="card-btn">Modifier</button></div>
-        <div style="display:flex;align-items:center;gap:20px;margin-bottom:24px">
-          <div style="width:72px;height:72px;background:linear-gradient(135deg,var(--blue-main),var(--blue-vif));border-radius:50%;display:flex;align-items:center;justify-content:center;color:white;font-size:24px;font-weight:700">JD</div>
-          <div><div style="font-size:20px;font-weight:800;color:var(--blue-dark)">Jean Dupont</div><div style="font-size:14px;color:#999;margin-top:4px">Entrepreneur — Plomberie Dupont</div></div>
+      <div class="card" style="max-width:580px">
+        <div class="card-header"><div class="card-title">Mon profil</div></div>
+        <div class="profil-photo">
+          <div class="avatar-big" id="profilAvatarBig"><img id="profilImg" src="" style="display:none" alt=""><span id="profilInitiales">JD</span></div>
+          <button class="photo-edit-btn" onclick="togglePhotoMenu()"><i class="fa-solid fa-pen"></i></button>
+          <div class="photo-menu" id="photoMenu">
+            <div class="photo-opt" onclick="takePhoto()"><i class="fa-solid fa-camera"></i>Prendre une photo</div>
+            <div class="photo-opt" onclick="document.getElementById('photoInput').click()"><i class="fa-solid fa-image"></i>Choisir une photo</div>
+            <div class="photo-opt" onclick="removePhoto()" style="color:#ef5350"><i class="fa-solid fa-trash" style="color:#ef5350"></i>Supprimer la photo</div>
+          </div>
+          <input type="file" id="photoInput" accept="image/*" style="display:none" onchange="handlePhoto(this)">
         </div>
-        <div style="display:flex;flex-direction:column;gap:16px">
-          <div style="display:flex;align-items:center;gap:12px;padding:12px;background:#f8fbff;border-radius:10px"><i class="fa-solid fa-envelope" style="color:var(--blue-vif)"></i><div><div style="font-size:12px;color:#999">Email</div><div style="font-size:14px;font-weight:600">jean.dupont@email.com</div></div></div>
-          <div style="display:flex;align-items:center;gap:12px;padding:12px;background:#f8fbff;border-radius:10px"><i class="fa-solid fa-phone" style="color:var(--blue-vif)"></i><div><div style="font-size:12px;color:#999">Téléphone</div><div style="font-size:14px;font-weight:600">07 49 94 20 81</div></div></div>
-          <div style="display:flex;align-items:center;gap:12px;padding:12px;background:#f8fbff;border-radius:10px"><i class="fa-solid fa-building" style="color:var(--blue-vif)"></i><div><div style="font-size:12px;color:#999">Entreprise</div><div style="font-size:14px;font-weight:600">Plomberie Dupont</div></div></div>
-          <div style="display:flex;align-items:center;gap:12px;padding:12px;background:#f8fbff;border-radius:10px"><i class="fa-solid fa-tag" style="color:var(--blue-vif)"></i><div><div style="font-size:12px;color:#999">Abonnement</div><div style="font-size:14px;font-weight:600;color:var(--blue-main)">Plan Pro — 8,99€/mois</div></div></div>
+        <div class="form-row">
+          <div class="form-group"><label>Prénom</label><input type="text" id="profPrenom" value="Jean" oninput="updateInitiales()"></div>
+          <div class="form-group"><label>Nom</label><input type="text" id="profNom" value="Dupont" oninput="updateInitiales()"></div>
         </div>
+        <div class="form-group"><label>Email</label><input type="email" id="profEmail" value="jean.dupont@email.com"></div>
+        <div class="form-group"><label>Téléphone</label><input type="tel" id="profTel" value="07 49 94 20 81"></div>
+        <div class="form-group"><label>Entreprise</label><input type="text" id="profEntreprise" value="Plomberie Dupont"></div>
+        <div class="form-group"><label>Abonnement</label>
+          <select id="profAbonnement">
+            <option value="gratuit">Gratuit — 0€</option>
+            <option value="pro" selected>Pro — 8,99€/mois</option>
+            <option value="business">Business — 19,99€/mois</option>
+          </select>
+        </div>
+        <button class="save-btn" onclick="saveProfil()">Enregistrer les modifications</button>
       </div>
     </div>
 
-    <!-- PAGE PARAMÈTRES -->
+    <!-- PARAMÈTRES -->
     <div id="page-parametres" style="display:none">
-      <div class="card" style="max-width:600px">
-        <div class="card-header"><div class="card-title">Paramètres</div></div>
-        <div style="display:flex;flex-direction:column;gap:16px">
-          <div style="display:flex;align-items:center;justify-content:space-between;padding:16px;background:#f8fbff;border-radius:12px">
-            <div><div style="font-size:14px;font-weight:700">Notifications</div><div style="font-size:12px;color:#999">Recevoir les alertes par email</div></div>
-            <input type="checkbox" checked style="width:20px;height:20px;accent-color:var(--blue-main)">
+      <div class="card" style="max-width:580px">
+
+        <div class="param-section">
+          <div class="param-title">Apparence</div>
+          <div class="param-item">
+            <div class="param-item-left"><i class="fa-solid fa-moon"></i><div><div class="param-label">Thème</div><div class="param-sub">Choisissez l'apparence de Clario</div></div></div>
+            <div class="theme-btns">
+              <button class="theme-btn active" id="themeLight" onclick="setTheme('light')"><i class="fa-solid fa-sun"></i> Clair</button>
+              <button class="theme-btn" id="themeDark" onclick="setTheme('dark')"><i class="fa-solid fa-moon"></i> Sombre</button>
+            </div>
           </div>
-          <div style="display:flex;align-items:center;justify-content:space-between;padding:16px;background:#f8fbff;border-radius:12px">
-            <div><div style="font-size:14px;font-weight:700">Traduction automatique</div><div style="font-size:12px;color:#999">Traduire les messages clients</div></div>
-            <input type="checkbox" checked style="width:20px;height:20px;accent-color:var(--blue-main)">
-          </div>
-          <div style="display:flex;align-items:center;justify-content:space-between;padding:16px;background:#f8fbff;border-radius:12px">
-            <div><div style="font-size:14px;font-weight:700">Langue de l'interface</div><div style="font-size:12px;color:#999">Français</div></div>
-            <select style="border:1.5px solid #dbeeff;border-radius:8px;padding:6px 10px;font-size:13px;outline:none"><option>Français</option><option>English</option><option>Español</option></select>
+          <div class="param-item">
+            <div class="param-item-left"><i class="fa-solid fa-globe"></i><div><div class="param-label">Langue</div><div class="param-sub">Langue de l'interface</div></div></div>
+            <div class="lang-btn">
+              <button class="lang-opt active">Français</button>
+              <button class="lang-opt">English</button>
+              <button class="lang-opt">Español</button>
+              <button class="lang-opt">Português</button>
+              <button class="lang-opt">Italiano</button>
+              <button class="lang-opt">العربية</button>
+              <button class="lang-opt">עברית</button>
+            </div>
           </div>
         </div>
+
+        <div class="param-section">
+          <div class="param-title">Notifications</div>
+          <div class="param-item">
+            <div class="param-item-left"><i class="fa-solid fa-bell"></i><div><div class="param-label">Notifications push</div><div class="param-sub">Alertes en temps réel</div></div></div>
+            <button class="toggle on" onclick="this.classList.toggle('on')"></button>
+          </div>
+          <div class="param-item">
+            <div class="param-item-left"><i class="fa-solid fa-envelope"></i><div><div class="param-label">Notifications email</div><div class="param-sub">Résumé quotidien par email</div></div></div>
+            <button class="toggle on" onclick="this.classList.toggle('on')"></button>
+          </div>
+          <div class="param-item">
+            <div class="param-item-left"><i class="fa-solid fa-calendar"></i><div><div class="param-label">Rappels RDV</div><div class="param-sub">Rappels avant vos rendez-vous</div></div></div>
+            <button class="toggle on" onclick="this.classList.toggle('on')"></button>
+          </div>
+          <div class="param-item">
+            <div class="param-item-left"><i class="fa-solid fa-comments"></i><div><div class="param-label">Nouveaux messages</div><div class="param-sub">Notification à chaque message</div></div></div>
+            <button class="toggle on" onclick="this.classList.toggle('on')"></button>
+          </div>
+        </div>
+
+        <div class="param-section">
+          <div class="param-title">Sécurité</div>
+          <div class="param-item" style="flex-direction:column;align-items:flex-start;gap:12px">
+            <div class="param-item-left"><i class="fa-solid fa-lock"></i><div><div class="param-label">Changer le mot de passe</div><div class="param-sub">Mettez à jour votre mot de passe</div></div></div>
+            <div style="width:100%;display:flex;flex-direction:column;gap:8px">
+              <input type="password" placeholder="Mot de passe actuel" style="padding:9px 14px;border:1.5px solid var(--border);border-radius:9px;font-size:13px;background:var(--bg3);color:var(--text);outline:none;width:100%">
+              <input type="password" id="newPw" placeholder="Nouveau mot de passe" style="padding:9px 14px;border:1.5px solid var(--border);border-radius:9px;font-size:13px;background:var(--bg3);color:var(--text);outline:none;width:100%">
+              <input type="password" id="confirmPw" placeholder="Confirmer le nouveau mot de passe" style="padding:9px 14px;border:1.5px solid var(--border);border-radius:9px;font-size:13px;background:var(--bg3);color:var(--text);outline:none;width:100%">
+              <button class="pw-save" onclick="changePw()" style="align-self:flex-start">Mettre à jour</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="param-section">
+          <div class="param-title">Application</div>
+          <div class="param-item">
+            <div class="param-item-left"><i class="fa-solid fa-language"></i><div><div class="param-label">Traduction auto messages</div><div class="param-sub">Traduire les messages clients</div></div></div>
+            <button class="toggle on" onclick="this.classList.toggle('on')"></button>
+          </div>
+          <div class="param-item">
+            <div class="param-item-left"><i class="fa-solid fa-robot"></i><div><div class="param-label">Suggestions IA</div><div class="param-sub">Réponses suggérées par l'IA</div></div></div>
+            <button class="toggle on" onclick="this.classList.toggle('on')"></button>
+          </div>
+        </div>
+
       </div>
     </div>
 
@@ -431,50 +535,287 @@ a{text-decoration:none;color:inherit}
 </div>
 
 <!-- MODAL AJOUTER CLIENT -->
-<div class="modal-overlay" id="modalOverlay">
+<div class="modal-overlay" id="modalClient">
   <div class="modal">
     <div class="modal-title">Ajouter un client</div>
-    <div class="modal-sub">Entrez les informations de votre client pour générer son lien unique.</div>
-    <div class="modal-input-group"><label>Prénom et nom du client</label><input type="text" id="clientName" placeholder="Ex: Marie Blanc"></div>
-    <div class="modal-input-group"><label>Email du client (optionnel)</label><input type="email" id="clientEmail" placeholder="marie@email.com"></div>
-    <div class="modal-input-group"><label>Projet / description</label><input type="text" id="clientProject" placeholder="Ex: Rénovation salle de bain"></div>
-    <div class="link-result" id="linkResult"></div>
-    <button class="link-copy" id="linkCopy" onclick="copyLink()">Copier le lien</button>
+    <div class="modal-sub">Créez l'espace de votre client et générez son lien.</div>
+    <div class="form-group"><label>Prénom et nom</label><input type="text" id="newClientName" placeholder="Marie Blanc"></div>
+    <div class="form-group"><label>Email (optionnel)</label><input type="email" id="newClientEmail" placeholder="marie@email.com"></div>
+    <div class="form-group"><label>Téléphone (optionnel)</label><input type="tel" id="newClientPhone" placeholder="06 00 00 00 00"></div>
+    <div class="form-group"><label>Projet</label><input type="text" id="newClientProject" placeholder="Ex: Rénovation cuisine"></div>
+    <div class="link-box" id="newLinkBox"></div>
+    <button class="copy-btn" id="copyBtn" onclick="copyNewLink()">Copier le lien</button>
     <div class="modal-btns">
-      <button class="modal-btn-cancel" onclick="closeModal()">Annuler</button>
-      <button class="modal-btn-confirm" onclick="generateLink()">Générer le lien</button>
+      <button class="modal-cancel" onclick="closeModal('modalClient')">Annuler</button>
+      <button class="modal-confirm" onclick="addClient()">Créer et générer le lien</button>
+    </div>
+  </div>
+</div>
+
+<!-- MODAL RDV -->
+<div class="modal-overlay" id="modalRdv">
+  <div class="modal">
+    <div class="modal-title">Planifier un rendez-vous</div>
+    <div class="modal-sub">Ajoutez un événement à votre planning.</div>
+    <div class="form-group"><label>Titre</label><input type="text" id="rdvTitle" placeholder="Ex: Intervention plomberie"></div>
+    <div class="form-group"><label>Client</label><input type="text" id="rdvClient" placeholder="Nom du client"></div>
+    <div class="form-row">
+      <div class="form-group"><label>Date</label><input type="date" id="rdvDate"></div>
+      <div class="form-group"><label>Heure</label><input type="time" id="rdvTime"></div>
+    </div>
+    <div class="form-group">
+      <label>Rappels</label>
+      <div class="rappel-options">
+        <button class="rappel-opt selected" onclick="toggleRappel(this)">5 min avant</button>
+        <button class="rappel-opt" onclick="toggleRappel(this)">30 min avant</button>
+        <button class="rappel-opt" onclick="toggleRappel(this)">1h avant</button>
+        <button class="rappel-opt" onclick="toggleRappel(this)">1 jour avant</button>
+      </div>
+    </div>
+    <div class="modal-btns">
+      <button class="modal-cancel" onclick="closeModal('modalRdv')">Annuler</button>
+      <button class="modal-confirm" onclick="addRdv()">Ajouter au planning</button>
     </div>
   </div>
 </div>
 
 <script>
-function showPage(page){
+// DONNÉES
+let clients=[
+  {id:1,name:'Marie Blanc',initials:'MB',color:'#185FA5',project:'Rénovation cuisine',status:'active',email:'marie@email.com',phone:'06 12 34 56 78'},
+  {id:2,name:'Thomas Martin',initials:'TM',color:'#2e7d32',project:'Installation chauffage',status:'pending',email:'thomas@email.com',phone:'07 23 45 67 89'},
+  {id:3,name:'Sophie Laurent',initials:'SL',color:'#6a1b9a',project:'Devis plomberie',status:'done',email:'sophie@email.com',phone:'06 34 56 78 90'},
+  {id:4,name:'Pierre Dubois',initials:'PD',color:'#e65100',project:'Fuite d\'eau urgente',status:'active',email:'pierre@email.com',phone:'07 45 67 89 01'},
+  {id:5,name:'Claire Leroy',initials:'CL',color:'#0d47a1',project:'Salle de bain complète',status:'active',email:'claire@email.com',phone:'06 56 78 90 12'},
+];
+let events=[
+  {date:'2026-06-02',title:'Intervention plomberie',client:'Pierre Dubois',time:'9h00',color:'#185FA5'},
+  {date:'2026-06-02',title:'Devis rénovation',client:'Marie Blanc',time:'14h00',color:'#2e7d32'},
+  {date:'2026-06-05',title:'Installation chauffage',client:'Thomas Martin',time:'10h00',color:'#6a1b9a'},
+  {date:'2026-06-10',title:'Visite de contrôle',client:'Sophie Laurent',time:'15h00',color:'#e65100'},
+];
+let calDate=new Date(2026,5,1);
+
+// RENDER CLIENTS
+function renderClients(){
+  const statusMap={active:'En cours',pending:'En attente',done:'Terminé'};
+  const classMap={active:'s-active',pending:'s-pending',done:'s-done'};
+  const html=clients.map(c=>`
+    <div class="client-item" onclick="openClientDetail(${c.id})">
+      <div class="c-avatar" style="background:${c.color}">${c.initials}</div>
+      <div style="flex:1"><div class="c-name">${c.name}</div><div class="c-project">${c.project}</div></div>
+      <span class="c-status ${classMap[c.status]}">${statusMap[c.status]}</span>
+    </div>`).join('');
+  document.getElementById('clientListHome').innerHTML=html;
+  document.getElementById('clientListFull').innerHTML=html;
+  const msgHtml=clients.slice(0,4).map((c,i)=>`
+    <div class="msg-item ${i<2?'unread':''}">
+      <div class="c-avatar" style="background:${c.color};width:34px;height:34px;font-size:11px">${c.initials}</div>
+      <div class="msg-content"><div class="msg-name">${c.name}</div><div class="msg-text">${['Pouvez-vous confirmer le RDV ?','Il faudrait acheter les tuyaux...','Merci pour l\'intervention !','Je suis absent demain...'][i]}</div></div>
+      <div class="msg-meta"><div class="msg-time">${['14:32','11:15','Hier','Lun'][i]}</div>${i<2?'<div class="msg-dot"></div>':''}</div>
+    </div>`).join('');
+  document.getElementById('msgListHome').innerHTML=msgHtml;
+  document.getElementById('msgListFull').innerHTML=msgHtml;
+}
+
+// CLIENT DETAIL
+function openClientDetail(id){
+  const c=clients.find(x=>x.id===id);
+  document.getElementById('clients-list-view').style.display='none';
+  document.getElementById('client-detail-view').classList.add('open');
+  document.getElementById('detailAvatar').style.background=c.color;
+  document.getElementById('detailAvatar').textContent=c.initials;
+  document.getElementById('detailName').textContent=c.name;
+  document.getElementById('detailProject').textContent=c.project;
+  document.getElementById('detailEmail').textContent=c.email;
+  document.getElementById('detailPhone').textContent=c.phone;
+  document.getElementById('detailStatus').textContent={active:'En cours',pending:'En attente',done:'Terminé'}[c.status];
+  document.getElementById('chatClientName').textContent=c.name;
+}
+function closeClientDetail(){
+  document.getElementById('clients-list-view').style.display='block';
+  document.getElementById('client-detail-view').classList.remove('open');
+}
+function sendChatMsg(){
+  const input=document.getElementById('chatInput');
+  if(!input.value.trim())return;
+  const msgs=document.getElementById('chatMessages');
+  msgs.innerHTML+=`<div class="chat-msg sent">${input.value}</div>`;
+  input.value='';
+  msgs.scrollTop=msgs.scrollHeight;
+}
+document.addEventListener('keydown',e=>{if(e.key==='Enter'&&document.activeElement.id==='chatInput')sendChatMsg()});
+
+// CALENDAR
+function renderCal(){
+  const months=['Janvier','Février','Mars','Avril','Mai','Juin','Juillet','Août','Septembre','Octobre','Novembre','Décembre'];
+  document.getElementById('calMonthTitle').textContent=months[calDate.getMonth()]+' '+calDate.getFullYear();
+  const grid=document.getElementById('calGrid');
+  const today=new Date();
+  const firstDay=(new Date(calDate.getFullYear(),calDate.getMonth(),1).getDay()||7)-1;
+  const daysInMonth=new Date(calDate.getFullYear(),calDate.getMonth()+1,0).getDate();
+  const prevDays=new Date(calDate.getFullYear(),calDate.getMonth(),0).getDate();
+  let html='';
+  for(let i=firstDay-1;i>=0;i--)html+=`<div class="cal-day other-month">${prevDays-i}</div>`;
+  for(let d=1;d<=daysInMonth;d++){
+    const dateStr=calDate.getFullYear()+'-'+String(calDate.getMonth()+1).padStart(2,'0')+'-'+String(d).padStart(2,'0');
+    const hasEvent=events.some(e=>e.date===dateStr);
+    const isToday=d===today.getDate()&&calDate.getMonth()===today.getMonth()&&calDate.getFullYear()===today.getFullYear();
+    html+=`<div class="cal-day${isToday?' today':''}${hasEvent?' has-event':''}" onclick="selectDay('${dateStr}')">${d}</div>`;
+  }
+  grid.innerHTML=html;
+  renderEvents();
+}
+function renderEvents(){
+  const monthStr=calDate.getFullYear()+'-'+String(calDate.getMonth()+1).padStart(2,'0');
+  const monthEvents=events.filter(e=>e.date.startsWith(monthStr));
+  document.getElementById('calEvents').innerHTML=monthEvents.length?monthEvents.map(e=>`
+    <div class="cal-event">
+      <div class="cal-event-dot" style="background:${e.color}"></div>
+      <div><div class="cal-event-title">${e.title}</div><div style="font-size:11px;color:var(--text3)">${e.client}</div></div>
+      <div class="cal-event-time">${e.date.split('-')[2]} — ${e.time}</div>
+    </div>`).join(''):'<div style="text-align:center;color:var(--text3);font-size:13px;padding:20px">Aucun événement ce mois</div>';
+}
+function changeMonth(dir){calDate.setMonth(calDate.getMonth()+dir);renderCal()}
+function selectDay(date){document.getElementById('rdvDate').value=date;openRdvModal()}
+
+// RDV
+function openRdvModal(){document.getElementById('modalRdv').classList.add('open')}
+function addRdv(){
+  const title=document.getElementById('rdvTitle').value;
+  const client=document.getElementById('rdvClient').value;
+  const date=document.getElementById('rdvDate').value;
+  const time=document.getElementById('rdvTime').value;
+  if(!title||!date){alert('Remplissez au moins le titre et la date.');return;}
+  events.push({date,title,client:client||'—',time:time||'—',color:'#185FA5'});
+  renderCal();
+  closeModal('modalRdv');
+  document.getElementById('rdvTitle').value='';
+  document.getElementById('rdvClient').value='';
+  alert('Rendez-vous ajouté ! Un rappel a été programmé.');
+}
+function toggleRappel(btn){btn.classList.toggle('selected')}
+
+// ADD CLIENT
+function openAddClient(){document.getElementById('modalClient').classList.add('open')}
+function addClient(){
+  const name=document.getElementById('newClientName').value;
+  if(!name){alert('Entrez le nom du client.');return;}
+  const link='https://clario-gamma-livid.vercel.app/client/'+name.toLowerCase().replace(/\s+/g,'-')+'-'+Math.random().toString(36).substr(2,6);
+  const initials=name.split(' ').map(w=>w[0]).join('').toUpperCase().slice(0,2);
+  const colors=['#185FA5','#2e7d32','#6a1b9a','#e65100','#0d47a1','#c62828'];
+  clients.push({id:clients.length+1,name,initials,color:colors[clients.length%colors.length],project:document.getElementById('newClientProject').value||'Nouveau projet',status:'active',email:document.getElementById('newClientEmail').value||'—',phone:document.getElementById('newClientPhone').value||'—'});
+  document.getElementById('newLinkBox').textContent=link;
+  document.getElementById('newLinkBox').style.display='block';
+  document.getElementById('copyBtn').style.display='inline-block';
+  renderClients();
+}
+function copyNewLink(){navigator.clipboard.writeText(document.getElementById('newLinkBox').textContent);document.getElementById('copyBtn').textContent='Copié !';setTimeout(()=>document.getElementById('copyBtn').textContent='Copier le lien',2000)}
+
+// IA
+const iaResponses=[
+  "Je peux vous aider à rédiger un message professionnel pour votre client. Donnez-moi plus de contexte !",
+  "Voici une suggestion de réponse : \"Bonjour, je vous confirme notre rendez-vous et reste disponible pour toute question.\"",
+  "D'après vos données, vous avez 4 clients actifs cette semaine. Je recommande de prioriser Pierre Dubois pour la fuite d'eau.",
+  "Pour améliorer votre relation client, pensez à envoyer un résumé hebdomadaire de l'avancement des projets.",
+  "Je peux aussi vous aider à traduire vos messages, analyser vos statistiques ou planifier vos rendez-vous.",
+];
+let iaIndex=0;
+function sendIA(){
+  const input=document.getElementById('iaInput');
+  if(!input.value.trim())return;
+  const msgs=document.getElementById('iaMessages');
+  msgs.innerHTML+=`<div class="ia-msg user">${input.value}</div>`;
+  input.value='';
+  setTimeout(()=>{
+    msgs.innerHTML+=`<div class="ia-msg bot">${iaResponses[iaIndex%iaResponses.length]}</div>`;
+    iaIndex++;msgs.scrollTop=msgs.scrollHeight;
+  },800);
+  msgs.scrollTop=msgs.scrollHeight;
+}
+
+// PROFIL
+function updateInitiales(){
+  const p=document.getElementById('profPrenom').value;
+  const n=document.getElementById('profNom').value;
+  const init=(p[0]||'')+(n[0]||'');
+  document.getElementById('profilInitiales').textContent=init.toUpperCase();
+  document.getElementById('topAvatar').textContent=init.toUpperCase();
+}
+function togglePhotoMenu(){document.getElementById('photoMenu').classList.toggle('open')}
+function handlePhoto(input){
+  if(!input.files[0])return;
+  const reader=new FileReader();
+  reader.onload=e=>{
+    document.getElementById('profilImg').src=e.target.result;
+    document.getElementById('profilImg').style.display='block';
+    document.getElementById('profilInitiales').style.display='none';
+    document.getElementById('topAvatar').innerHTML=`<img src="${e.target.result}" style="width:100%;height:100%;object-fit:cover;border-radius:50%">`;
+  };
+  reader.readAsDataURL(input.files[0]);
+  document.getElementById('photoMenu').classList.remove('open');
+}
+function takePhoto(){alert('Fonctionnalité disponible depuis l\'application mobile.');document.getElementById('photoMenu').classList.remove('open')}
+function removePhoto(){
+  document.getElementById('profilImg').style.display='none';
+  document.getElementById('profilInitiales').style.display='block';
+  updateInitiales();
+  document.getElementById('photoMenu').classList.remove('open');
+}
+function saveProfil(){
+  updateInitiales();
+  alert('Profil enregistré !');
+}
+
+// THÈME
+function setTheme(t){
+  document.documentElement.setAttribute('data-theme',t);
+  document.getElementById('themeLight').classList.toggle('active',t==='light');
+  document.getElementById('themeDark').classList.toggle('active',t==='dark');
+}
+
+// MOT DE PASSE
+function changePw(){
+  const n=document.getElementById('newPw').value;
+  const c=document.getElementById('confirmPw').value;
+  if(!n||!c){alert('Remplissez les champs.');return;}
+  if(n!==c){alert('Les mots de passe ne correspondent pas.');return;}
+  if(n.length<6){alert('Le mot de passe doit faire au moins 6 caractères.');return;}
+  alert('Mot de passe mis à jour !');
+  document.getElementById('newPw').value='';
+  document.getElementById('confirmPw').value='';
+}
+
+// LANGUE
+document.querySelectorAll('.lang-opt').forEach(btn=>{btn.addEventListener('click',function(){document.querySelectorAll('.lang-opt').forEach(b=>b.classList.remove('active'));this.classList.add('active')})});
+
+// PAGES
+function showPage(page,btn){
   document.querySelectorAll('[id^="page-"]').forEach(p=>p.style.display='none');
   document.getElementById('page-'+page).style.display='block';
   document.querySelectorAll('.nav-item').forEach(n=>n.classList.remove('active'));
-  event.currentTarget.classList.add('active');
-  const titles={accueil:'Tableau de bord',clients:'Mes clients',messages:'Messages',planning:'Planning',stats:'Statistiques',profil:'Mon profil',parametres:'Paramètres'};
-  const subs={accueil:'Bonjour, bienvenue sur Clario',clients:'Gérez tous vos clients',messages:'Messagerie avec traduction automatique',planning:'Votre agenda partagé',stats:'Vos performances en un coup d\'œil',profil:'Vos informations personnelles',parametres:'Gérez vos préférences'};
-  document.getElementById('pageTitle').textContent=titles[page]||'Dashboard';
-  document.getElementById('pageSub').textContent=subs[page]||'';
+  if(btn)btn.classList.add('active');
+  const titles={accueil:'Tableau de bord',clients:'Mes clients',messages:'Messages',planning:'Planning',ia:'Assistant IA',stats:'Statistiques',profil:'Mon profil',parametres:'Paramètres'};
+  const subs={accueil:'Bienvenue sur Clario',clients:'Gérez vos clients',messages:'Messagerie traduite automatiquement',planning:'Votre agenda',ia:'Powered by Claude AI',stats:'Vos performances',profil:'Vos informations',parametres:'Gérez vos préférences'};
+  document.getElementById('pageTitle').textContent=titles[page];
+  document.getElementById('pageSub').textContent=subs[page];
+  if(page==='planning')renderCal();
   closeSidebar();
 }
-function openSidebar(){document.getElementById('sidebar').classList.add('open');document.getElementById('mobOverlay').classList.add('open');document.body.style.overflow='hidden'}
-function closeSidebar(){document.getElementById('sidebar').classList.remove('open');document.getElementById('mobOverlay').classList.remove('open');document.body.style.overflow=''}
-function openModal(){document.getElementById('modalOverlay').classList.add('open')}
-function closeModal(){document.getElementById('modalOverlay').classList.remove('open');document.getElementById('linkResult').style.display='none';document.getElementById('linkCopy').style.display='none';document.getElementById('clientName').value='';document.getElementById('clientEmail').value='';document.getElementById('clientProject').value=''}
-function generateLink(){
-  const name=document.getElementById('clientName').value;
-  if(!name){alert('Veuillez entrer le nom du client.');return;}
-  const link='https://clario-gamma-livid.vercel.app/client/'+name.toLowerCase().replace(/\s+/g,'-')+'-'+Math.random().toString(36).substr(2,6);
-  document.getElementById('linkResult').textContent=link;
-  document.getElementById('linkResult').style.display='block';
-  document.getElementById('linkCopy').style.display='inline-block';
+
+// MODAL
+function closeModal(id){
+  document.getElementById(id).classList.remove('open');
+  if(id==='modalClient'){document.getElementById('newLinkBox').style.display='none';document.getElementById('copyBtn').style.display='none';}
 }
-function copyLink(){
-  const link=document.getElementById('linkResult').textContent;
-  navigator.clipboard.writeText(link).then(()=>{document.getElementById('linkCopy').textContent='Copié !';setTimeout(()=>document.getElementById('linkCopy').textContent='Copier le lien',2000)});
-}
+
+// SIDEBAR MOBILE
+function openSidebar(){document.getElementById('sidebar').classList.add('open');document.getElementById('mobOverlay').classList.add('open')}
+function closeSidebar(){document.getElementById('sidebar').classList.remove('open');document.getElementById('mobOverlay').classList.remove('open')}
+
+// INIT
+renderClients();
+renderCal();
 </script>
 </body>
 </html>
